@@ -160,6 +160,38 @@ test("Suche findet auch einen winzigen Mond", async ({ page }) => {
   expect(errs).toEqual([]);
 });
 
+test("ein instanzieter Mond ohne eigenes Mesh laesst sich trotzdem auswaehlen", async ({ page }) => {
+  // Regression (Ticket 15): Die 449 kleinen, unbekannten Monde werden
+  // aus Performance-Gruenden als InstancedMesh gezeichnet und haben daher
+  // KEIN eigenes Mesh. `readBodyPositions` las nur den Szenengraphen, die
+  // Positionen fehlten also in der Map, und `focusBody` brach mit einem
+  // stillen `return` ab: der Nav-Knopf war da, ein Klick tat aber nichts.
+  // Der E2E-Test sieht genau das, was ein Kind sieht.
+  const errs: string[] = [];
+  page.on("pageerror", (e) => errs.push(String(e)));
+  await ready(page);
+
+  // Adrastea ist ein Jupitermond ohne eigenes Mesh (Radius 8,2 km).
+  await search(page, "Adrastea");
+  const hit = page.locator('nav button[data-body-id="adrastea"]');
+  await expect(hit, "Adrastea nicht auffindbar").toBeVisible();
+
+  await hit.click();
+  await page.waitForTimeout(900);
+
+  // Das Panel muss sich mit dem richtigen Namen oeffnen — nicht leer
+  // bleiben und nicht auf dem Titel "Weltraum-Objekt" stehen bleiben,
+  // dem Default des Panels vor der ersten Auswahl.
+  const title = await page.locator(".se-panel__title").innerText();
+  expect(title.trim(), "Panel blieb auf dem Default-Titel").toBe("Adrastea");
+
+  const body = await page.locator(".se-panel__body").innerText();
+  expect(body.length, "Panel blieb leer").toBeGreaterThan(200);
+  expect(body, "undefined im Info-Panel").not.toContain("undefined");
+  expect(body, "NaN im Info-Panel").not.toContain("NaN");
+  expect(errs).toEqual([]);
+});
+
 test("alle acht Planeten zeigen einen echten Kindtext", async ({ page }) => {
   // Acht Planeten mit je 400 ms Panel-Wartezeit plus Seitenaufbau passen
   // nicht in das globale 30-s-Fenster.

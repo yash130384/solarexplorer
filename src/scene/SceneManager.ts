@@ -832,6 +832,40 @@ export class SceneManager {
   }
 
   /**
+   * Liefert die IDs aller Koerper der Szene, auch der instanzierten Monde.
+   *
+   * @returns Die Koerper-IDs in der Reihenfolge von `bodies.json`.
+   */
+  getBodyIds(): readonly string[] {
+    return this.bodies.map((body) => body.id);
+  }
+
+  /**
+   * Liefert die Weltposition eines Koerpers, auch fuer instanzierte Monde.
+   *
+   * Kleine, unbekannte Monde haben aus Performance-Gruenden kein eigenes
+   * Mesh, sondern stecken als Instanz in einem `InstancedMesh`. Ihr
+   * Weltpunkt steckt daher nur in der Instanzmatrix. Ohne diese Abfrage
+   * waeren 449 der 456 Monde in der Navigation sichtbar, aber nicht
+   * anwaehlbar — die Kamera wuesste nicht, wohin sie fliegen soll.
+   *
+   * @param bodyId - ID des Koerpers.
+   * @param out - Zielvektor; wird in-place gefuellt.
+   * @returns `true`, wenn eine Position ermittelt werden konnte.
+   */
+  getBodyWorldPosition(bodyId: string, out: THREE.Vector3): boolean {
+    const object = this.meshes.get(bodyId);
+    if (object !== undefined) {
+      object.getWorldPosition(out);
+      return true;
+    }
+    if (this.instancedMoons !== null && this.instancedMoons.positionOf(bodyId, out)) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
    * Loest alle Geometrien, Materialien und Listener auf.
    *
    * Nach diesem Aufruf ist der Manager unbrauchbar; `dispose` ist idempotent.

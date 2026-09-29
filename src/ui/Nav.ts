@@ -695,17 +695,25 @@ export class NavUI {
   }
 
   private renderMoreRow(planet: BodyData): HTMLElement {
-    const shown = this.moonLimit.get(planet.id) ?? this.pageSize;
     const item = document.createElement('li');
 
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'se-button se-nav__more';
     const all = this.moonsOf(planet.id).filter((moon) => this.isVisible(moon));
+    // `shown` muss die TATSACHLICH gerenderte Zahl sein, nicht die
+    // Seitenlaenge: waehrend einer Suche rendert `renderedMoons` alle
+    // Treffer ohne Seitengrenze. Mit der Seitenlaenge gerechnet ergab sich
+    // bei einem Treffer "1 - 25 = -24 weitere".
+    const shown = this.renderedMoons(planet).length;
     const remaining = all.length - shown;
     button.textContent = `Mehr anzeigen (${remaining} weitere)`;
     button.addEventListener('click', () => {
-      this.moonLimit.set(planet.id, shown + this.pageSize);
+      // Die neue Grenze richtet sich nach dem bisherigen Limit, nicht nach
+      // `shown`: waehrend einer Suche entspricht `shown` der vollen
+      // Trefferzahl, und `shown + pageSize` waere dann ein No-Op.
+      const base = this.moonLimit.get(planet.id) ?? this.pageSize;
+      this.moonLimit.set(planet.id, base + this.pageSize);
       this.render();
     });
     item.appendChild(button);

@@ -225,6 +225,25 @@ describe('NavUI — Baum und Performance', () => {
     expect(document.querySelector('[data-body-id="planet-0-mond-2"]')).not.toBeNull();
   });
 
+  it('"Mehr anzeigen" zaehlt waehrend der Suche nie negativ', () => {
+    // Regression: `renderedMoons` rendert waehrend einer Suche ALLE Treffer
+    // (cap = Infinity), `renderMoreRow` rechnete aber mit der Seitenlaenge.
+    // Bei einem einzigen Treffer ergab das "1 - 25 = -24 weitere".
+    const nav = new NavUI(document.body);
+    nav.mount();
+    nav.update(makeSystem(1, 40));
+    nav.setQuery('Mond 0-7');
+
+    const beschriftungen = [...document.querySelectorAll('.se-nav__more')]
+      .map((el) => el.textContent ?? '');
+    expect(beschriftungen.length).toBeGreaterThan(0);
+    for (const text of beschriftungen) {
+      const treffer = /\((-?\d+) weitere\)/.exec(text);
+      expect(treffer, `unparsbare Beschriftung: ${text}`).not.toBeNull();
+      expect(Number(treffer![1]), `negative Restzahl in: ${text}`).toBeGreaterThanOrEqual(0);
+    }
+  });
+
   it('der Filter "Nur bekannte" blendet Koerper ohne Radius aus', () => {
     const bodies = makeSystem(2, 2);
     bodies.push(

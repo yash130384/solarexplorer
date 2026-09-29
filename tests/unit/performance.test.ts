@@ -197,6 +197,38 @@ describe("InstancedMoons", () => {
     expect(() => instanced.update(Number.NaN, "visual")).toThrow(RangeError);
     instanced.dispose();
   });
+
+  it("liefert fuer jeden instanzierten Mond eine endliche Weltposition", () => {
+    // Regression: instanzierte Monde haben kein eigenes Mesh. Ohne
+    // `positionOf` fehlte ihre Position in `quickTravelPositions`, und
+    // `focusBody` brach still ab — 449 von 456 Monden waren in der Nav
+    // sichtbar, aber ein Klick tat nichts.
+    const radii = new Map<string, number>();
+    for (const body of bodies) {
+      radii.set(body.id, safeRenderRadius(body, "visual"));
+    }
+    const instanced = new InstancedMoons(bodies, radii, "visual");
+    const parents = new Map<string, THREE.Mesh>();
+    for (const id of ["jupiter", "saturn", "uranus", "neptun", "mars"]) {
+      parents.set(id, new THREE.Mesh());
+    }
+    instanced.attachTo(parents);
+    instanced.update(2451545.0, "visual");
+
+    const out = new THREE.Vector3();
+    const geprueft = bodies.filter((b) => b.type === "moon" && !isFeaturedMoon(b));
+    expect(geprueft.length).toBeGreaterThan(400);
+    for (const body of geprueft) {
+      expect(instanced.positionOf(body.id, out), `keine Position fuer ${body.id}`).toBe(true);
+      expect(Number.isFinite(out.x), `${body.id}.x ist ${out.x}`).toBe(true);
+      expect(Number.isFinite(out.y), `${body.id}.y ist ${out.y}`).toBe(true);
+      expect(Number.isFinite(out.z), `${body.id}.z ist ${out.z}`).toBe(true);
+    }
+    // Ein Koerper, der nicht instanziert ist, wird korrekt abgelehnt.
+    expect(instanced.positionOf("erde", out)).toBe(false);
+    expect(instanced.positionOf("gibt-es-nicht", out)).toBe(false);
+    instanced.dispose();
+  });
 });
 
 describe("Rings", () => {
