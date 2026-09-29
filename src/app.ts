@@ -525,6 +525,7 @@ export class SolarExplorerApp {
    */
   private readBodyPositions(scene: SceneManager): Map<string, THREE.Vector3> {
     const positions = new Map<string, THREE.Vector3>();
+    const world = new THREE.Vector3();
     scene.getScene().updateMatrixWorld(true);
     scene.getScene().traverse((object) => {
       if (object.name === "" || object.name.endsWith("-glow")) {
@@ -533,10 +534,21 @@ export class SolarExplorerApp {
       if (positions.has(object.name)) {
         return;
       }
-      const world = new THREE.Vector3();
       object.getWorldPosition(world);
       positions.set(object.name, world);
     });
+    // Die instanzierten Monde (449 der 456) haben kein eigenes Mesh und
+    // tauchen im Szenengraphen deshalb nicht auf. Ohne sie fehlt in der
+    // Map jede Position, und `focusBody` bricht mit einem stillen `return`
+    // ab: der Nav-Knopf schlieelicht, aber es passiert sichtbar nichts.
+    for (const id of scene.getBodyIds()) {
+      if (positions.has(id)) {
+        continue;
+      }
+      if (scene.getBodyWorldPosition(id, world)) {
+        positions.set(id, world);
+      }
+    }
     return positions;
   }
 
