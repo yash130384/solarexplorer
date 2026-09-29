@@ -44,15 +44,26 @@ export interface NavOptions {
 /**
  * Entscheidet, ob ein Koerper als "bekannt" gilt.
  *
- * Ein Koerper ist bekannt, wenn er einen Radius UND eine Umlaufbahn hat —
- * also wenn das Info-Panel ueberhaupt Werte zeigen kann. Die kleinen
- * Irregulaer-Monde ohne gemessenen Radius fallen durch dieses Raster.
+ * "Bekannt" heisst: der Koerper ist belegt und ueberhaupt darstellbar. Das
+ * ist die Bedingung fuer eine eigene Umlaufbahn mit einer Position > 0.
+ * Der Radius wird bewusst NICHT vorausgesetzt — manche bestaetigten Monde
+ * (z. B. S/2009 S 2) haben in der Fachliteratur keinen gemessenen Radius.
+ * Diese Monde existieren, kreisen um ihren Planeten und sollen in der
+ * Navigation auftauchen; die fehlende Groesse wird erst im Info-Panel
+ * als "Daten noch nicht erfasst" erklaert.
+ *
+ * Vorher stand hier `radiusKm > 0`, wodurch genau ein Mond aus 465 aus der
+ * Liste fiel und der Zaehler "464 von 465 Koerpern" anzeigte.
  *
  * @param body Koerper aus bodies.json.
- * @returns true, wenn der Koerper belastbare Daten hat.
+ * @returns true, wenn der Koerper eine berechenbare Umlaufbahn hat.
  */
 export function isKnownBody(body: BodyData): boolean {
-  return Number.isFinite(body.radiusKm) && body.radiusKm > 0;
+  return (
+    Number.isFinite(body.semiMajorAxisKm) &&
+    body.semiMajorAxisKm > 0 &&
+    body.type !== "star"
+  );
 }
 
 /**
@@ -429,7 +440,11 @@ export class NavUI {
    * @returns true, wenn der Koerper im Baum auftauchen darf.
    */
   private isVisible(body: BodyData): boolean {
-    if (this.filter === 'known' && !isKnownBody(body)) {
+    // Die Sonne ist IMMER sichtbar: sie hat keine Umlaufbahn (und soll auch
+    // keine haben), wird aber nie durch "Nur bekannte" ausgeblendet. Sonst
+    // verliert die Navigation ihre Wurzel und der Zaehler meldet
+    // "464 von 465 Koerpern" — bei einer Zahl, die es so nicht gibt.
+    if (this.filter === 'known' && body.type !== 'star' && !isKnownBody(body)) {
       return false;
     }
     return matchesQuery(body, this.query);

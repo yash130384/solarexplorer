@@ -220,25 +220,20 @@ export class OrbitLines {
       const jd = J2000_JULIAN_DATE + daysSinceJ2000;
       const state = orbitalPosition(body, jd);
 
-      // `orbitalPosition` dreht die Position zusaetzlich um einen zeitabhaengigen
-      // "Knotenwinkel" (siehe `core/orbital.ts`). Mitgenommen wuerde sich die
-      // Ellipse waehrend des Durchlaufs drehen und eine dickere, verschmierte
-      // Kurve ergeben statt der echten Bahn. Deshalb wird die
-      // Knotenrotation pro Probe zurueckgerechnet — die Bahn liegt dann fest
-      // in ihrer geneigten Ebene, nur in der Inklination.
-      const nodeRad =
-        body.rotationPeriodH === 0
-          ? 0
-          : ((((360 * (daysSinceJ2000 * 24)) / body.rotationPeriodH) % 360) *
-              Math.PI) /
-            180;
-      const cosN = Math.cos(nodeRad);
-      const sinN = Math.sin(nodeRad);
-
+      // `orbitalPosition` liefert die Szenenposition bereits fertig: die
+      // Bahn liegt in der x/z-Ebene, `y` ist die Hoehe aus der Inklination
+      // und der Knotenwinkel ist drin.
+      //
+      // Vorher wurde hier noch einmal von Hand nachgedreht — mit derselben
+      // falschen Annahme wie in `core/orbital.ts` (Knoten aus der
+      // Eigenrotation, Drehung in der x/y-Ebene). Das war nach der Korrektur
+      // in `core/orbital.ts` doppelt falsch und stellte die Planetenbahnen
+      // wieder senkrecht. Punkte werden deshalb unveraendert uebernommen und
+      // nur mit `factor` von Kilometern auf Szeneneinheiten gebracht.
       points.push(
         new THREE.Vector3(
-          (state.position.x * cosN + state.position.y * sinN) * factor,
-          (-state.position.x * sinN + state.position.y * cosN) * factor,
+          state.position.x * factor,
+          state.position.y * factor,
           state.position.z * factor,
         ),
       );
@@ -266,9 +261,17 @@ export class OrbitLines {
     const points: THREE.Vector3[] = [];
     for (let i = 0; i < MOON_SEGMENTS; i += 1) {
       const angle = (i / MOON_SEGMENTS) * Math.PI * 2;
+      // Die Kreise liegen in der x/z-Ebene — derselben Referenzebene wie
+      // die Planetenbahnen. `y` ist die Hoehenachse und waechst nur mit der
+      // Inklination.
+      //
+      // Vorher stand der Kreis in der x/y-Ebene (x = r*cos, y = r*sin). Damit
+      // standen alle 456 Mondkreise senkrecht auf den Planetenbahnen und
+      // ueberlagerten sich zu einem dichten Strahlenkreuz ueber dem ganzen
+      // Bild, statt als flache Ringe um ihren Planeten zu erscheinen.
       const x = scaledAxis * Math.cos(angle);
-      const y = scaledAxis * Math.sin(angle) * Math.cos(inclination);
-      const z = scaledAxis * Math.sin(angle) * Math.sin(inclination);
+      const z = scaledAxis * Math.sin(angle);
+      const y = scaledAxis * Math.sin(angle) * Math.sin(inclination);
       points.push(new THREE.Vector3(x, y, z));
     }
     return points;

@@ -10,12 +10,13 @@
 import {
   AU_KM,
   COMPACT_RADIUS_FACTOR,
+  DISTANCE_KNEE_AU,
+  DISTANCE_TAIL_RATE,
   LOG_DISTANCE_SCALE,
   MOND_RADIUS_KM,
   SCALE_MAX_RADIUS_KM,
   SCALE_MIN_RADIUS_KM,
-  VISUAL_DISTANCE_EXPONENT,
-  VISUAL_DISTANCE_FACTOR,
+  SCENE_UNITS_PER_AU_VISUAL,
   VISUAL_MAX_RADIUS,
   VISUAL_MIN_RADIUS,
 } from "./constants";
@@ -147,10 +148,46 @@ export function scaleDistance(semiMajorAxisKm: number, mode: DistanceMode): numb
     case "log":
       return LOG_DISTANCE_SCALE * Math.log(1 + au);
     case "visual":
-      return VISUAL_DISTANCE_FACTOR * Math.pow(au, VISUAL_DISTANCE_EXPONENT);
+      return visualDistance(au);
     default:
       throw new RangeError(`Unbekannter DistanceMode: ${String(mode)}.`);
   }
+}
+
+/**
+ * Standard-Skalierung der Umlaufbahnen: relativ getreue Verhaeltnisse bei
+ * handhabbarer Spannweite.
+ *
+ * Warum nicht einfach linear: Neptun liegt 30 AE von der Sonne entfernt,
+ * Merkur 0,39 AE. Bei rein linearer Skalierung liegt der ganze innere
+ * Bereich bis Mars in den ersten 5 Prozent der Szene — die vier inneren
+ * Planeten druecken sich gegenseitig die Sichtbarkeit weg. Bei vollstaendig
+ * logarithmischer Skalierung sind dagegen die Verhaeltnisse zwischen den
+ * Planeten nicht mehr wiedererkennbar (Jupiter nur 1,8x so weit wie die
+ * Erde statt 5,2x), und die Aufgabe gilt als fachlich falsch.
+ *
+ * Diese Kurve haelt beides:
+ *  - Bis {@link DISTANCE_KNEE_AU} AE streng linear. Mars liegt damit
+ *    genau 1,52x so weit von der Sonne wie die Erde, Merkur 0,39x.
+ *  - Darueber waechst der Abstand logarithmisch. Jupiter landet bei
+ *    ~4,4x Erde, Neptun bei ~7,2x Erde — die Reihenfolge und die
+ *    Groessenordnung bleiben erkennbar, die Szene bleibt ueberschaubar.
+ *
+ * @param au Abstand in Astronomischen Einheiten.
+ * @returns Abstand in Szeneneinheiten.
+ */
+function visualDistance(au: number): number {
+  const linear = au * SCENE_UNITS_PER_AU_VISUAL;
+  if (au <= DISTANCE_KNEE_AU) {
+    return linear;
+  }
+  // log1p sorgt fuer einen stetigen Uebergang: an der Knie-Stelle
+  // ergibt die Fortsetzung exakt denselben Wert wie der lineare Zweig.
+  const knee = DISTANCE_KNEE_AU * SCENE_UNITS_PER_AU_VISUAL;
+  return (
+    knee +
+    SCENE_UNITS_PER_AU_VISUAL * DISTANCE_TAIL_RATE * Math.log1p((au - DISTANCE_KNEE_AU) / DISTANCE_KNEE_AU)
+  );
 }
 
 /**

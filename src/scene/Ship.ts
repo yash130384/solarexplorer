@@ -24,8 +24,7 @@ import * as THREE from "three";
 import {
   AU_KM,
   LOG_DISTANCE_SCALE,
-  VISUAL_DISTANCE_EXPONENT,
-  VISUAL_DISTANCE_FACTOR,
+  SCENE_UNITS_PER_AU_VISUAL,
 } from "../core/constants";
 import { scaleRadius } from "../core/scale";
 import type { DistanceMode, ScaleMode } from "../core/scale";
@@ -114,7 +113,12 @@ export function kmPerSceneUnit(distanceMode: DistanceMode): number {
     case "log":
       return AU_KM / (LOG_DISTANCE_SCALE * Math.log(2));
     case "visual":
-      return AU_KM / (VISUAL_DISTANCE_FACTOR * Math.pow(1, VISUAL_DISTANCE_EXPONENT));
+      // Bis zum Kniepunkt gilt 1 AE = SCENE_UNITS_PER_AU_VISUAL. Fuer die
+      // Umrechnung der Schiffsgeschwindigkeit wird dieser lineare Abschnitt
+      // verwendet — er ist fuer die inneren Planeten exakt und fuer die
+      // aeusseren bewusst konservativ (das Schiff bewegt sich dort in der
+      // Darstellung schneller, als es in Wirklichkeit waere).
+      return AU_KM / SCENE_UNITS_PER_AU_VISUAL;
     default:
       throw new RangeError(`Unbekannter DistanceMode: ${String(distanceMode)}.`);
   }

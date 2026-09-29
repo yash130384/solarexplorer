@@ -306,8 +306,18 @@ export function getScaleModeFromUrl(search: string): ScaleMode {
  * Rotate an in-plane vector by the orbital inclination and the node angle.
  *
  * The inclination tilts the orbital plane around the x axis; the node angle
- * (derived from the body's rotation since J2000) rotates the result around
- * the z axis, so the orbit orientation changes with time.
+ * (derived from the orbital period) rotates that plane around the y axis.
+ *
+ * Convention: the scene's reference plane is x/z (y is the vertical axis
+ * pointing at the ecliptic north pole), so an uninclined orbit has y = 0.
+ *
+ * The previous implementation mixed x and y in the node rotation
+ * (`y = x*sinN + y*cosN`). That is a rotation about the y axis written in the
+ * wrong slot, and it lifted even a perfectly ecliptic orbit out of the
+ * plane: with inclination 0 the Earth's y reached 1.5e8 km, and the outer
+ * planets ended up at y = +/-230 scene units, which is why they kept
+ * sliding out of frame. The node rotation must leave the y component alone
+ * and only spin x and z.
  *
  * @param v - Vector in the orbital plane (km or km/s).
  * @param inclinationRad - Inclination in radians.
@@ -317,14 +327,30 @@ export function getScaleModeFromUrl(search: string): ScaleMode {
 function toSceneSpace(v: Vec3, inclinationRad: number, nodeRad: number): Vec3 {
   const cosI = Math.cos(inclinationRad);
   const sinI = Math.sin(inclinationRad);
-  // Inclination: fold the in-plane y axis around the x axis.
-  const xi = v.x;
-  const yi = v.y * cosI - v.z * sinI;
-  const zi = v.y * sinI + v.z * cosI;
-  // Node rotation around the z axis.
   const cosN = Math.cos(nodeRad);
   const sinN = Math.sin(nodeRad);
-  return { x: xi * cosN - yi * sinN, y: xi * sinN + yi * cosN, z: zi };
+
+  // Die Bahn liegt in der x/y-Ebene (z = 0). Erst der aufsteigende Knoten
+  // dreht sie um die Hoehenachse z — dadurch steht die Bahnebene schief zur
+  // x/y-Ebene, ihre Normale neigt sich um die Inklination. Erst danach wird
+  // die Inklination eingestellt, indem um die gedrehte Knotenachse geneigt
+  // wird.
+  //
+  // Reihenfolge ist entscheidend: erst Knoten, dann Inklination. Wird
+  // umgekehrt gearbeitet (Knoten nach der Inklination) oder der Knoten um
+  // die falsche Achse gelegt, kippt die Bahn um bis zu 90 Grad aus der
+  // Ebene und z erreicht die volle Bahnhalbsgrossen — bei Neptun waren das
+  // 2,4e8 km statt der durch die Inklination bedingten 1,4e8 km.
+  const x1 = v.x * cosN - v.y * sinN;
+  const y1 = v.x * sinN + v.y * cosN;
+  const z1 = v.z;
+
+  // Inklination: Kippung um die x-Achse. z waechst mit sin(Inklination).
+  return {
+    x: x1,
+    y: y1 * cosI,
+    z: y1 * sinI + z1 * cosI,
+  };
 }
 
 /**
@@ -393,13 +419,29 @@ export function orbitalPosition(elements: Body, julianDate: number): OrbitalStat
   const k = Math.sqrt(GM_SUN * a) / distanceKm;
   const planeVelocity: Vec3 = { x: -k * sinE, y: k * b / a * cosE, z: 0 };
 
-  // Node angle: how many revolutions the body completed since J2000,
-  // derived from its rotation period.
-  const rotationPeriodH =
-    elements.rotationPeriodH === 0 ? 0 : elements.rotationPeriodH;
-  const nodeDeg = rotationPeriodH === 0
-    ? 0
-    : (360 * (daysSinceJ2000 * 24) / rotationPeriodH) % 360;
+  // Orientation of the orbital plane.
+  //
+  // Der aufsteigende Knoten (also die Drehung der Bahnebene um die
+  // Erdachse) haengt an der Umlaufperiode, NICHT an der Eigenrotation.
+  // Ein frueherer Stand hat `nodeDeg` aus `rotationPeriodH` abgeleitet. Das
+  // ist physikalisch falsch und hatte einen sichtbaren Fehler: Neptun
+  // rotiert in 16 Stunden, nach 9000 Tagen also rund 13.500 Umdrehungen —
+  // der berechnete Knotenwinkel wechselte dauernd und schleuderte die Bahn
+  // aus der Ebene. Im Snapshot standen die aeusseren Planeten dadurch bei
+  // y = +/-230 statt in der Ebene, sodass sie aus dem Bild rutschten.
+  //
+  // Korrekt ist der scheinbare Knotenrueckgang: der Erdkoerper erreicht
+  // den aufsteigenden Knoten einmal pro Umlauf wieder, also betraegt die
+  // Drehung pro Tag 360 Grad / Umlaufperiode. Ohne Oszillation (gerae
+  // retrograde Bahn) ist sie 0.
+  const orbitalPeriodH =
+    elements.semiMajorAxisKm > 0
+      ? 2 * Math.PI * Math.sqrt(
+          Math.pow(elements.semiMajorAxisKm, 3) / GM_SUN,
+        ) / 3600
+      : 0;
+  const nodeDeg =
+    orbitalPeriodH === 0 ? 0 : ((360 * daysSinceJ2000) / orbitalPeriodH) % 360;
 
   const inclinationRad = (elements.inclinationDeg * Math.PI) / 180;
   const nodeRad = (nodeDeg * Math.PI) / 180;

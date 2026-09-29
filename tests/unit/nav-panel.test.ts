@@ -110,9 +110,29 @@ describe('Nav — reine Hilfsfunktionen', () => {
     expect(matchesQuery(mond, 'erde')).toBe(true);
   });
 
-  it('isKnownBody trennt gemessene von unvermessenen Koerpern', () => {
+  it('isKnownBody haengt an der Umlaufbahn, nicht am Radius', () => {
+    // Regression: `isKnownBody` verlangte `radiusKm > 0`. Der bestaetigte
+    // Mond saturn-s2009s2 hat in der Fachliteratur keinen gemessenen Radius
+    // (radiusKm = 0 in bodies.json) und fiel dadurch aus der Navigation —
+    // der Zaehler zeigte "464 von 465 Koerpern" fuer ein System, in dem
+    // alle 465 Koerper belegt sind.
     expect(isKnownBody(makeBody({ radiusKm: 100 }))).toBe(true);
-    expect(isKnownBody(makeBody({ radiusKm: 0 }))).toBe(false);
+    // Ohne Radius, aber mit Umlaufbahn: ein bestaetigter Mond, der nur
+    // kreist. Das ist bekannt genug fuer die Navigation.
+    expect(isKnownBody(makeBody({ type: 'moon', radiusKm: 0, semiMajorAxisKm: 1e8 }))).toBe(true);
+  });
+
+  it('isKnownBody ist bei der Sonne immer false', () => {
+    // Die Sonne hat keine Umlaufbahn. Sie wird in der Navigation trotzdem
+    // immer gezeigt (siehe `isVisible`), aber sie ist kein "bekannter
+    // Koerper" im Sinne des Filters.
+    const sonne = makeBody({ id: 'sonne', type: 'star', parent: null, semiMajorAxisKm: 0 });
+    expect(isKnownBody(sonne)).toBe(false);
+  });
+
+  it('isKnownBody ist false ohne berechenbare Halbachse', () => {
+    expect(isKnownBody(makeBody({ semiMajorAxisKm: 0 }))).toBe(false);
+    expect(isKnownBody(makeBody({ semiMajorAxisKm: Number.NaN }))).toBe(false);
   });
 });
 
@@ -244,10 +264,20 @@ describe('NavUI — Baum und Performance', () => {
     }
   });
 
-  it('der Filter "Nur bekannte" blendet Koerper ohne Radius aus', () => {
+  it('der Filter "Nur bekannte" blendet Koerper ohne Umlaufbahn aus', () => {
+    // Aktualisiert: "bekannt" haengt jetzt an `semiMajorAxisKm > 0`, nicht
+    // mehr am Radius. Der Test filtert deshalb auf einen Koerper ganz ohne
+    // Halbachse (radiusKm bleibt der Vollstaendigkeit halber 0).
     const bodies = makeSystem(2, 2);
     bodies.push(
-      makeBody({ id: 'winzig', name: 'Winzig', type: 'moon', parent: 'planet-0', radiusKm: 0 }),
+      makeBody({
+        id: 'winzig',
+        name: 'Winzig',
+        type: 'moon',
+        parent: 'planet-0',
+        radiusKm: 0,
+        semiMajorAxisKm: 0,
+      }),
     );
     const nav = new NavUI(document.body);
     nav.mount();
@@ -258,10 +288,28 @@ describe('NavUI — Baum und Performance', () => {
     // vorher nach ihm gesucht — eine Suche loest alle Planeten auf.
     nav.setQuery('Winzig');
     expect(nav.setFilter('known')).toBe('known');
-    // Radius 0 heisst "nicht gemessen" — "Nur bekannte" muss ihn ausblenden.
+    // Ohne Halbachse gibt es keine berechenbare Position — "Nur bekannte"
+    // muss ihn ausblenden.
     expect(nav.getVisibleIds()).not.toContain('winzig');
     expect(nav.setFilter('all')).toBe('all');
     expect(nav.getVisibleIds()).toContain('winzig');
+  });
+
+  it('der Filter "Nur bekannte" blendet die Sonne NICHT aus', () => {
+    // Regression, gefunden bei der Verifikation: `isKnownBody` liefert fuer
+    // die Sonne false (type "star", semiMajorAxisKm 0). Blieb die Sonne an
+    // `isKnownBody` gekoppelt, verschwand sie aus dem Baum und der Zaehler
+    // meldete dauerhaft "464 von 465 Koerpern" — die Navigation hatte keine
+    // Wurzel mehr. Die Sonne ist die Wurzel und darf nie ausgeblendet
+    // werden.
+    const nav = new NavUI(document.body);
+    nav.mount();
+    nav.update(makeSystem(2, 2));
+    // makeSystem setzt die Sonne mit semiMajorAxisKm aus makeBody (1e8),
+    // aber type "star" — isKnownBody ist also definitiv false.
+    expect(isKnownBody(makeBody({ type: 'star', semiMajorAxisKm: 0 }))).toBe(false);
+    expect(document.querySelector('.se-nav__button[data-body-id="sonne"]')).not.toBeNull();
+    expect(nav.getVisibleIds()).toContain('sonne');
   });
 
   it('meldet einen leeren Treffer, statt eine leere Liste zu zeigen', () => {

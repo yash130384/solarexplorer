@@ -140,10 +140,21 @@ describe("scaleDistance", () => {
     },
   );
 
-  it("setzt Neptun in visual naeher an die Sonne als in real", () => {
+  it("setzt Neptun in visual an ~434 Szeneneinheiten, nicht auf 30", () => {
+    // Ersetzt die alte Zusicherung "visual < real". Die war an die
+    // Kompression `au^0.35` gebunden: dort lag Neptun bei 30 Einheiten,
+    // also auf demselben Abstand wie der Erde-Mittelpunkt in "real" — man
+    // konnte das System nicht ueberblicken. Heute ist "visual" bewusst
+    // DEHNT (60 Einheiten pro AE im linearen Zweig): Neptun muss weit
+    // ausserhalb der Erde liegen, sonst waeren die aeusseren Planeten nicht
+    // von den inneren zu unterscheiden.
     const visual = scaleDistance(NEPTUN_SEMI_MAJOR_KM, "visual");
     const real = scaleDistance(NEPTUN_SEMI_MAJOR_KM, "real");
-    expect(visual).toBeLessThan(real);
+    expect(visual).toBeGreaterThan(400);
+    expect(visual).toBeLessThan(460);
+    // "real" ist definitionsgemaess 1 Einheit pro AE -> Neptun bei 30.
+    expect(real).toBeCloseTo(30.05, 1);
+    expect(visual).toBeGreaterThan(real * 10);
   });
 
   it("bildet 1 AE in real exakt auf 1 Szeneneinheit ab", () => {
@@ -179,6 +190,111 @@ describe("scaleDistance", () => {
     expect(() => scaleDistance(AU_KM, "unsinn" as DistanceMode)).toThrow(
       /Unbekannter DistanceMode/,
     );
+  });
+});
+
+/**
+ * Verhaeltnisse der "visual"-Kurve, bezogen auf die Erde.
+ *
+ * Die alte Kurve `au^0.35` stauchte das System so stark, dass Jupiter nur
+ * 1,78x so weit von der Sonne lag wie die Erde (real sind es 5,20x) — der
+ * ganze Innenbereich war ein Klumpen. Diese Tabelle schreibt die neuen,
+ * dokumentierten Zielwerte fest. Referenz: Erde = 1 AE = 60 Szeneneinheiten.
+ */
+const VISUAL_RATIO_TABLE: ReadonlyArray<
+  readonly [string, number, number, number]
+> = [
+  // [Planet, echte AE, min. Verhaeltnis, max. Verhaeltnis]
+  ["Merkur", 0.387, 0.382, 0.398],
+  ["Venus", 0.723, 0.712, 0.734],
+  ["Erde", 1.0, 0.999, 1.001],
+  ["Mars", 1.524, 1.509, 1.539],
+  ["Jupiter", 5.203, 4.29, 4.51],
+  ["Saturn", 9.537, 5.09, 5.89],
+  ["Uranus", 19.191, 6.09, 6.91],
+  ["Neptun", 30.069, 7.09, 7.39],
+];
+
+describe("scaleDistance — visual-Kurve", () => {
+  const erdeVisuell = scaleDistance(AU_KM, "visual");
+
+  it("bildet 1 AE im linearen Zweig auf 60 Szeneneinheiten ab", () => {
+    // Bis zum Kniepunkt gilt streng linear: 60 Einheiten pro AE. Das ist
+    // der Anker, an dem alle Verhaeltnisse der Tabelle haengen.
+    expect(erdeVisuell).toBeCloseTo(60, 10);
+  });
+
+  it.each(VISUAL_RATIO_TABLE)(
+    "%s liegt bei %.2f-%.2f Erde-Bahnen",
+    (_name, au, min, max) => {
+      const verhaeltnis = scaleDistance(au * AU_KM, "visual") / erdeVisuell;
+      expect(
+        verhaeltnis,
+        `${_name}: ${verhaeltnis.toFixed(3)}x Erde, erlaubt ${min}-${max}`,
+      ).toBeGreaterThanOrEqual(min);
+      expect(
+        verhaeltnis,
+        `${_name}: ${verhaeltnis.toFixed(3)}x Erde, erlaubt ${min}-${max}`,
+      ).toBeLessThanOrEqual(max);
+    },
+  );
+
+  it("haelt Merkur, Mars und Erde exakt auf ihren echten Verhaeltnissen", () => {
+    // Diese drei liegen unterhalb des Kniepunkts (4 AE) und muessen daher
+    // EXAKT linear sein — 2 % Toleranz, die Kurve ist hier fehlerfrei.
+    for (const [name, au, soll] of [
+      ["Merkur", 0.387, 0.387],
+      ["Mars", 1.524, 1.524],
+    ] as const) {
+      const ist = scaleDistance(au * AU_KM, "visual") / erdeVisuell;
+      expect(Math.abs(ist - soll) / soll, `${name} driftet`).toBeLessThan(0.02);
+    }
+  });
+
+  it("bildet Jupiter weit ausserhalb der Erde ab — nicht bei 1,78x", () => {
+    // Der behobene Fehler: mit `au^0.35` lag Jupiter bei 1,78x Erde.
+    const verhaeltnis = scaleDistance(5.203 * AU_KM, "visual") / erdeVisuell;
+    expect(verhaeltnis).toBeGreaterThan(3);
+    expect(verhaeltnis).toBeGreaterThan(4);
+  });
+
+  it("ist ueber 0,39 .. 30 AE streng monoton steigend", () => {
+    let vorher = Number.NEGATIVE_INFINITY;
+    for (let au = 0.39; au <= 30.0001; au += 0.01) {
+      const wert = scaleDistance(au * AU_KM, "visual");
+      expect(
+        wert,
+        `Kurve faellt bei ${au.toFixed(2)} AE (${wert} <= ${vorher})`,
+      ).toBeGreaterThan(vorher);
+      vorher = wert;
+    }
+  });
+
+  it("ist am Kniepunkt (4 AE) stetig", () => {
+    // Genau an der Knie-Stelle muss der lineare Zweig in den logarithmischen
+    // uebergehen, ohne einen Sprung zu erzeugen — sonst sieht man eine
+    // Luecke in der Umlaufbahn des Planeten, der dort liegt.
+    const links = scaleDistance(3.99 * AU_KM, "visual");
+    const rechts = scaleDistance(4.01 * AU_KM, "visual");
+    const sprung = Math.abs(rechts - links) / links;
+    expect(sprung, `Sprung am Knie: ${(sprung * 100).toFixed(3)} %`).toBeLessThan(0.005);
+    // Zusaetzlich: der Wert AN der Knie-Stelle selbst ist exakt der lineare.
+    expect(scaleDistance(4 * AU_KM, "visual")).toBeCloseTo(4 * 60, 10);
+  });
+
+  it("haelt die Reihenfolge der Planeten von innen nach aussen ein", () => {
+    // Ein Kind muss Innen- und Aussenbereich unterscheiden koennen. Mit der
+    // alten Kurve lagen Jupiter (1,78x) und Mars (1,52x) dicht beieinander.
+    const verhaeltnisse = VISUAL_RATIO_TABLE.map(
+      ([, au]) => scaleDistance(au * AU_KM, "visual") / erdeVisuell,
+    );
+    for (let i = 1; i < verhaeltnisse.length; i += 1) {
+      expect(verhaeltnisse[i] ?? 0).toBeGreaterThan(verhaeltnisse[i - 1] ?? 0);
+    }
+    // Der Abstand Erde -> Mars betraegt exakt das echte Verhaeltnis; das ist
+    // der Bereich, in dem die alte Kurve am schlimmsten schnitt.
+    const marsErde = (verhaeltnisse[3] ?? 0) / (verhaeltnisse[2] ?? 1);
+    expect(Math.abs(marsErde - 1.524)).toBeLessThan(0.03);
   });
 });
 

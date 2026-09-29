@@ -34,8 +34,21 @@ import type { SceneBody, SceneOptions, SceneStats } from "./types";
 /** Oeffnungswinkel der Perspektivkamera in Grad. */
 const CAMERA_FOV = 50;
 
-/** Anfangskamera: schaut von schraeg oben auf das Sonnensystem. */
-const INITIAL_CAMERA_POSITION: readonly [number, number, number] = [0, 140, 320];
+/**
+ * Startposition der Kamera: schaut von schraeg oben auf das Sonnensystem.
+ *
+ * Muss zur Groessenordnung der Umlaufbahnen passen. In der Distanzskalierung
+ * "visual" liegt Neptun bei ~434 Szeneneinheiten, Uranus bei ~390.
+ *
+ * Die Werte sind nicht geschaetzt, sondern gerechnet: bei 50 Grad
+ * Oeffnungswinkel und 1280x720 Bildformat ergibt der Kamerastand
+ * (0, 150, 850) — rund 864 Einheiten von der Sonne entfernt — einen
+ * worst-case NDC-Wert von 0,71 ueber den gesamten Neptun-Bahnkreis. Damit
+ * liegen alle acht Bahnen sicher im Bild (|ndc| <= 1), mit Reserve fuer die
+ * Bahnkurve selbst. Aus (0, 110, 560) fielen Uranus und Neptun heraus
+ * (ndc 1,06 und 1,38).
+ */
+const INITIAL_CAMERA_POSITION: readonly [number, number, number] = [0, 150, 850];
 
 /** Standarddistanz der Kamera, multipliziert mit dem Radius des Koerpers. */
 const DEFAULT_FOCUS_FACTOR = 6;

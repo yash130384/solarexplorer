@@ -55,11 +55,31 @@ export const SCALE_MAX_RADIUS_KM = 695700;
  */
 export const SCENE_UNITS_PER_AU = 1;
 
-/** Exponent der Kompression im Distanzmodus "visual" (0 = keine Kompression, 1 = linear). */
-export const VISUAL_DISTANCE_EXPONENT = 0.35;
+/**
+ * Kniepunkt der Distanzskalierung, in Astronomischen Einheiten.
+ *
+ * Bis hierher wird streng linear skaliert, damit die inneren Planeten ihre
+ * echten Verhaeltnisse behalten (Mars liegt genau 1,52x so weit draussen
+ * wie die Erde). Ab dem Knie wird die Kurve sanft abgeflacht, damit Neptun
+ * bei 30 AE die Szene nicht verlaesst.
+ */
+export const DISTANCE_KNEE_AU = 4.0;
 
-/** Vorfaktor des Distanzmodus "visual" in Szeneneinheiten. */
-export const VISUAL_DISTANCE_FACTOR = 5;
+/**
+ * Szeneneinheiten pro AE im linearen Abschnitt der Distanzskalierung.
+ *
+ * Gewaehlt, damit Neptun (30 AE) bei rund 430 Einheiten liegt: gross genug
+ * fuer die aeusseren Monde, klein genug fuer intakte Float-Praezision.
+ */
+export const SCENE_UNITS_PER_AU_VISUAL = 60;
+
+/**
+ * Waechstumsrate der Distanzkurve jenseits des Kniepunkts.
+ *
+ * Bestimmt, wie stark die aeusseren Planeten gestaucht werden:
+ * Jupiter (5,2 AE) landet bei ~4,4x Erde, Neptun (30 AE) bei ~7,2x.
+ */
+export const DISTANCE_TAIL_RATE = 1.6;
 
 /** Faktor des Distanzmodus "log" in Szeneneinheiten. */
 export const LOG_DISTANCE_SCALE = 100;
