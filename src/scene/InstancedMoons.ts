@@ -239,6 +239,31 @@ class MoonInstanceGroup {
   }
 
   /**
+   * Liefert die Weltposition eines instanzierten Mondes.
+   *
+   * Instanzierte Monde haben kein eigenes Mesh, sie stecken als Matrix in
+   * einem gemeinsamen `InstancedMesh`. Damit sie trotzdem anwaehlbar sind
+   * (Nav-Klick, Kamera-Anflug), wird die Position aus derselben Rechnung
+   * gewonnen, die auch {@link update} zum Setzen der Instanzmatrizen nutzt.
+   *
+   * @param bodyId - Koerper-ID des Mondes.
+   * @param out - Zielvektor; wird in-place gefuellt und zurueckgegeben.
+   * @returns `true`, wenn der Mond in dieser Gruppe liegt.
+   */
+  positionOf(bodyId: string, out: THREE.Vector3): boolean {
+    const index = this.moons.findIndex((moon) => moon.body.id === bodyId);
+    if (index < 0) {
+      return false;
+    }
+    // Die Instanzmatrix ist bereits gesetzt; sie enthaelt Position UND
+    // Radius, die Position steckt also in der Spalte 3.
+    this.mesh.getMatrixAt(index, instanceMatrix);
+    out.setFromMatrixPosition(instanceMatrix);
+    this.mesh.localToWorld(out);
+    return Number.isFinite(out.x) && Number.isFinite(out.y) && Number.isFinite(out.z);
+  }
+
+  /**
    * Loest Material und Geometrie (letztere ist geteilt) frei.
    *
    * @returns {void}
@@ -365,6 +390,21 @@ export class InstancedMoons {
    */
   getObjectForTest(): THREE.InstancedMesh[] {
     return [...this.groups.values()].map((group) => group.mesh);
+  }
+
+  /**
+   * Liefert die Weltposition eines beliebigen instanzierten Mondes.
+   *
+   * @param bodyId - Koerper-ID des Mondes.
+   * @param out - Zielvektor; wird in-place gefuellt.
+   * @returns `true`, wenn die Position ermittelt werden konnte.
+   */
+  positionOf(bodyId: string, out: THREE.Vector3): boolean {
+    const group = this.groupByBodyId.get(bodyId);
+    if (group === undefined) {
+      return false;
+    }
+    return group.positionOf(bodyId, out);
   }
 
   /** Gesamtanzahl der instanzierten Monde. */
