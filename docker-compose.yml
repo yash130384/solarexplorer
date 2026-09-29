@@ -1,0 +1,24 @@
+services:
+  solarexplorer:
+    build: .
+    image: solarexplorer:local
+    container_name: solarexplorer
+    # Nur Port 8090 wird veroeffentlicht. 3000/8000 sind auf dem Host belegt,
+    # 80/443 bleiben bewusst frei.
+    ports:
+      - "8090:8090"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8090/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    environment:
+      TZ: Europe/Berlin
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    # Kein privileged, kein host network, keine host-volumes.

@@ -1,0 +1,84 @@
+# CI für SolarExplorer.
+#
+# Drei Stufen:
+#   1. Typprüfung (tsc --noEmit) — fängt Compilefehler ab.
+#   2. Unit-Tests (vitest) — reine Logik, braucht keinen Browser.
+#   3. End-to-End-Tests (Playwright) — laufen gegen das gebaute Bundle,
+#      das in diesem Job von einem nginx-Container ausgeliefert wird.
+#
+# Schritt 3 startet bewusst NICHT `docker compose up`: In GitHub-Actions ist
+# der Docker-Daemon neben dem Runner nicht erreichbar. Stattdessen wird das
+# gleiche `dist/` mit `nginx:alpine` auf Port 8090 gestartet — dieselben
+# Dateien, die das Projekt-Image ausliefert.
+
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    name: Typprüfung, Unit- und E2E-Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code auschecken
+        uses: actions/checkout@v4
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Abhängigkeiten installieren
+        run: npm ci
+
+      - name: Typprüfung
+        run: npx tsc --noEmit
+
+      - name: Unit-Tests
+        run: npx vitest run
+
+      - name: Produktions-Build
+        run: npx vite build
+
+      - name: Browser für Playwright installieren
+        run: npx playwright install --with-deps chromium
+
+      - name: nginx-Server für dist/ starten
+        run: |
+          docker run -d --name se-e2e -p 8090:80 \
+            -v "$PWD/dist:/usr/share/nginx/html:ro" \
+            nginx:alpine
+          # Aufbereiten, bis die Startseite antwortet.
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8090/ >/dev/null; then
+              echo "Server bereit nach ${i}s"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "Server wurde nicht bereit" >&2
+          docker logs se-e2e
+          exit 1
+
+      - name: End-to-End-Tests
+        run: npx playwright test
+
+      - name: Testberichte hochladen (nur bei Fehlschlag)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 7
+
+      - name: nginx wieder beenden
+        if: always()
+        run: docker rm -f se-e2e || true

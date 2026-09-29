@@ -1,0 +1,366 @@
+{{Short description|Natural satellites of the planet Neptune}}
+{{good article}}
+[[File:New Webb Images Capture Rare View of Neptune’s Rings (Labeled).png|alt=Shown in this image are Neptune and some of its moons: Triton, Galatea, Naiad, Thalassa, Despina, Proteus, and Larissa|thumb|upright=1.5|An annotated [[near-infrared]] image of some of [[Neptune]]'s moons as captured by the [[James Webb Space Telescope]] in September 2022.<ref group="note">The bright blue [[Diffraction spike|diffraction star]] is [[Triton (moon)|Triton]], Neptune's largest moon; while [[Hippocamp (moon)|Hippocamp]], its smallest known regular moon, is too small to be seen.</ref>]]
+There are 16 known [[Natural satellite|moons]] of the planet [[Neptune]], fourteen of which are named after [[List of water deities|water deities]] and creatures in [[Greek mythology]].<ref group="note">This is an IAU guideline that will be followed at the naming of every Neptunian moon, although two ([[S/2002 N 5]] and [[S/2021 N 1]]) have yet to receive permanent names.</ref> The largest is [[Triton (moon)|Triton]], discovered by [[William Lassell]] on 10 October 1846, 17 days after the [[discovery of Neptune]] itself. Over a century passed before the discovery of the second natural satellite, [[Nereid (moon)|Nereid]], in 1949, and another 40 years before [[Proteus (moon)|Proteus]], Neptune's second-largest moon, was discovered in 1989.
+
+Triton is unique among moons of [[Planetary-mass object|planetary mass]] in that its orbit is [[Retrograde and prograde motion|retrograde]] to Neptune's rotation and [[Orbital inclination|inclined]] relative to Neptune's equator, which suggests that it did not form in orbit around Neptune, but was instead gravitationally captured by it. The next-largest satellite in the [[Solar System]] suspected to be captured, [[Saturn]]'s moon [[Phoebe (moon)|Phoebe]], has only 0.03% of Triton's mass. The [[capture of Triton]], probably occurring some time after Neptune formed a satellite system, was a catastrophic event for Neptune's original satellites, disrupting their orbits so that they collided to form a rubble disc. Triton is massive enough to have achieved [[hydrostatic equilibrium]] and to retain a thin atmosphere capable of forming clouds and hazes.
+
+Inward of Triton are seven small inner moons, Neptune's only [[regular moon|regular satellites]], all with [[Retrograde and prograde motion|prograde orbits]] close to the planet's equatorial plane; some orbit among [[Rings of Neptune|Neptune's rings]]. Including the largest, Proteus, they were re-accreted from the rubble disc formed after Triton's orbit became circular. Beyond Triton, Neptune has eight outer [[irregular satellite]]s: four retrograde and four prograde. Among the prograde satellites is Nereid, the largest of the eight outer moons, which orbits much farther from Neptune at a high inclination. Its orbit is unusually close and highly eccentric for an irregular satellite, suggesting it may once have been a regular satellite significantly perturbed when Triton was captured. The outermost moons of Neptune are the furthest moons from their primaries in the Solar System.
+
+==History==
+===Discovery===
+[[Triton (moon)|Triton]] was discovered by [[William Lassell]] in 1846, just seventeen days after the [[discovery of Neptune]].<ref name=Lassell1846/> [[Nereid (moon)|Nereid]] was discovered by [[Gerard Kuiper|Gerard P. Kuiper]] in 1949.<ref name=Kuiper1949/> The third moon, later named [[Larissa (moon)|Larissa]], was first observed by Harold J. Reitsema, William B. Hubbard, Larry A. Lebofsky, and [[David J. Tholen]] on 24 May 1981. The astronomers were observing a star's close approach to Neptune, looking for rings similar to [[Rings of Uranus|those discovered around Uranus]] four years earlier.<ref name="Reitsema1982" /> If rings were present, the star's luminosity would decrease slightly just before the planet's closest approach. The star's luminosity dipped only for several seconds, which meant that it was due to a moon rather than rings.
+
+No further moons were found until ''[[Voyager 2]]'' flew by Neptune in 1989. ''Voyager 2'' recovered Larissa and discovered five inner moons: [[Naiad (moon)|Naiad]], [[Thalassa (moon)|Thalassa]], [[Despina (moon)|Despina]], [[Galatea (moon)|Galatea]] and [[Proteus (moon)|Proteus]].<ref name="Smith1989" /> In 2002 and 2003, two surveys using large ground-based telescopes found five additional outer irregular moons, bringing the total to thirteen.<ref name="HolmanKavelaarsGrav2004" /> These moons were [[Halimede (moon)|Halimede]], [[Sao (moon)|Sao]], [[Laomedeia]], [[Neso (moon)|Neso]], and [[Psamathe (moon)|Psamathe]].<ref name="HolmanKavelaarsGrav2004" /><ref name="SheppardJewittKleyna2006" /> A sixth moon was also detected in 2002, but it could not be re-observed enough times to determine its orbit, so it became [[lost asteroid|lost]].<ref name="HolmanKavelaarsGrav2004"/>
+
+In 2013 [[Mark R. Showalter]] discovered [[Hippocamp (moon)|Hippocamp]] while examining Hubble Space Telescope images of Neptune's [[Rings of Neptune#Adams ring|ring arcs]] from 2009. He used a technique similar to [[Panning (camera)|panning]] to compensate for orbital motion and allow [[Shift-and-add|stacking]] of multiple images to bring out faint details.<ref name = "STScI_2013-07-15">{{cite web| title = Hubble Finds New Neptune Moon| publisher = [[Space Telescope Science Institute]]| date = 2013-07-15| url = http://hubblesite.org/newscenter/archive/releases/2013/30/full/| access-date = 2021-01-28| archive-date = 2016-03-04| archive-url = https://web.archive.org/web/20160304014616/http://hubblesite.org/newscenter/archive/releases/2013/30/full/| url-status = live}}</ref><ref name = "Showalter_blog">{{cite web | last = Showalter | first = M. R. | author-link = Mark R. Showalter | title = How to Photograph a Racehorse ...and how this relates to a tiny moon of Neptune | work = Mark Showalter's blog | date = 2013-07-15 | url = http://cosmicdiary.org/mshowalter/2013/07/15/how-to-photograph-a-racehorse-and-how-this-relates-to-a-tiny-moon-of-neptune | access-date = 2013-07-16 | archive-date = 2013-07-18 | archive-url = https://web.archive.org/web/20130718052533/http://cosmicdiary.org/mshowalter/2013/07/15/how-to-photograph-a-racehorse-and-how-this-relates-to-a-tiny-moon-of-neptune/ | url-status = live }}</ref> After deciding on a whim to expand the search area to radii well beyond the rings, he found an unambiguous dot that represented the new moon.<ref name="Beatty_2013">{{cite news |url=http://www.skyandtelescope.com/astronomy-news/neptunes-newest-moon/ |title=Neptune's Newest Moon |work=[[Sky & Telescope]] |author=Kelly Beatty |date=15 July 2013 |access-date=12 June 2017 |archive-date=10 August 2014 |archive-url=https://web.archive.org/web/20140810155711/http://www.skyandtelescope.com/astronomy-news/neptunes-newest-moon/ |url-status=live }}</ref> He then found it repeatedly in other archival HST images going back to 2004. ''Voyager 2'', which had observed all of Neptune's other inner satellites, did not detect it during its 1989 flyby, due to its dimness.<ref name="STScI_2013-07-15" />
+
+In 2021, [[Scott S. Sheppard]] and colleagues used the [[Subaru Telescope]] at [[Mauna Kea, Hawaii]] and discovered two more irregular moons of Neptune, which were announced in 2024.<ref name="Sheppardmoons2024"/> These two moons are [[provisional designation|provisionally designated]] [[S/2021 N 1]] and [[S/2002 N 5]]. The latter turned out to be a recovery of the lost moon from 2002.<ref name="MPEC-2024-D112"/><ref name="MPEC-2024-D114"/>
+
+===Names===
+{{See also|Name conflicts with minor planets}}
+Triton did not have an official name until the twentieth century. Its name, deriving from [[Triton (mythology)|Greek mythology]] as a son of [[Poseidon]] (the Greek equivalent of Neptune), was suggested by [[Camille Flammarion]] in his 1880 book ''Astronomie Populaire'',<ref>{{cite book
+|last = Flammarion
+|first = Camille
+|title = Astronomie populaire
+|page = 591
+|date = 2002
+|orig-date = 1st pub. 1880
+|publisher = Flammarion
+|language = fr
+|url = http://gallica.bnf.fr/ark:/12148/bpt6k94887w/f610.table
+|isbn = 2-08-011041-1
+|access-date = 2009-03-04
+|archive-date = 2012-03-01
+|archive-url = https://web.archive.org/web/20120301004123/http://gallica.bnf.fr/ark:/12148/bpt6k94887w/f610.table
+|url-status = live
+}}</ref> but it did not come into common use until at least the 1930s.<ref name="PMoore">{{cite book
+| last = Moore
+| first = Patrick
+| author-link = Patrick Moore
+| title = The planet Neptune: an historical survey before Voyager
+| publisher = [[John Wiley & Sons]]
+| series = Wiley-Praxis Series in Astronomy and Astrophysics
+| edition = 2nd
+| date = April 1996
+| pages = 150 (see p. 68)
+| url = https://books.google.com/books?id=RZruAAAAMAAJ&q=H.+N.+Russell
+| isbn = 978-0-471-96015-7
+| oclc = 33103787
+}}
+</ref> Until this time it was usually simply known as "the satellite of Neptune". Other moons of Neptune are also named for Greek [[list of water deities|water gods]], in keeping with [[Neptune (mythology)|Neptune]]'s position as god of the sea:<ref name="Gazetteer" /> either from [[Greek mythology]], usually children of Poseidon (Triton, Proteus, Despina, Thalassa); lovers of Poseidon (Larissa); other mythological creatures related to Poseidon (Hippocamp); classes of minor Greek water deities ([[Naiad]], [[Nereid]]); or specific Nereids (Halimede, Galatea, Neso, Sao, Laomedeia, Psamathe).<ref name="Gazetteer" /><ref name="Showalter2019" />
+
+For the "normal" irregular satellites, the general convention is to use names ending in "a" for prograde satellites, names ending in "e" for retrograde satellites, and names ending in "o" for exceptionally inclined satellites, exactly like the convention for the [[moons of Jupiter]].<ref name="Nicholson2008"/> Two [[asteroid]]s share the same names as moons of Neptune: [[74 Galatea]] and [[1162 Larissa]].
+
+==Characteristics==
+The moons of Neptune can be divided into two groups: [[regular satellite|regular]] and [[irregular satellite|irregular]]. The first group includes the seven inner moons, which follow circular prograde orbits lying in the equatorial plane of Neptune. The second group consists of all nine other moons including Triton. They generally follow inclined eccentric and often retrograde orbits far from Neptune; the only exception is Triton, which orbits close to the planet following a circular orbit, though retrograde and inclined.<ref name="Jewitt2007" />
+[[File:Orbits of inner moons of Neptune including S 2004 N 1.jpg|thumb|Orbit diagram of Neptune's inner moons, including Triton, with their names and orbit directions indicated]]
+[[File:Neptune inner moons size comparison.svg|thumb|Size comparison of Neptune's seven inner moons]]
+
+===Regular moons===
+In order of distance from Neptune, the regular moons are [[Naiad (moon)|Naiad]], [[Thalassa (moon)|Thalassa]], [[Despina (moon)|Despina]], [[Galatea (moon)|Galatea]], [[Larissa (moon)|Larissa]], [[Hippocamp (moon)|Hippocamp]], and [[Proteus (moon)|Proteus]]. All but the outer two are within Neptune-[[synchronous orbit]] (Neptune's rotational period is 0.6713 day or 16 hours<ref name="fact">{{cite web |last = Williams |first = David R. |date = 1 September 2004 |url = http://nssdc.gsfc.nasa.gov/planetary/factsheet/neptunefact.html |title = Neptune Fact Sheet |publisher = NASA |access-date = 18 July 2013 |archive-date = 1 July 2010 |archive-url = https://web.archive.org/web/20100701192119/http://nssdc.gsfc.nasa.gov/planetary/factsheet/neptunefact.html |url-status = live }}</ref>) and thus are being [[Tidal deceleration|tidally decelerated]]. Naiad, the closest regular moon, is also the second smallest among the inner moons (following the discovery of Hippocamp), whereas Proteus is the largest regular moon and the second largest moon of Neptune. The first five moons orbit much faster than Neptune's rotation itself ranging from 7 hours for Naiad and Thalassa, to 13 hours for Larissa.
+
+The inner moons are closely associated with [[Rings of Neptune|Neptune's rings]]. The two innermost satellites, Naiad and Thalassa, orbit between the [[Rings of Neptune#Galle ring|Galle]] and [[Rings of Neptune#Le Verrier ring|LeVerrier rings]].<ref name="Smith1989" /> Despina may be a [[shepherd moon]] of the LeVerrier ring, because its orbit lies just inside this ring.<ref name=Miner2007b/> The next moon, [[Galatea (moon)|Galatea]], orbits just inside the most prominent of Neptune's rings, the [[Adams ring]].<ref name=Miner2007b/> This ring is very narrow, with a width not exceeding 50&nbsp;km,<ref name=Horn1990/> and has five embedded bright [[arc (geometry)|arcs]].<ref name=Miner2007b/> The gravity of Galatea helps confine the ring particles within a limited region in the radial direction, maintaining the narrow ring. Various [[orbital resonance|resonances]] between the ring particles and Galatea may also have a role in maintaining the arcs.<ref name=Miner2007b/>
+
+Only the two largest regular moons have been imaged with a resolution sufficient to discern their shapes and surface features.<ref name="Smith1989" /> Larissa, about 200&nbsp;km in diameter, is slightly elongated.<ref name="Stooke1994"/> Proteus is also not significantly elongated, but not fully spherical either: it resembles an irregular [[polyhedron]], with several flat or slightly [[Curved mirror#Concave mirrors|concave]] facets 150 to 250&nbsp;km in diameter.<ref name="Stooke1994" /> At about 400&nbsp;km in diameter, it is larger than the Saturnian moon [[Mimas (moon)|Mimas]], which is fully ellipsoidal. This difference may be due to a past collisional disruption of Proteus.<ref name=BanfieldMurray/> The surface of Proteus is heavily cratered and shows a number of linear features. Its largest crater, Pharos, is more than 150&nbsp;km in diameter.<ref name="Smith1989" /><ref name="Stooke1994" />
+
+All of Neptune's inner moons are dark objects: their [[geometric albedo]] ranges from 7 to 10%.<ref name=Karkoschka2003/> Their [[spectrum|spectra]] indicate that they are made from water ice contaminated by some very dark material. In this respect, the inner Neptunian moons are similar to the inner [[moons of Uranus|Uranian moons]].<ref name="Smith1989" />
+
+===Irregular moons===
+[[File:Irregular moon orbits a vs. i.jpg|thumb|upright=1.5|Irregular satellites of all four giant planets, plotted by average distance from their planet ([[semi-major axis]] in [[Hill radius|Hill radii]]) and [[orbital inclination]] ([[degree (angle)|degrees]] with respect to [[ecliptic]]). Irregular moons of Neptune are plotted as blue diamonds. Data as of February 2024.]]
+
+In order of their distance from the planet, the irregular moons are [[Triton (moon)|Triton]], [[Nereid (moon)|Nereid]], [[Halimede (moon)|Halimede]], [[Sao (moon)|Sao]], [[S/2002 N 5]], [[Laomedeia]], [[Psamathe (moon)|Psamathe]], [[Neso (moon)|Neso]], and [[S/2021 N 1]], a group that includes both prograde and retrograde objects.<ref name="Jewitt2007" /> The seven outermost moons are similar to the irregular moons of other [[giant planet]]s, and are thought to have been gravitationally captured by Neptune, unlike the regular satellites, which probably formed ''[[in situ]]''.<ref name="SheppardJewittKleyna2006" />
+
+Triton and Nereid are unusual irregular satellites and are thus treated separately from the other seven irregular Neptunian moons, which are more like the outer irregular satellites of the other outer planets.<ref name="SheppardJewittKleyna2006" /><ref name="Nicholson2008"/> Firstly, they are the largest two known irregular moons in the Solar System, with Triton being about eight times larger than Nereid in terms of diameter.<ref name="SheppardJewittKleyna2006" /> Secondly, they both have atypically small semi-major axes,<ref name="Belyakov2026"/> with Triton's being about twelve times smaller than the runner-up ([[Francisco (moon)|Francisco]] around Uranus, with the third place being Nereid).<ref name="jplsats"/> Thirdly, they both have unusual orbital eccentricities: Nereid has one of the most eccentric orbits of any known irregular satellite, and Triton's orbit is a nearly perfect circle.<ref name="Nicholson2008"/> Finally, Nereid also has the lowest inclination of any known irregular satellite.<ref name="SheppardJewittKleyna2006" />
+
+====Triton====
+{{Main|Triton (moon)}}
+
+Triton follows a retrograde and quasi-circular orbit, and is thought to be a gravitationally captured satellite. It was the second moon in the Solar System that was discovered to have a substantial [[atmosphere]], which is primarily [[nitrogen]] with small amounts of [[methane]] and [[carbon monoxide]].<ref name="ElliotStrobelZhu_2000" /> The pressure on Triton's surface is about 14&nbsp;[[bar (unit)|μbar]].<ref name="ElliotStrobelZhu_2000" /> In 1989, the ''Voyager 2'' spacecraft observed what appeared to be clouds and hazes in this thin atmosphere.<ref name="Smith1989" /> Triton is one of the coldest bodies in the Solar System, with a surface temperature of about {{convert|38|K|C}}.<ref name="ElliotStrobelZhu_2000" /> Its surface is covered by nitrogen, methane, [[carbon dioxide]] and water [[Volatile (astrogeology)|ices]]<ref name=Cruikshank1993/> and has a high [[geometric albedo]] of more than 70%.<ref name="Smith1989" /> The [[Bond albedo]] is even higher, reaching up to 90%.<ref name="Smith1989" /><ref group="note">The geometric albedo of an astronomical body is the ratio of its actual brightness at zero [[Phase angle (astronomy)|phase angle]] (i.e. as seen from the light source) to that of an idealized flat, fully reflecting, [[diffuse reflection|diffusively scattering]] ([[Lambertian reflectance|Lambertian]]) disk with the same cross-section. The Bond albedo, named after the American astronomer [[George Phillips Bond]] (1825–1865), who originally proposed it, is the fraction of [[power (physics)|power]] in the total [[electromagnetic radiation]] incident on an astronomical body that is scattered back out into space. The Bond albedo is a value strictly between 0 and 1, as it includes all possible scattered light (but not radiation from the body itself).  This is in contrast to other definitions of [[albedo]] such as the geometric albedo, which can be above 1. In general, though, the Bond albedo may be greater or smaller than the geometric albedo, depending on surface and atmospheric properties of the body in question.</ref> Surface features include the large southern [[polar ice cap|polar cap]], older cratered planes cross-cut by [[graben]] and [[Escarpment|scarps]], as well as youthful features probably formed by endogenic processes like [[cryovolcano|cryovolcanism]].<ref name="Smith1989" /> ''Voyager 2'' observations revealed a number of active [[geyser]]s within the polar cap heated by the Sun, which eject plumes up to 8&nbsp;km high.<ref name="Smith1989" /> Triton has a relatively high density of about 2&nbsp;g/cm<sup>3</sup>, indicating that rocks constitute about two thirds of its mass, and ices (mainly water ice) the remaining one third. There may be a layer of liquid water deep inside Triton, forming a [[subsurface ocean]].<ref name=Hussmann2006/> Because of its retrograde orbit and relative proximity to Neptune (closer than the Moon is to Earth), [[tidal deceleration]] is causing Triton to spiral inward, which will lead to its destruction in about 28&nbsp;billion years.<ref name="Wang2025">{{cite journal |last1=Wang |first1=K. |last2=Zhang |first2=H. |last3=Li |first3=Y. |last4=Qiao |first4=L. |title=A Plausible Minimum Value of the Neptunian Tidal Dissipation Factor Estimated from Triton’s Astrometric Observations |journal=Solar System Research |volume=59 |issue=1 |pages=6–15 |doi=10.1134/S0038094624601440 |url=https://link.springer.com/article/10.1134/S0038094624601440 |date=2025-02-18 |access-date=2026-05-12|url-access=subscription }}</ref>
+
+====Nereid====
+{{Main|Nereid (moon)}}
+
+Nereid is the third-largest moon of Neptune. It has a prograde, but very eccentric, orbit and is believed to be a former regular satellite that was scattered to its current orbit through gravitational interactions during Triton's capture.<ref name="Goldreich1989" /> Water ice has been spectroscopically detected on its surface. Early measurements of Nereid showed large, irregular variations in its visible magnitude, which were speculated to be caused by forced [[precession]] or chaotic rotation combined with an elongated shape and bright or dark spots on the surface.<ref name=Shaefer2008/> This was disproved in 2016, when observations from the [[Kepler space telescope]] showed only minor variations. Thermal modeling based on infrared observations from the [[Spitzer Space Telescope|Spitzer]] and [[Herschel Space Observatory|Herschel]] space telescopes suggest that Nereid is only moderately elongated, which disfavours forced precession of the rotation.<ref name="Kiss2016" /> The thermal model also indicates that the surface roughness of Nereid is very high, likely similar to the Saturnian moon [[Hyperion (moon)|Hyperion]].<ref name="Kiss2016" />
+
+Nereid dominates the normal irregular satellites of Neptune, having about 98% of the mass of Neptune's entire irregular satellite system altogether (if Triton is not counted). This is similar to the situation of [[Phoebe (moon)|Phoebe]] at Saturn. It is also larger by far than all normal irregular satellites, having about two-thirds the mass of all non-Triton irregular moons combined.<ref>{{cite web |url=https://tilmanndenk.de/outersaturnianmoons/ |title=Outer Moons of Saturn |last=Denk |first=Tilmann |date=2024 |website=tilmanndenk.de |publisher=Tilmann Denk |access-date=25 February 2024 |quote= |archive-date=24 February 2024 |archive-url=https://web.archive.org/web/20240224094854/https://tilmanndenk.de/outersaturnianmoons/ |url-status=live }}</ref>
+
+Spectroscopic observations conducted by the [[James Webb Space Telescope]] have shown that Nereid's spectrum differs significantly from those of [[minor planet]]s in the outer Solar System. Although many irregular satellites share similarities with Kuiper belt objects, Nereid does not correspond to the observed [[Trans-Neptunian spectral types|spectral types of Kuiper belt objects]], implying that it likely formed around Neptune instead of being captured. If this interpretation is confirmed, Nereid would represent the only intact original moon of Neptune to have survived Triton's destructive arrival.<ref name="Belyakov2026">{{Cite journal |last=Belyakov |first=Matthew |last2=Davis |first2=M. Ryleigh |last3=Wong |first3=Ian |last4=Batygin |first4=Konstantin |author-link4=Konstantin Batygin |last5=Brown |first5=Michael E. |author-link5=Michael E. Brown |title=Nereid as a regular satellite of Neptune |url=https://www.science.org/doi/10.1126/sciadv.aeb1429 |journal=Science Advances |volume=21 |issue=11 |doi=10.1126/sciadv.aeb1429 |date=May 2026|arxiv=2606.02818 }}</ref>
+
+====Normal irregular moons====
+Among the remaining irregular moons, Sao, S/2002 N 5, and Laomedeia follow prograde orbits, whereas Halimede, Psamathe, Neso and S/2021 N 1 follow retrograde orbits. There are at least two groups of moons that share similar orbits, with the prograde moons Sao, S/2002 N 5, and Laomedeia belonging to the Sao group and the retrograde moons Psamathe, Neso, and S/2021 N 1 belonging to the Neso group.<ref name="Sheppardmoons2024"/> The moons of the Neso group have the largest orbits of any natural satellites discovered in the Solar System to date, with average orbital distances over 125 times the distance between Earth and the Moon and orbital periods over 25 years.<ref name="sheppardmoons"/> In particular, Neptune's outermost moon, [[S/2021 N 1]], which has an orbital period of about 27 [[Earth years]], orbits farther from its planet than any other known moon in the [[Solar System]].<ref name="jplsats"/><ref name="MPEC-2024-D112"/> Neptune has the largest [[Hill sphere]] in the Solar System, owing primarily to its large distance from the Sun; this allows it to retain control of such distant moons.<ref name="Jewitt2007" /> Nevertheless, the Jovian moons in the [[Carme group|Carme]] and [[Pasiphae group]]s orbit at a greater percentage of their primary's Hill radius than the Neso group moons.<ref name="Jewitt2007" />
+
+[[File:Irregular Moons of Neptune 3-panel view dark.svg|thumb|center|upright=4|The orbits of Neptune's irregular moons, as seen from three different views. Prograde irregular moons are colored blue, retrograde irregular moons are colored red, and major moons (Triton and Nereid) are colored magenta. Data as of 2026.]]
+
+==List of moons==
+[[File:Neptunemoonsdiagram.png|thumb|upright=4.5|center|Orbital diagram of the [[orbital inclination]] and orbital distances for Neptune's rings and moon system at various scales. Notable moons and rings are individually labeled. Open the image for full resolution.]]
+
+The Neptunian moons are listed here by orbital period, from shortest to longest. Irregular (captured) moons are marked by color and symbols, distinguishing the Sao and Neso groups, as well as Triton, Nereid, and Halimede which do not fit in either. The orbits and mean distances of the irregular moons are variable over short timescales due to frequent planetary and solar [[perturbation (astronomy)|perturbations]]; therefore, the listed orbital elements of all irregular moons are averaged over a 30,000-year period: these may differ from [[osculating orbit|osculating]] orbital elements provided by other sources.<ref name="Brozovic2022"/> The orbital elements of Triton and Nereid are based on the [[Epoch (astronomy)|epoch]] of 1 January 2000,<ref name="Yuan2021"/> while those of the other moons are all based on the epoch of 1 January 2020.<ref name="Brozovic2020"/><ref name="jplsats">{{cite web|title=Planetary Satellite Mean Elements|url=https://ssd.jpl.nasa.gov/sats/elem/|publisher=Jet Propulsion Laboratory|accessdate=9 October 2024|archive-date=9 October 2024|archive-url=https://web.archive.org/web/20241009025136/https://ssd.jpl.nasa.gov/sats/elem/|url-status=live}}</ref> Triton, the only Neptunian moon massive enough for its surface to have [[gravitational collapse|collapsed]] into a [[spheroid]], is emboldened.
+
+{| class="wikitable" style="font-size:90%; text-align:left"
+
+|+ Key
+|-
+| style="background:#fff;"  | ''Inner moons (7)''
+| style="background:#ccf;"  | ♠ '''Triton''' (1)
+| style="background:#efefef"| † Nereid (1)
+|-
+| style="background:#d3d3d3"| ‡ Halimede (1)
+| style="background:#f0f0b0"| ♦ ''Sao group (3)''
+| style="background:#f4c2c2"| ♥ ''Neso group (3)''
+|-
+| colspan=3 | Orbital period: default is [[retrograde and prograde motion|prograde]], − is [[retrograde and prograde motion|retrograde]]
+|}
+{{static row numbers}}
+{{Table alignment}}
+{{sort under}}
+{{sticky table start}}
+{| class="wikitable sortable sort-under-center sticky-table-row1 sticky-table-col1 col1center col2center col3center col4center col12center col13center col14left col15left" style="font-size:90%;text-align:right;"
+|+ style="text-align:center;" | Neptunian moons
+|- style="background: #efefef;"
+! Label<br />{{refn|group=note|Label refers to the [[Roman numerals|Roman numeral]] attributed to each moon in order of their discovery.<ref name="Gazetteer" />}}
+! Name
+! class="unsortable" | [[Help:IPA for English|Pronunciation]]
+! class="unsortable" | Image
+! data-sort-type="number" | <abbr title="Absolute magnitude">[[Absolute magnitude#Solar System bodies (H)|Abs.<br>magn.]]</abbr><ref name="Karkoschka2003" /><ref>{{Cite web |title=Natural Satellites Ephemeris Service |url=https://minorplanetcenter.org/iau/NatSats/NaturalSatellites.html |access-date=2025-11-15 |website=minorplanetcenter.org}}</ref>
+! data-sort-type="number" | [[List of Solar System objects by size|Diameter]]<br />(km)<br />{{refn|group=note|Diameters with multiple entries such as "60×40×34" reflect that the body is not spherical and that each of its dimensions has been measured well enough to provide a 3-axis estimate. Proteus, despite not being spherical, fits poorly to a triaxial ellipsoid,<ref name="Stooke1994" /> so its dimensions are not listed here. The size and dimensions of the inner moons except Hippocamp were taken from Karkoschka, 2003.<ref name="Karkoschka2003" /> The size of Hippocamp was taken from Sholwalter et al., 2019.<ref name="Showalter2019"/> Dimensions of Triton are from Thomas, 2000,<ref name="Thomas2000" /> whereas its diameter is taken from Davies et al., 1991.<ref name="Davies1991" /> The size of Nereid is from Kiss et al., 2016,<ref name="Kiss2016" /> and the sizes of the other outer moons are from Sheppard, with the diameters of S/2002 N 5 and S/2021 N 1 calculated assuming an albedo of 0.04.<ref name="sheppardmoons">{{cite web |last=Sheppard |first=Scott S. |author-link=Scott S. Sheppard |title=Neptune Moons |url=https://sites.google.com/carnegiescience.edu/sheppard/moons/neptunemoons |website=sites.google.com |access-date=14 November 2025 |archive-date=22 April 2022 |archive-url=https://web.archive.org/web/20220422175451/https://sites.google.com/carnegiescience.edu/sheppard/moons/neptunemoons |url-status=live }}</ref>}}
+! data-sort-type="number" | [[List of Solar System objects by size|Mass]]<br />(×10&nbsp;[[Kilogram#SI multiples|Eg]])<br />{{refn|group=note|The mass of Triton was estimated by JPL,<ref name="jplsats-phys">{{cite web|title=Planetary Satellite Physical Parameters|url=https://ssd.jpl.nasa.gov/sats/phys_par/|publisher=Jet Propulsion Laboratory|accessdate=28 March 2022|archive-date=28 March 2022|archive-url=https://web.archive.org/web/20220328194721/https://ssd.jpl.nasa.gov/sats/phys_par/|url-status=live}}</ref> the masses of Naiad and Thalassa were estimated by Brozović et al. 2020,<ref name="Brozovic2020"/> and the mass of Galatea was taken from Porco 1991.<ref name="Porco1991"/> The masses of Despina and Proteus were calculated assuming a spherical volume and a density of 0.6 g/cm<sup>3</sup> while the masses of all other moons of Neptune were calculated assuming a density of 1 g/cm<sup>3</sup>.}}
+! data-sort-type="number" | [[Semi-major axis]]<br />(km)<br />{{refn|group=note|name="Orbits"}}
+! data-sort-type="number" | [[Orbital period]]<br />([[retrograde and prograde motion|±]][[Day|d]])<br />{{refn|group=note|name="Orbits"}}
+! data-sort-type="number" | [[Orbital inclination]]<br />([[Degree (angle)|°]])<br />{{refn|group=note|name="Orbits"}}{{refn|group=note|Orbital elements of the inner satellites, Triton, and Nereid are with respect to their local [[Laplace plane]]s.<ref name="Brozovic2020"/><ref name="Yuan2021"/> Orbital elements of the other irregular satellites are with respect to the [[ecliptic]].<ref name="jplsats" /> Inclinations greater than 90° are retrograde. Orbital periods of irregular satellites may not be consistent with their semi-major axes due to perturbations.}}
+! data-sort-type="number" | [[Orbital eccentricity|Eccentricity]]<br />{{refn|group=note|name="Orbits"}}
+! [[Timeline of discovery of Solar System planets and their moons|Discovery <br> year]]<br /><ref name="Gazetteer" />
+! Year announced
+! class="unsortable" | Discoverer<br /><ref name="Gazetteer" />
+! Group
+|-style="background:#fff"
+| {{sort|03|III}} || [[Naiad (moon)|Naiad]] || {{IPAc-en|ˈ|n|eɪ|ə|d|,_|ˈ|n|aɪ|æ|d}}{{refn|{{Citation |last=Jones |first=Daniel |author-link=Daniel Jones (phonetician) |title=English Pronouncing Dictionary |editor=Peter Roach |editor2=James Hartmann |editor3=Jane Setter |place=Cambridge |publisher=Cambridge University Press |orig-year=1917 |year=2003 |isbn=3-12-539683-2 }}}} || bgcolor="black" | [[File:Naiad Voyager.png|50px|center|alt=A smeared white object elongated from the bottom-left to top-right can be seen in the center.]] || 9.2 || {{sort|0066|66 ± 6<br />(96 × 60 × 52)}} || {{sort|0012|12}} || {{val|48228}} || {{val|0.2943923}} || 4.728 || 0.00014 || 1989 || 1989 || Voyager Science Team || Inner
+|-style="background:#fff"
+| {{sort|04|IV}} || [[Thalassa (moon)|Thalassa]] || {{IPAc-en|θ|ə|ˈ|l|æ|s|ə}} || bgcolor="white" | [[File:Neptune_Trio.jpg|50px|center|alt=A group of three objects, each circled and labeled by the respective designations. Thalassa is the central object designated 1989 N5.]] || 8.6 || {{sort|0082|82 ± 6<br />(108 × 100 × 52)}} || {{sort|0035|35}} || {{val|50075}} || {{val|0.3114836}} || 0.168 || 0.00019 || 1989 || 1989 || Voyager Science Team || Inner
+|-style="background:#fff"
+| {{sort|05|V}} || [[Despina (moon)|Despina]] || {{IPAc-en|d|ə|ˈ|s|p|aɪ|n|ə}} || bgcolor="black" | [[File:Despina.jpg|50px|center|alt=A white oval shaped object somewhat elongated horizontally is seen in the center. There are a few small dark spots on its surface.]] || 7.3 || {{sort|0150|150 ± 6<br />(180 × 148 × 128)}} || {{sort|0110|≈ 110}} || {{val|52526}} || {{val|0.3346555}} || 0.039 || 0.00027 || 1989 || 1989 || Voyager Science Team || Inner
+|-style="background:#fff"
+| {{sort|06|VI}} || [[Galatea (moon)|Galatea]] || {{IPAc-en|ˌ|ɡ|æ|l|ə|ˈ|t|iː|ə}} || bgcolor="black" | [[File:GalateaMoon.png|50px|center|alt=A small white object elongated from the bottom-left to top-right can be seen in the center.]] || 7.1 || {{sort|0176|176 ± 8<br />(204 × 184 × 144)}} || {{sort|0212|212}} || {{val|61953}} || {{val|0.428744}} || 0.010 || 0.00020 || 1989 || 1989 || Voyager Science Team || Inner
+|-style="background:#fff"
+| {{sort|07|VII}} || [[Larissa (moon)|Larissa]] || {{IPAc-en|l|ə|ˈ|r|ɪ|s|ə}} || bgcolor="black" | [[File:LarissaMoon.png|50px|center|alt=An irregularly shaped grey object slightly elongated horizontally occupies almost the whole image. Its surface shows a number of dark and white spots.]] || 6.8 || {{sort|0194|194 ± 6<br />(216 × 204 × 168)}} || {{sort|0380|≈ 380}} || {{val|73548}} || {{val|0.554653}} || 0.214 || 0.00121 || 1981 || 1981 || Reitsema et al. || Inner
+|-style="background:#fff"
+| {{sort|14|XIV}} || [[Hippocamp (moon)|Hippocamp]] || {{IPAc-en|ˈ|h|ɪ|p|ə|k|æ|m|p}} || bgcolor="black" | [[File:Hippocamp-heic1904b.jpg|50px|center|alt=Composite of multiple Hubble images of the Neptune system, with the moons appearing as bright white dots. The fainter dot to the upper right is Hippocamp, circled and labeled to distinguish it from other moons in this image.]] || 10.5 || {{sort|0034.8|{{val|34.8|4.0}}}} || {{sort|0002.2|≈ 2.2}} || {{val|105283}} || {{val|0.950104}} || 0.002 || 0.00001 || 2013 || 2013 || [[Mark R. Showalter|Showalter]] et al. || Inner
+|-style="background:#fff"
+| {{sort|08|VIII}} || [[Proteus (moon)|Proteus]] || {{IPAc-en|ˈ|p|r|oʊ|t|i|ə|s}} || bgcolor="black" | [[File:Proteus (Voyager 2).jpg|50px|center|alt=A conically shaped object is seen almost fully illuminated from the left. The cone axis looks towards the observer. The outline of the object is a rectangle with rounded corners. The surface is rough with a few large depressions.]] || 5.0 || {{sort|0420|420 ± 14}} || {{sort|2300|≈ 2300}} || {{val|117647}} || {{val|1.12231}} || 0.042 || 0.00047 || 1989 || 1989 || Voyager Science Team || Inner
+|- style="background: #ccf"
+| {{sort|01|I}} || '''[[Triton (moon)|Triton]]'''<sup>♠</sup> || {{IPAc-en|ˈ|t|r|aɪ|t|ən}} || bgcolor="black" | [[File:Triton.usgs23.png|50px|center|alt=A large spherical object is half-illuminated from the bottom-left. The south pole faces to the light source. Around it in the bottom-left part of the body there is a large white area with a few dozens dark streaks elongated in the pole to equator direction. This polar cap has a slight red tinge. The equatorial region is darker with a tint of cyan. Its surface is rough with a number of craters and intersecting lineaments.]] || –1.2 || {{sort|2705|{{val|2705.2|4.8}} <br> {{nowrap|({{val|2709}} × {{val|2706}} × {{val|2705}})}}}} || {{val|2139000}} || {{val|354758}} || data-sort-value={{val|5.876854}} | −{{val|5.876854}} || 156.834 || 0.00001 || 1846 || 1846 || [[William Lassell|Lassell]] || 
+|- style="background: #efefef;"
+| {{sort|02|II}} || [[Nereid (moon)|Nereid]]<sup>†</sup> || {{IPAc-en|ˈ|n|ɪər|i|ə|d}} || bgcolor="black" | [[File:Nereid-Voyager2.jpg|50px|center|alt=A small white smeared body is seen in center.]] || 4.4 || {{sort|0340|{{nowrap|335–345}}}} || {{sort|2100|≈ {{val|2100}}}} || {{val|5513782}} || {{val|360.1336}} || 7.108 || 0.75067 || 1949 || 1949 || [[Gerard Kuiper|Kuiper]] || 
+|- style="background: #d3d3d3;"
+| {{sort|09|IX}} || [[Halimede (moon)|Halimede]]<sup>‡</sup> || {{IPAc-en|ˌ|h|æ|l|ə|ˈ|m|iː|d|iː}} || bgcolor="black" | [[File:Halimede VLT-FORS1 2002-09-03 alt circled.png|50px|center]] || 9.9 || {{sort|0061|≈ 61}}|| {{sort|0012|≈ 12}} || {{val|16590500}} || data-sort-value={{val|1879.08}} | −{{val|1879.08}} || 119.6 || 0.521 || 2002 || 2003 || [[Matthew J. Holman|Holman]] et al. || 
+|- style="background: #f0f0b0;"
+| {{sort|11|XI}} || [[Sao (moon)|Sao]]<sup>♦</sup> || {{IPAc-en|ˈ|s|eɪ|oʊ}} || bgcolor="black" | [[File:Sao VLT-FORS1 2002-09-03 annotated.gif|50px|center]] || 11.0 || {{sort|0040|≈ 40}}|| {{sort|0003.4|≈ 3.4}} || {{val|22239900}} || {{val|2912.72}} || 50.2 || 0.296 || 2002 || 2003 || Holman et al. || Sao
+|- style="background: #f0f0b0;"
+| {{sort|99A|}} || <small>[[S/2002 N 5]]</small><sup>♦</sup> || || bgcolor="black" | [[File:S-2002 N 5 VLT-FORS1 2002-09-03 annotated.gif|50px|center]] || 11.2 || {{sort|0038|≈ 38}}|| {{sort|0002.9|≈ 2.9}} || {{val|23414700}} || {{val|3156.556}} || 46.3 || 0.433 || 2002 || 2024 || Holman et al. || Sao
+|- style="background: #f0f0b0;"
+| {{sort|12|XII}} || [[Laomedeia]]<sup>♦</sup> || {{IPAc-en|ˌ|l|eɪ|ə|m|ə|ˈ|d|iː|ə}} || bgcolor="black" | [[File:Laomedeia VLT-FORS1 2002-09-03 contrast annotated.gif|50px|center]] || 10.8 || {{sort|0040|≈ 40}}|| {{sort|0003.4|≈ 3.4}} || {{val|23499900}} || {{val|3171.33}} || 36.9 || 0.419 || 2002 || 2003 || Holman et al. || Sao
+|- style="background: #f4c2c2;"
+| {{sort|10|X}} || [[Psamathe (moon)|Psamathe]]<sup>♥</sup> || {{IPAc-en|ˈ|s|æ|m|ə|θ|iː}} || bgcolor="black" | [[File:Psamathe VLT-FORS2 2010-07-13 annotated circled.gif|50px|center]] || 10.8 || {{sort|0038|≈ 38}}|| {{sort|0002.9|≈ 2.9}} || {{val|47646600}} || data-sort-value={{val|9149.514}} | −{{val|9149.514}} || 127.8 || 0.413 || 2003 || 2003 || [[Scott S. Sheppard|Sheppard]] et al. || Neso
+|- style="background: #f4c2c2;"
+| {{sort|13|XIII}} || [[Neso (moon)|Neso]]<sup>♥</sup> || {{IPAc-en|ˈ|n|iː|s|oʊ}} || bgcolor="black" | [[File:Neso VLT-FORS1 2002-09-03 annotated.gif|50px|center]] || 10.7 || {{sort|0060|≈ 60}} || {{sort|0011|≈ 11}} || {{val|49897800}} || data-sort-value={{val|9794.705}} | −{{val|9794.705}} || 128.4 || 0.455 || 2002 || 2003 || Holman et al. || Neso
+|- style="background: #f4c2c2;"
+| {{sort|99B|}} || <small>[[S/2021 N 1]]</small><sup>♥</sup> || || bgcolor="black" | [[File:S-2021 N 1 GeminiNorth 2023-11-03 average stack annotated.png|50px|center]] || 12.1 || {{sort|0025|≈ 25}} || {{sort|0000.8|≈ 0.8}} || {{val|50700200}} || data-sort-value={{val|10036.651}} | −{{val|10036.651}} || 135.2 || 0.503 || 2021 || 2024 || Sheppard et al. || Neso
+|}
+{{sticky table end}}
+
+==Formation==
+{{Further|Capture of Triton}}
+The mass distribution of the Neptunian moons is the most lopsided of the satellite systems of the [[giant planet]]s in the Solar System. One moon, Triton, makes up nearly all of the mass of the system, with all other moons together comprising only one third of one percent. This is similar to the moon system of Saturn, where [[Titan (moon)|Titan]] makes up more than 95% of the total mass, but is different from the more balanced systems of Jupiter and Uranus. The reason for the lopsidedness of the present Neptunian system is that Triton was captured well after the formation of Neptune's original satellite system, and experts conjecture much of the system was destroyed in the process of capture.<ref name="Goldreich1989" /><ref name=Naeye2006>{{cite journal|journal=[[Sky & Telescope]]|date=September 2006|title=Triton Kidnap Caper|volume=112|first=R.|issue=3|last=Naeye|page=18|bibcode=2006S&T...112c..18N}}</ref>
+
+[[File:Masa de triton.svg|thumb|The relative masses of the Neptunian moons]]
+Triton's orbit upon capture would have been highly eccentric, and would have caused chaotic perturbations in the orbits of the original inner Neptunian satellites, causing them to collide and reduce to a disc of rubble.<ref name="Goldreich1989" /> This means it is likely that Neptune's present inner satellites are not the original bodies that formed with Neptune. Only after Triton's orbit became circularised could some of the rubble re-accrete into the present-day regular moons.<ref name="BanfieldMurray" /> These satellites were probably destroyed again by later impacts from [[Comet|comets]], and so reformed even more recently than Triton's capture event, with the exception of Proteus which was likely large enough to survive the impacts.<ref name="BanfieldMurray" />
+
+The mechanism of Triton's capture has been the subject of several theories over the years. One of them postulates that Triton was captured in a [[three-body problem|three-body]] encounter. In this scenario, Triton is the surviving member of a [[Binary asteroid|binary]] [[Kuiper belt]] object{{refn|group=note|[[Minor-planet moon#Trans-Neptunian objects|Binary objects]], objects with moons such as the [[Pluto]]–[[Charon (moon)|Charon]] system, are quite common among the larger [[trans-Neptunian object]]s (TNOs). Around 11% of all TNOs may be binaries.<ref name="Agnor2006" />}} disrupted by its encounter with Neptune.<ref name="Agnor2006" />
+
+Numerical simulations show that there is a 41% probability that the moon Halimede collided with Nereid at some time in the past.<ref name="HolmanKavelaarsGrav2004" /> Although it is not known whether any collision has taken place, both moons appear to have similar ("grey") colors, implying that Halimede could be a fragment of Nereid.<ref name="GravHolmanFraser2004">{{cite journal| doi = 10.1086/424997| last1 = Grav| first1 = Tommy| last2 = Holman| first2 = Matthew J.| author-link2 = Matthew J. Holman| last3 = Fraser| first3 = Wesley C.| date = 2004-09-20| title = Photometry of Irregular Satellites of Uranus and Neptune| journal = [[The Astrophysical Journal]]| volume = 613| issue = 1| pages = L77–L80| arxiv = astro-ph/0405605| bibcode = 2004ApJ...613L..77G| s2cid = 15706906}}</ref>
+{{Clear}}
+
+==See also==
+*[[List of natural satellites]]
+
+==Notes==
+{{Reflist
+| group = note
+| refs =
+<ref name="Orbits">Orbital elements of the inner moons are from Brozović et al. 2020.<ref name="Brozovic2020"/> Those of Triton and Nereid are from Yuan et al. 2021,<ref name="Yuan2021"/> and those of the other irregular moons are from JPL.<ref name="jplsats" /></ref>
+}}
+
+==References==
+{{Reflist
+| refs =
+
+<ref name="Reitsema1982">
+{{cite journal |doi=10.1126/science.215.4530.289 |last1=Reitsema |first1=Harold J. |last2=Hubbard |first2=William B. |last3=Lebofsky |first3=Larry A. |last4=Tholen |first4=David J. |title=Occultation by a Possible Third Satellite of Neptune |journal=Science |volume=215 |issue=4530 |pages=289–291 |year=1982 |bibcode=1982Sci...215..289R |pmid=17784355 |s2cid=21385195 }}</ref>
+
+<ref name="Smith1989">{{cite journal| doi = 10.1126/science.246.4936.1422| last1 = Smith| first1 = B. A.| last2 = Soderblom| first2 = L. A.| last3 = Banfield| first3 = D.| last4 = Barnet| first4 = C.| last5 = Basilevsky| first5 = A. T.| last6 = Beebe| first6 = R. F.| last7 = Bollinger| first7 = K.| last8 = Boyce| first8 = J. M.| last9 = Brahic| first9 = A.| year = 1989| title = Voyager 2 at Neptune: Imaging Science Results| journal = Science| volume = 246| issue = 4936| pages = 1422–1449| bibcode = 1989Sci...246.1422S| pmid = 17755997| s2cid = 45403579| ref = {{sfnRef|Smith Soderblom et al.|1989}}| url = https://zenodo.org/record/1230992| access-date = 2019-06-25| archive-date = 2020-08-04| archive-url = https://web.archive.org/web/20200804110536/https://zenodo.org/record/1230992| url-status = live}}</ref>
+
+<ref name="Miner2007b">
+{{Cite book|title=Planetary Ring System|date=2007|author=Miner, Ellis D.|author2=Wessen, Randii R.|author3=Cuzzi, Jeffrey N.|publisher=Springer Praxis Books|chapter=Present knowledge of the Neptune ring system|isbn=978-0-387-34177-4|chapter-url-access=registration|chapter-url=https://archive.org/details/planetaryringsys0000mine}}</ref>
+
+<ref name="Horn1990">
+{{cite journal|last=Horn|first=Linda J.|author2=Hui, John |author3=Lane, Arthur L. |title=Observations of Neptunian rings by Voyager photopolarimeter experiment|date=1990|journal=Geophysical Research Letters|volume=17|issue=10|pages=1745–1748|doi=10.1029/GL017i010p01745|bibcode=1990GeoRL..17.1745H|last4=Colwell|first4=Joshua E.}}</ref>
+
+<ref name="Jewitt2007">{{cite journal|last=Jewitt|first=David|author2=Haghighipour, Nader|title=Irregular Satellites of the Planets: Products of Capture in the Early Solar System|journal=Annual Review of Astronomy and Astrophysics|date=2007|volume=45|issue=1|pages=261–95|url=http://www2.ess.ucla.edu/~jewitt/papers/2007/JH07.pdf|doi=10.1146/annurev.astro.44.051905.092459|bibcode=2007ARA&A..45..261J|arxiv=astro-ph/0703059|s2cid=13282788|access-date=2010-09-27|archive-date=2014-02-25|archive-url=https://web.archive.org/web/20140225204338/http://www2.ess.ucla.edu/~jewitt/papers/2007/JH07.pdf|url-status=live}}</ref>
+
+<ref name="Karkoschka2003">
+{{cite journal| doi = 10.1016/S0019-1035(03)00002-2| last = Karkoschka| first = Erich| year = 2003| title = Sizes, shapes, and albedos of the inner satellites of Neptune| journal = Icarus| volume = 162| issue = 2| pages = 400–407| bibcode = 2003Icar..162..400K}}</ref>
+
+<ref name="SheppardJewittKleyna2006">
+{{cite journal| doi = 10.1086/504799| last1 = Sheppard| first1 = Scott S.| author-link1 = Scott S. Sheppard| last2 = Jewitt| first2 = David C.| author-link2 = David C. Jewitt| last3 = Kleyna| first3 = Jan| author-link3 = Jan Kleyna| year = 2006| title = A Survey for "Normal" Irregular Satellites around Neptune: Limits to Completeness| journal = The Astronomical Journal| volume = 132| issue = 1| pages = 171–176| bibcode = 2006AJ....132..171S| arxiv = astro-ph/0604552| s2cid = 154011}}</ref>
+
+<ref name="Nicholson2008">
+{{cite book |editor=M. Antonietta Barucci |editor2=Hermann Boehnhardt |editor3=Dale P. Cruikshank |editor4=Alessandro Morbidelli
+|first1=Philip D. |last1=Nicholson |first2=Matija |last2=Cuk |first3=Scott S. |last3=Sheppard |first4=David |last4=Nesvorný |first5=Torrence V. |last5=Johnson |date=2008 |title=The Solar System Beyond Neptune |chapter=Irregular Satellites of the Giant Planets |chapter-url=https://web.gps.caltech.edu/~mbrown/out/kbbook/Chapters/Nicholson_IrregSat.pdf |page=414 |publisher=University of Arizona Press |isbn=9780816527557 |access-date=2017-07-22 |archive-url=https://web.archive.org/web/20170810063403/http://home.dtm.ciw.edu/users/sheppard/pub/Nicholson2008KBOBook.pdf |archive-date=2017-08-10 |url-status=dead }}</ref>
+
+<ref name="ElliotStrobelZhu_2000">{{cite journal |last1 = Elliot |first1 = J. L. |last2 = Strobel |first2 = D. F. |last3 = Zhu |first3 = X. |last4 = Stansberry |first4 = J. A. |last5 = Wasserman |first5 = L. H. |last6 = Franz |first6 = O. G. |title = The Thermal Structure of Triton's Middle Atmosphere |url = http://occult.mit.edu/_assets/documents/publications/Elliot2000Icarus143.425.pdf |journal = Icarus |volume = 143 |issue = 2 |pages = 425–428 |doi = 10.1006/icar.1999.6312 |date = 2000 |bibcode = 2000Icar..143..425E |access-date = 2010-05-22 |archive-date = 2012-02-23 |archive-url = https://web.archive.org/web/20120223205209/http://occult.mit.edu/_assets/documents/publications/Elliot2000Icarus143.425.pdf |url-status = live }}</ref>
+
+<ref name="Hussmann2006">{{cite journal| doi = 10.1016/j.icarus.2006.06.005| last1 = Hussmann| first1 = Hauke| last2 = Sohl| first2 = Frank| last3 = Spohn| first3 = Tilman| date = November 2006| title = Subsurface oceans and deep interiors of medium-sized outer planet satellites and large trans-neptunian objects| journal = [[Icarus (journal)|Icarus]]| volume = 185| issue = 1| pages = 258–273| url = https://www.researchgate.net/publication/225019299| bibcode = 2006Icar..185..258H| ref = {{sfnRef|Hussmann Sohl et al.|2006}}| access-date = 2019-06-09| archive-date = 2015-08-31| archive-url = https://web.archive.org/web/20150831232202/http://www.researchgate.net/profile/Tilman_Spohn/publication/225019299_Subsurface_Oceans_and_Deep_Interiors_of_Medium-Sized_Outer_Planet_Satellites_and_Large_Trans-Neptunian_Objects/links/55018a3a0cf24cee39f7b952.pdf| url-status = live}}</ref>
+
+<ref name="Cruikshank1993">
+{{cite journal |first1=D.P. |last1=Cruikshank |first2=T.L. |last2=Roush |first3=T.C. |last3=Owen |first4=T.R. |last4=Geballe |first5=C. |last5=De Bergh |first6=B. |last6=Schmitt |first7=R.H. |last7=Brown |first8=M.J. |last8=Bartholomew |display-authors=4 |title=Ices on the surface of Triton |journal=Science |volume=261 |issue=5122 |pages=742–745 |date=6 August 1993 |doi=10.1126/science.261.5122.742 |bibcode=1993Sci...261..742C |pmid=17757211 |s2cid=38283311}}</ref>
+
+<ref name="Stooke1994">
+{{cite journal| doi = 10.1007/BF00572198| last = Stooke| first = Philip J.| year = 1994| title = The surfaces of Larissa and Proteus| journal = Earth, Moon, and Planets| volume = 65| issue = 1| pages = 31–54| bibcode = 1994EM&P...65...31S| s2cid = 121825800}}</ref>
+
+<ref name="Davies1991">
+{{cite journal|first1=Merton E.|last1=Davies|last2=Rogers|first2=Patricia G.|first3=Tim R.|last3=Colvin|title=A control network of Triton|journal=Journal of Geophysical Research|volume=96|issue=E1|pages=15,675–681|doi=10.1029/91JE00976|bibcode=1991JGR....9615675D|date=1991}}</ref>
+
+<ref name="Thomas2000">
+{{cite journal|first=P.C.|last=Thomas|title=NOTE: The Shape of Triton from Limb Profiles|journal=Icarus|volume=148|issue=2|pages=587–588|doi=10.1006/icar.2000.6511|bibcode=2000Icar..148..587T|date=2000|doi-access=free}}</ref>
+
+<ref name="BanfieldMurray">
+{{cite journal| doi = 10.1016/0019-1035(92)90155-Z| last1 = Banfield| first1 = Don| last2 = Murray| first2 = Norm| date=October 1992| title = A dynamical history of the inner Neptunian satellites| journal = Icarus| volume = 99| issue = 2| pages = 390–401| bibcode = 1992Icar...99..390B}}</ref>
+
+<ref name="Agnor2006">{{cite journal|first1=C.B.|last1=Agnor|first2=D.P.|last2=Hamilton|title=Neptune's capture of its moon Triton in a binary-planet gravitational encounter|journal=Nature|volume=441|date=2006|pages=192–4|url=http://www.astro.umd.edu/~hamilton/research/reprints/AgHam06.pdf|doi=10.1038/nature04792|pmid=16688170|issue=7090|bibcode=2006Natur.441..192A|s2cid=4420518|access-date=2006-09-13|archive-date=2013-11-03|archive-url=https://web.archive.org/web/20131103235809/http://www.astro.umd.edu/~hamilton/research/reprints/AgHam06.pdf|url-status=live}}</ref>
+
+<ref name="Goldreich1989">
+{{cite journal|last=Goldreich|first=P.|author2=Murray, N. |author3=Longaretti, P. Y. |author4= Banfield, D. |title=Neptune's story|journal=Science|volume=245|date=1989|pages=500–504|bibcode=1989Sci...245..500G|doi=10.1126/science.245.4917.500|pmid=17750259|issue=4917|s2cid=34095237}}</ref>
+
+<ref name="HolmanKavelaarsGrav2004">{{cite journal| doi = 10.1038/nature02832| last1 = Holman| first1 = M. J.| author-link = Matthew J. Holman| last2 = Kavelaars| first2 = J. J.| author-link2 = John J. Kavelaars| last3 = Grav| first3 = T.| display-authors = 3| year = 2004| last4 = Gladman| first4 = B. J.| author-link4 = Brett J. Gladman| last5 = Fraser| first5 = W. C.| last6 = Milisavljevic| first6 = D.| last7 = Nicholson| first7 = P. D.| last8 = Burns| first8 = J. A.| last9 = Carruba| first9 = V.| title = Discovery of five irregular moons of Neptune| journal = Nature| volume = 430| issue = 7002| pages = 865–867| pmid = 15318214| bibcode = 2004Natur.430..865H| s2cid = 4412380| url = https://www.cfa.harvard.edu/~mholman/nature_final.pdf| access-date = 24 October 2011| archive-date = 2 November 2013| archive-url = https://web.archive.org/web/20131102023048/https://www.cfa.harvard.edu/~mholman/nature_final.pdf| url-status = live}}</ref>
+
+<ref name="Gazetteer">{{Cite web|title=Planet and Satellite Names and Discoverers|work=Gazetteer of Planetary Nomenclature|publisher=USGS Astrogeology|url=https://planetarynames.wr.usgs.gov/Page/Planets|access-date=2022-06-23|archive-date=2010-07-03|archive-url=https://web.archive.org/web/20100703115324/https://planetarynames.wr.usgs.gov/Page/Planets|url-status=live}}</ref>
+
+<ref name="Shaefer2008">
+{{Cite journal|last=Shaefer|first=Bradley E.|author2=Tourtellotte, Suzanne W. |author3=Rabinowitz, David L.|author4= Schaefer, Martha W.|title=Nereid: Light curve for 1999–2006 and a scenario for its variations|journal=[[Icarus (journal)|Icarus]]|volume=196|issue=1|pages=225–240|date=2008|bibcode=2008Icar..196..225S|doi=10.1016/j.icarus.2008.02.025|arxiv=0804.2835|s2cid=119267757}}</ref>
+
+<ref name="Kuiper1949">
+{{cite journal|last=Kuiper|first=Gerard P.|title=The Second Satellite of Neptune|journal=Publications of the Astronomical Society of the Pacific|date=1949|volume=61|issue=361|pages=175–176|bibcode=1949PASP...61..175K|doi=10.1086/126166|doi-access=free}}</ref>
+
+<ref name="Lassell1846">
+{{cite journal|last=Lassell|first=W.|title=Discovery of supposed ring and satellite of Neptune|date=1846|journal=[[Monthly Notices of the Royal Astronomical Society]]|volume=7|page=157|bibcode=1846MNRAS...7..157L|doi=10.1093/mnras/7.9.154|doi-access=free}}</ref>
+
+<ref name="Kiss2016">
+{{cite journal |title = Nereid from space: Rotation, size and shape analysis from Kepler/K2, Herschel and Spitzer observations |url = https://academic.oup.com/mnras/article-pdf/457/3/2908/8000447/stw081.pdf |first1 = C. |last1 = Kiss |first2 = A. |last2 = Pál |first3 = A. I. |last3 = Farkas-Takács |first4 = G. M. |last4 = Szabó| first5 = R. |last5 = Szabó |first6 = L. L. |last6 = Kiss |first7 = L. |last7 = Molnár |first8 = K. |last8 = Sárneczky |first9 = T. G. |last9 = Müller |first10 = M. |last10 = Mommert |first11 = J. |last11 = Stansberry |date = 11 April 2016 |journal = Monthly Notices of the Royal Astronomical Society |volume = 457 |issue = 3 |pages = 2908–2917 |doi = 10.1093/mnras/stw081 |doi-access = free |arxiv = 1601.02395 |bibcode = 2016MNRAS.457.2908K |s2cid = 54602372 |issn=0035-8711}}</ref>
+
+<ref name="Brozovic2022">
+{{cite journal |title = Orbits of the Irregular Satellites of Uranus and Neptune |first1 = Marina |last1 = Brozović |first2 = Robert A. |last2 = Jacobson |date = May 2022 |journal = The Astronomical Journal |volume = 163 |issue = 5 |id = 241 |pages = 12 |doi = 10.3847/1538-3881/ac617f |bibcode = 2022AJ....163..241B|s2cid = 248458067 |doi-access = free }}</ref>
+
+<ref name="MPEC-2024-D112">{{cite web
+ |title        = MPEC 2024-D112 : S/2021 N 1
+ |url          = https://minorplanetcenter.net/mpec/K24/K24DB2.html
+ |work         = Minor Planet Electronic Circular
+ |publisher    = Minor Planet Center
+ |date         = 23 February 2024
+ |accessdate   = 23 February 2024
+ |archive-date = 5 March 2024
+ |archive-url  = https://web.archive.org/web/20240305065326/https://minorplanetcenter.net/mpec/K24/K24DB2.html
+ |url-status   = live
+}}</ref>
+
+<ref name="MPEC-2024-D114">{{cite web
+ |title        = MPEC 2024-D114 : S/2002 N 5
+ |url          = https://minorplanetcenter.net/mpec/K24/K24DB4.html
+ |work         = Minor Planet Electronic Circular
+ |publisher    = Minor Planet Center
+ |date         = 23 February 2024
+ |accessdate   = 23 February 2024
+ |archive-date = 3 March 2024
+ |archive-url  = https://web.archive.org/web/20240303040354/https://minorplanetcenter.net/mpec/K24/K24DB4.html
+ |url-status   = live
+}}</ref>
+
+<ref name="Sheppardmoons2024">{{cite web
+ |title        = New Uranus and Neptune Moons
+ |url          = https://sites.google.com/carnegiescience.edu/sheppard/home/newuranusneptunemoons
+ |work         = Earth & Planetary Laboratory
+ |publisher    = Carnegie Institution for Science
+ |date         = 23 February 2024
+ |accessdate   = 23 February 2024
+ |archive-date = 23 February 2024
+ |archive-url  = https://web.archive.org/web/20240223160326/https://sites.google.com/carnegiescience.edu/sheppard/home/newuranusneptunemoons
+ |url-status   = live
+}}</ref>
+
+<ref name="Brozovic2020">
+{{cite journal
+|last1 = Brozović
+|first1 = M.
+|last2 = Showalter
+|first2 = M. R.
+|last3 = Jacobson
+|first3 = R. A.
+|last4 = French
+|first4 = R. S.
+|last5 = Lissauer
+|first5 = J. J.
+|last6 = de Pater
+|first6 = I.
+|title = Orbits and resonances of the regular moons of Neptune
+|date = March 1, 2020 
+|journal = Icarus
+|volume = 338
+|issue = 2
+|article-number = 113462
+|arxiv = 1910.13612
+|doi = 10.1016/j.icarus.2019.113462
+|bibcode = 2020Icar..33813462B
+|s2cid = 204960799
+}}</ref>
+
+<ref name="Showalter2019">{{cite journal|last1= Showalter|first1= M. R.|last2= de Pater|first2= I.|last3= Lissauer|first3= J. J.|last4= French|first4= R. S.|title= The seventh inner moon of Neptune|journal= Nature|volume= 566|issue= 7744|year= 2019|pages= 350–353|doi= 10.1038/s41586-019-0909-9|pmid= 30787452|pmc= 6424524|bibcode= 2019Natur.566..350S}}</ref>
+
+<ref name="Yuan2021">{{Cite journal |last=Yuan |first=Ye |last2=Li |first2=Fan |last3=Fu |first3=Yanning |last4=Chen |first4=Jian |date=October 2021 |title=The orbits of Triton and Nereid and the pole orientation of Neptune from Voyager, Hubble Space Telescope, and Earth-based astrometry in 1847–2020 |journal=Astronomy & Astrophysics |volume=654 |pages=A66 |doi=10.1051/0004-6361/202140739 |issn=0004-6361|bibcode=2021A&A...654A..66Y|doi-access=free|s2cid=243212661}}</ref>
+
+<ref name="Porco1991">
+{{cite journal
+| doi = 10.1126/science.253.5023.995
+| last = Porco
+| first = C.C.
+| year = 1991
+| title = An Explanation for Neptune's Ring Arcs
+| journal = Science
+| volume = 253
+| issue = 5023
+| pages = 995–1001
+| pmid = 17775342
+| bibcode = 1991Sci...253..995P
+| s2cid = 742763
+}}
+</ref>
+
+}}
+
+==External links==
+{{Commons category}}
+*[[Scott S. Sheppard]]: [https://sites.google.com/carnegiescience.edu/sheppard/moons/neptunemoons Neptune Moons]
+*[https://web.archive.org/web/20070609074953/http://solarsystem.nasa.gov/planets/profile.cfm?Object=Neptune&Display=Moons Neptune's Moons] by [http://solarsystem.nasa.gov NASA's Solar System Exploration]
+*[https://planetarynames.wr.usgs.gov/Page/Planets#NeptunianSystem Gazetteer of Planetary Nomenclature—Neptune (USGS)]
+*[https://web.archive.org/web/20120303191038/http://www.orinetz.com/planet/tourprog/saturnmoons.html Simulation showing the position of Neptune's Moon]
+
+{{Moons of Neptune}}
+{{Neptune}}
+{{Solar System moons (compact)}}
+{{Solar System}}
+{{Portal bar|Stars|Spaceflight|Outer space|Science}}
+{{Authority control}}
+
+{{DEFAULTSORT:Moons Of Neptune}}
+[[Category:Moons of Neptune| ]]
+[[Category:Lists of moons]]
+[[Category:Articles containing video clips]]
+[[Category:Solar System]]

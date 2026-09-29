@@ -1,0 +1,35 @@
+{
+  "parent": "mars",
+  "moons": [
+    {
+      "name": "Phobos",
+      "designation": false,
+      "parent": "mars",
+      "radiusKm": 11.1,
+      "diameterKm": 22.2,
+      "massKg": 1.07e+16,
+      "semiMajorAxisKm": 9377.0,
+      "orbitalPeriodDays": 7.66,
+      "inclinationDeg": 1.093,
+      "eccentricity": 0.0151,
+      "discoveryYear": null,
+      "discoverer": null,
+      "sourceUrl": "https://en.wikipedia.org/wiki/Moons_of_Mars"
+    },
+    {
+      "name": "Deimos",
+      "designation": false,
+      "parent": "mars",
+      "radiusKm": 6.3,
+      "diameterKm": 12.6,
+      "massKg": 1500000000000000.0,
+      "semiMajorAxisKm": 23460.0,
+      "orbitalPeriodDays": 30.31,
+      "inclinationDeg": 0.93,
+      "eccentricity": 0.00033,
+      "discoveryYear": null,
+      "discoverer": null,
+      "sourceUrl": "https://en.wikipedia.org/wiki/Moons_of_Mars"
+    }
+  ]
+}

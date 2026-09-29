@@ -1,0 +1,157 @@
+{
+  "_meta": {
+    "source": "Wikipedia (en) via action=raw",
+    "note": "Rohtreffer inkl. Quell-URL. Werte mit 'missing' muessen von Hand aus bodies.json uebernommen werden.",
+    "generator": "tools/fetch_astronomy.py"
+  },
+  "planets": [
+    {
+      "wikipediaTitle": "Sun",
+      "satellites": null,
+      "meanRadiusKm": null,
+      "axialTiltDeg": null,
+      "sourceUrl": "https://en.wikipedia.org/wiki/Sun",
+      "eccentricity": null,
+      "inclinationDeg": null,
+      "periodDays": null,
+      "missing": [
+        "meanRadiusKm",
+        "massKg",
+        "semiMajorAxisKm",
+        "eccentricity",
+        "rotationHours",
+        "inclinationDeg"
+      ]
+    },
+    {
+      "wikipediaTitle": "Mercury",
+      "satellites": null,
+      "meanRadiusKm": null,
+      "axialTiltDeg": null,
+      "sourceUrl": "https://en.wikipedia.org/wiki/Mercury",
+      "eccentricity": null,
+      "inclinationDeg": null,
+      "periodDays": null,
+      "missing": [
+        "meanRadiusKm",
+        "massKg",
+        "semiMajorAxisKm",
+        "eccentricity",
+        "rotationHours",
+        "inclinationDeg"
+      ]
+    },
+    {
+      "wikipediaTitle": "Venus",
+      "satellites": null,
+      "meanRadiusKm": 0.9499,
+      "axialTiltDeg": 2.64,
+      "sourceUrl": "https://en.wikipedia.org/wiki/Venus",
+      "eccentricity": 0.006772,
+      "inclinationDeg": 3.39458,
+      "periodDays": 224.701,
+      "missing": [
+        "massKg",
+        "semiMajorAxisKm",
+        "rotationHours"
+      ]
+    },
+    {
+      "wikipediaTitle": "Earth",
+      "satellites": 1,
+      "meanRadiusKm": 6371.0,
+      "axialTiltDeg": 23.4392811,
+      "sourceUrl": "https://en.wikipedia.org/wiki/Earth",
+      "massKg": 5.97217e+24,
+      "semiMajorAxisKm": 149.598,
+      "eccentricity": 0.0167086,
+      "inclinationDeg": null,
+      "periodDays": null,
+      "missing": [
+        "rotationHours",
+        "inclinationDeg"
+      ]
+    },
+    {
+      "wikipediaTitle": "Mars",
+      "satellites": 2,
+      "meanRadiusKm": 3389.5,
+      "axialTiltDeg": 25.19,
+      "sourceUrl": "https://en.wikipedia.org/wiki/Mars",
+      "massKg": 6.4171,
+      "eccentricity": 0.0934,
+      "inclinationDeg": null,
+      "periodDays": null,
+      "missing": [
+        "semiMajorAxisKm",
+        "rotationHours",
+        "inclinationDeg"
+      ]
+    },
+    {
+      "wikipediaTitle": "Jupiter",
+      "satellites": 115,
+      "meanRadiusKm": 69886.0,
+      "axialTiltDeg": 3.13,
+      "sourceUrl": "https://en.wikipedia.org/wiki/Jupiter",
+      "massKg": 1.898125e+27,
+      "rotationHours": 9.009166666666667,
+      "rotationRetrograde": false,
+      "eccentricity": 0.0489,
+      "inclinationDeg": 1.303,
+      "periodDays": 11.862,
+      "missing": [
+        "semiMajorAxisKm"
+      ]
+    },
+    {
+      "wikipediaTitle": "Saturn",
+      "satellites": 293,
+      "meanRadiusKm": 58232.0,
+      "axialTiltDeg": 26.73,
+      "sourceUrl": "https://en.wikipedia.org/wiki/Saturn",
+      "rotationHours": 10.543333333333333,
+      "rotationRetrograde": false,
+      "eccentricity": 0.0565,
+      "inclinationDeg": 2.485,
+      "periodDays": 29.4475,
+      "missing": [
+        "massKg",
+        "semiMajorAxisKm"
+      ]
+    },
+    {
+      "wikipediaTitle": "Uranus",
+      "satellites": 29,
+      "meanRadiusKm": null,
+      "axialTiltDeg": 82.23,
+      "sourceUrl": "https://en.wikipedia.org/wiki/Uranus",
+      "massKg": 8.68099e+25,
+      "eccentricity": 0.04717,
+      "inclinationDeg": null,
+      "periodDays": 84.0205,
+      "missing": [
+        "meanRadiusKm",
+        "semiMajorAxisKm",
+        "rotationHours",
+        "inclinationDeg"
+      ]
+    },
+    {
+      "wikipediaTitle": "Neptune",
+      "satellites": 16,
+      "meanRadiusKm": null,
+      "axialTiltDeg": 28.32,
+      "sourceUrl": "https://en.wikipedia.org/wiki/Neptune",
+      "massKg": 1.0240920000000001e+26,
+      "eccentricity": 0.008678,
+      "inclinationDeg": 1.77,
+      "periodDays": 164.8,
+      "missing": [
+        "meanRadiusKm",
+        "semiMajorAxisKm",
+        "rotationHours"
+      ]
+    }
+  ]
+}

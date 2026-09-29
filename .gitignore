@@ -1,0 +1,17 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+.vite/
+*.local
+.DS_Store
+
+# Wegwerf-Arbeitsmaterial aus Debug-Sessions (kein Teil der App)
+_probe/
+
+# Wikipedia-Rohdaten der Abrufe; jederzeit via
+# python3 tools/fetch_astronomy.py neu erzeugbar
+.cache/
+
+# Oszillator der lokalen Soundtests
+sim/

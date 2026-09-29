@@ -1,0 +1,29 @@
+# Abhaengigkeiten und Build-Artefakte werden im Image neu erzeugt.
+node_modules
+dist
+.git
+.gitignore
+
+# E2E-Tests fliegen nicht in das Produktionsimage.
+tests/e2e
+test-results
+playwright-report
+blob-report
+playwright/.cache
+
+# Dokumentation (AGENTS.md wird als Kontext fuer Build-Agenten behalten).
+*.md
+!AGENTS.md
+
+# Secrets und lokale Editor-Konfiguration
+.env
+.env.*
+.vscode
+.idea
+
+# Docker-Dateien selbst sind im Image nicht noetig
+Dockerfile
+.dockerignore
+docker-compose.yml
+docker-compose.*.yml
+README.md

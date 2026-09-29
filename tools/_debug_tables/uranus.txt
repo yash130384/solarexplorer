@@ -1,0 +1,435 @@
+{{short description|Natural satellites of the planet Uranus}}
+[[File:Annotated_Moons_of_Uranus.png|thumb|upright=1.5|A [[near-infrared]] image of the six largest moons and eight largest inner moons of Uranus as captured by the [[James Webb Space Telescope]] on 4 September 2023]]
+
+There are 29 known [[Natural satellite|moons]] of the planet [[Uranus]].<ref name="NASA-29"/> The 27 with names are named after characters that appear in, or are mentioned in, [[William Shakespeare]]'s plays and [[Alexander Pope]]'s poem ''[[The Rape of the Lock]]''.<ref name="Gazetteer" /> Uranus's moons are divided into three groups: fourteen inner moons, five [[major moon]]s, and ten [[irregular moon]]s. The inner and major moons all have [[Retrograde and prograde motion|prograde]] orbits and are cumulatively classified as [[regular moon]]s. In contrast, the orbits of the irregular moons are distant, highly [[inclination|inclined]], and mostly [[Retrograde and prograde motion|retrograde]].
+
+The inner moons are small dark bodies that share common properties and origins with [[Rings of Uranus|Uranus's rings]]. The five major moons are ellipsoidal, indicating that they reached [[hydrostatic equilibrium]] at some point in their past (and may still be in equilibrium), and four of them show signs of internally driven processes such as canyon formation and volcanism on their surfaces.<ref name="Smith Soderblom et al. 1986" /> The largest of these five, [[Titania (moon)|Titania]], is 1,578&nbsp;km in diameter and the [[List of moons|eighth-largest]] moon in the Solar System, about one-twentieth the mass of the [[Earth]]'s [[Moon]]. The orbits of the regular moons are nearly [[coplanar]] with Uranus's equator, which is tilted 97.77° to its orbit. Uranus's irregular moons have elliptical and strongly inclined (mostly retrograde) orbits at large distances from the planet.<ref name="Sheppard2005" />
+
+[[William Herschel]] discovered the first two moons, [[Titania (moon)|Titania]] and [[Oberon (moon)|Oberon]], in 1787. The other three ellipsoidal moons were discovered in 1851 by [[William Lassell]] ([[Ariel (moon)|Ariel]] and [[Umbriel]]) and in 1948 by [[Gerard Kuiper]] ([[Miranda (moon)|Miranda]]).<ref name="Gazetteer" /> These five may be in [[hydrostatic equilibrium]]. The remaining moons were discovered after 1985, either during the ''[[Voyager&nbsp;2]]'' flyby mission or with the aid of advanced [[Earth]]-based telescopes.<ref name="Smith Soderblom et al. 1986" /><ref name="Sheppard2005" />
+
+== Discovery ==
+The first two moons to be discovered were [[Titania (moon)|Titania]] and [[Oberon (moon)|Oberon]], which were spotted by [[Sir William Herschel]] on January 11, 1787, six years after he had discovered the planet itself. Later, Herschel thought he had discovered up to six moons (see below) and perhaps even a ring. For nearly 50&nbsp;years, Herschel's instrument was the only one with which the moons had been seen.<ref>{{cite journal|author=Herschel, John|bibcode=1834MNRAS...3...35H|title=On the Satellites of Uranus|journal=[[Monthly Notices of the Royal Astronomical Society]]|volume=3|issue=5|date=1834|pages=35–36|author-link=John Herschel|doi=10.1093/mnras/3.5.35 |doi-access=free}}</ref> In the 1840s, better instruments and a more favorable position of Uranus in the sky led to sporadic indications of satellites additional to Titania and Oberon. Eventually, the next two moons, [[Ariel (moon)|Ariel]] and [[Umbriel]], were discovered by [[William Lassell]] in 1851.<ref name="Lassell1851" /> The Roman numbering scheme of Uranus's moons was in a state of flux for a considerable time, and publications hesitated between Herschel's designations (where Titania and Oberon are Uranus II and IV) and William Lassell's (where they are sometimes I and II).<ref>{{cite journal|author=Lassell, W.|bibcode=1848MNRAS...8...43L|title=Observations of Satellites of Uranus|journal=Monthly Notices of the Royal Astronomical Society|volume=8|issue=3|date=1848|pages=43–44|doi=10.1093/mnras/8.3.43|doi-access=free}}</ref> With the confirmation of Ariel and Umbriel, Lassell numbered the moons I through IV from Uranus outward, and this finally stuck.<ref name="Lassell1851b" /> In 1852, Herschel's son [[John Herschel]] gave the four then-known moons their names.<ref name="Kuiper 1949" />
+
+No other discoveries were made for almost another century. In 1948, [[Gerard Kuiper]] at the [[McDonald Observatory]] discovered the smallest and the last of the five large, spherical moons, [[Miranda (moon)|Miranda]].<ref name="Kuiper 1949" /><ref name="NYTimes1948b">{{cite news
+| newspaper = The New York Times
+| url = https://query.nytimes.com/gst/abstract.html?res=9F05EFDF143AE33BBC4E51DFB4678383659EDE&legacy=true
+| date = 26 December 1948
+| title = Science in Review: Research Work in Astronomy and Cancer Lead Year's List of Scientific Developments
+| last1 = Kaempffert
+| first1 = Waldemar
+| page = 87
+| edition = Late City
+| issn = 0362-4331
+| access-date = 10 September 2017
+| archive-date = 6 February 2018
+| archive-url = https://web.archive.org/web/20180206073006/http://query.nytimes.com/gst/abstract.html?res=9F05EFDF143AE33BBC4E51DFB4678383659EDE&legacy=true
+| url-status = live
+}}</ref> Decades later, the flyby of the ''[[Voyager 2]]'' space probe in January 1986 led to the discovery of ten further inner moons.<ref name="Smith Soderblom et al. 1986" /> Another satellite, [[Perdita (moon)|Perdita]], was discovered in 1999<ref name="IAUC 7171" /> by [[Erich Karkoschka]] after studying old ''Voyager'' photographs.<ref name="Karkoschka2001, Voyager" />
+
+Uranus was the last giant planet without any known [[irregular moon]]s until 1997, when astronomers using ground-based telescopes discovered [[Sycorax (moon)|Sycorax]] and [[Caliban (moon)|Caliban]]. From 1999 to 2003, astronomers continued searching for irregular moons of Uranus using more powerful ground-based telescopes, resulting in the discovery of seven more Uranian irregular moons.<ref name="Sheppard2005" /> In addition, two small inner moons, [[Cupid (moon)|Cupid]] and [[Mab (moon)|Mab]], were discovered using the [[Hubble Space Telescope]] in 2003.<ref name="Showalter Lissauer 2006" /> No other discoveries were reported until 2024, when [[Scott Sheppard]] and colleagues announced the discovery of one irregular moon of Uranus ([[S/2023 U 1]]) from 2023 observations by the [[Subaru Telescope]] at [[Mauna Kea, Hawaii]].<ref name="MPEC-2024-D113"/><ref name="Sheppardmoons2024"/>
+
+In August 2025, a team of astronomers led by [[Maryame El Moutamid]] at the Southwest Research Institute announced the discovery of a new inner moon of Uranus ([[Uranus XXVIII]]) in [[James Webb Space Telescope]] images from February 2025. It was not detected earlier by ''Voyager 2'' and the Hubble Space Telescope because it was too small and faint.<ref name="NASA-29"/><ref>{{cite web |title=Scientists Discover a New Moon Orbiting Uranus |work=The New York Times |date=2025-08-20 |url=https://www.nytimes.com/2025/08/20/science/uranus-new-moon.html |access-date=2025-08-23}}</ref>
+
+=== Spurious moons ===
+After Herschel discovered [[Titania (moon)|Titania]] and [[Oberon (moon)|Oberon]] on 11 January 1787, he subsequently believed that he had observed four other moons: two on 18 January and 9 February 1790, and two more on 28 February and 26 March 1794. It was thus believed for many decades thereafter that Uranus had a system of six satellites, though the four latter moons were never confirmed by any other astronomer. [[William Lassell|Lassell]]'s observations of 1851, in which he discovered [[Ariel (moon)|Ariel]] and [[Umbriel]], however, failed to support Herschel's observations; Ariel and Umbriel, which Herschel certainly ought to have seen if he had seen any satellites besides Titania and Oberon, did not correspond to any of Herschel's four additional satellites in orbital characteristics. Herschel's four spurious satellites were thought to have [[sidereal period]]s of 5.89 days (interior to Titania), 10.96 days (between Titania and Oberon), 38.08 days, and 107.69 days (exterior to Oberon).<ref name="Hughes1994" /> It was therefore concluded that Herschel's four satellites were spurious, probably arising from the misidentification of faint stars in the vicinity of Uranus as satellites, and the credit for the discovery of Ariel and Umbriel was given to Lassell.<ref name="Denning1881" />
+
+== Names ==
+{{main|Naming of moons}}
+{{see also|Name conflicts with minor planets}}
+
+Although the first two Uranian moons were discovered in 1787, they were not named until 1852, a year after two more moons had been discovered. The responsibility for naming was taken by [[John Herschel]], son of the discoverer of Uranus. Herschel, instead of assigning names from [[Greek mythology]], named the moons after magical spirits in [[English literature]]: the fairies Oberon and Titania from [[William Shakespeare]]'s ''[[A Midsummer Night's Dream]]'', and the [[sylph]] Ariel and [[gnome]] Umbriel from [[Alexander Pope]]'s ''[[The Rape of the Lock]]'' (Ariel is also a spirit in Shakespeare's ''[[The Tempest]]'').<ref>{{cite journal |title=Beobachtungen der Uranus-Satelliten |journal=Astronomische Nachrichten |volume=34 |page=325 |author=William Lassell |date=1852 |bibcode=1852AN.....34..325. |df=dmy-all}}</ref> It is uncertain if John Herschel was the originator of the names, or if it was instead William Lassell (who discovered Ariel and Umbriel) who chose the names and asked Herschel for permission.<ref name=podcast>{{cite web |url=https://www.folger.edu/podcasts/shakespeare-unlimited/shakespearean-moons-uranus/ |title=The Shakespearean Moons of Uranus |last=Paul |first=Richard |date=2014 |website=folger.edu |publisher=Folger Shakespeare Library |access-date=25 February 2024 |quote= |archive-date=25 February 2024 |archive-url=https://web.archive.org/web/20240225065911/https://www.folger.edu/podcasts/shakespeare-unlimited/shakespearean-moons-uranus/ |url-status=live }}</ref>
+
+Subsequent names, rather than continuing the airy spirits theme (only [[Puck (moon)|Puck]] and [[Mab (moon)|Mab]] continued the trend), have focused on Herschel's source material. In 1949, the fifth moon, [[Miranda (moon)|Miranda]], was named by its discoverer [[Gerard Kuiper]] after a human character in Shakespeare's ''[[The Tempest]]''.<ref name="Kuiper 1949" /> The current [[IAU]] practice is to name moons after characters from Shakespeare's plays and ''The Rape of the Lock'' (although at present only Ariel, Umbriel, and Belinda have names drawn from the latter; all the rest are from Shakespeare). The outer retrograde moons are all named after characters from one play, ''The Tempest''; the sole known outer prograde moon, [[Margaret (moon)|Margaret]], is named from ''[[Much Ado About Nothing]]''.<ref name=podcast/>
+
+Some [[asteroid]]s, also named after the same Shakespearean characters, share names with moons of Uranus: [[171 Ophelia]], [[218 Bianca]], [[593 Titania]], [[666 Desdemona]], [[763 Cupido]], and [[2758 Cordelia]].
+
+== Characteristics and groups ==
+[[File:MajorUranianSatellitesPieChart.jpg|thumb|300px|Pie chart showing the relative masses of the 5 major (rounded) Uranian moons]]
+The Uranian satellite system is the least massive among those of the [[giant planet]]s. Indeed, the combined mass of the five major satellites is less than half that of [[Triton (moon)|Triton]] (the seventh-largest moon in the Solar System) alone.{{efn|name=Triton|The mass of Triton is about 2.14{{E-sp|22}}&nbsp;kg,<ref name="Tyler1989" /> whereas the combined mass of the Uranian moons is about 0.92{{E-sp|22}}&nbsp;kg.}} The largest of the satellites, [[Titania (moon)|Titania]], has a radius of 788.9&nbsp;km,<ref name="Thomas 1988" /> or less than half that of the [[Moon]], but slightly more than that of [[Rhea (moon)|Rhea]], the second-largest moon of [[Saturn]], making Titania the [[List of natural satellites by diameter|eighth-largest moon]] in the [[Solar System]]. Uranus is about 10,000&nbsp;times more massive than its moons.{{efn|name=Big4Mass|Uranus mass of 8.681{{E-sp|25}}&nbsp;kg / Mass of Uranian moons of 0.93{{E-sp|22}}&nbsp;kg }}
+
+=== Inner moons ===
+{{see also|Inner moon|Rings of Uranus}}
+[[File:Uranian_rings_scheme.png|thumb|355x355px|Schematic of the Uranian moon–ring system, excluding [[Uranus XXVIII]], which was not known at the time of drawing]]
+As of {{year}}, Uranus is known to have 14 inner moons, whose orbits all lie inside that of [[Miranda (moon)|Miranda]].<ref name="Showalter Lissauer 2006" /> Some of the inner moons are classified into two groups based on similar orbital distances: these are the Portia group, which includes the six moons [[Bianca (moon)|Bianca]], [[Cressida (moon)|Cressida]], [[Desdemona (moon)|Desdemona]], [[Juliet (moon)|Juliet]], [[Portia (moon)|Portia]], and [[Rosalind (moon)|Rosalind]]; and the Belinda group, which includes the three moons [[Cupid (moon)|Cupid]], [[Belinda (moon)|Belinda]], and [[Perdita (moon)|Perdita]].<ref name="Showalter Lissauer 2006"/><ref name="Cuk2022"/> [[Uranus XXVIII]], which orbits between [[Ophelia (moon)|Ophelia]] and Bianca, is not classified into either of these groups.<ref name="CBET5593"/> All of the inner moons are intimately connected with the [[rings of Uranus]], which probably resulted from the fragmentation of one or several small inner moons.<ref name="Esposito2002" /> The two innermost moons, [[Cordelia (moon)|Cordelia]] and Ophelia, are [[Shepherd moon|shepherds]] of Uranus's ε ring, whereas the small moon [[Mab (moon)|Mab]] is a source of Uranus's outermost μ ring.<ref name="Showalter Lissauer 2006" /> There may be two additional small (2–7&nbsp;km in radius) undiscovered shepherd moons located about 100&nbsp;km exterior to Uranus's [[Rings of Uranus#.CE.B1 and .CE.B2 rings|α and β rings]].<ref name="Chancia2016">{{cite journal|last1=Chancia|first1=R.O.|last2=Hedman|first2=M.M.|title=Are there moonlets near Uranus' alpha and beta rings?|year=2016|arxiv=1610.02376|journal=The Astronomical Journal|volume=152|issue=6|pages=211|doi=10.3847/0004-6256/152/6/211 |bibcode = 2016AJ....152..211C |s2cid=85559054 |doi-access=free }}</ref>
+
+At 162&nbsp;km, [[Puck (moon)|Puck]] is the largest of the inner moons of Uranus and the only one imaged by ''Voyager&nbsp;2'' in any detail. Puck and Mab are the two outermost inner satellites of Uranus. All inner moons are dark objects; their geometrical [[albedo]] is less than 10%.<ref name="Karkoschka2001, Hubble" /> They are composed of water ice contaminated with a dark material, probably radiation-processed organics.<ref name="DumasSmithTerrile2003" />
+
+The inner moons constantly [[perturbation (astronomy)|perturb]] each other, especially within the closely-packed Portia and Belinda groups. The system is [[chaotic system|chaotic]] and apparently unstable.<ref name="Duncan Lissauer 1997"/> Simulations show that the moons may perturb each other into crossing orbits, which may eventually result in collisions between the moons.<ref name="Showalter Lissauer 2006" /> [[Desdemona (moon)|Desdemona]] may collide with [[Cressida (moon)|Cressida]] within the next million years,<ref name="Uranus">{{cite web|title= Uranus's colliding moons|year= 2017|url= http://www.astronomy.com/news/2017/09/uranus-colliding-moons|publisher= astronomy.com|access-date= 23 September 2017|archive-date= 26 February 2021|archive-url= https://web.archive.org/web/20210226103604/https://astronomy.com/news/2017/09/uranus-colliding-moons|url-status= live}}</ref> and [[Cupid (moon)|Cupid]] will likely collide with [[Belinda (moon)|Belinda]] in the next 10 million years; [[Perdita (moon)|Perdita]] and [[Juliet (moon)|Juliet]] may be involved in later collisions.<ref name="French Showalter 2012">{{cite journal |last1=French |first1=Robert S. |last2=Showalter |first2=Mark R. |title=Cupid is doomed: An analysis of the stability of the inner uranian satellites |journal=Icarus |date=August 2012 |volume=220 |issue=2 |pages=911–921 |doi=10.1016/j.icarus.2012.06.031|arxiv=1408.2543 |bibcode=2012Icar..220..911F |s2cid=9708287 }}</ref> Because of this, the rings and inner moons may be under constant flux, with moons colliding and re-accreting on short timescales.<ref name="French Showalter 2012"/>
+
+=== Large moons ===
+[[File:Uranus moons.jpg|thumb|Uranus and its six largest moons compared at their proper relative sizes and in the correct order. From left to right: [[Puck (moon)|Puck]], [[Miranda (moon)|Miranda]], [[Ariel (moon)|Ariel]], [[Umbriel]], [[Titania (moon)|Titania]], and [[Oberon (moon)|Oberon]]|left|300x300px]]Uranus has five [[major moon]]s: [[Miranda (moon)|Miranda]], [[Ariel (moon)|Ariel]], [[Umbriel]], [[Titania (moon)|Titania]], and [[Oberon (moon)|Oberon]]. They range in diameter from 472&nbsp;km for Miranda to 1578&nbsp;km for Titania.<ref name="Thomas 1988" /> All these moons are relatively dark objects: their geometrical albedo varies between 30 and 50%, whereas their [[Bond albedo]] is between 10 and 23%.<ref name="Karkoschka2001, Hubble" /> Umbriel is the darkest moon and Ariel the brightest. The masses of the moons range from 6.7{{E-sp|19}}&nbsp;kg (Miranda) to 3.5{{E-sp|21}}&nbsp;kg (Titania). For comparison, the [[Moon]] has a mass of 7.5{{E-sp|22}}&nbsp;kg and a diameter of 3474&nbsp;km.<ref name="Jacobson Campbell et al. 1992" /> The major moons of Uranus are thought to have formed in the [[Nebular hypothesis#Meaning of accretion|accretion disc]], which existed around Uranus for some time after its formation or resulted from a large impact suffered by [[Uranus]] early in its history.<ref name="Mousis 2004" /><ref>{{cite book|title=Atlas of Uranus|first=Garry E.|last=Hunt|author2=Patrick Moore|publisher=Cambridge University Press|date=1989|isbn=0-521-34323-2|pages=[https://archive.org/details/atlasofuranus00hunt_1/page/78 78–85]|url-access=registration|url=https://archive.org/details/atlasofuranus00hunt_1/page/78}}
+</ref> This view is supported by their large [[thermal inertia]], a surface property they share with [[dwarf planet]]s like [[Pluto]] and [[Haumea]].<ref>{{Cite journal|last1=Detre|first1=Ö. H.|last2=Müller|first2=T. G.|last3=Klaas|first3=U.|last4=Marton|first4=G.|last5=Linz|first5=H.|last6=Balog|first6=Z.|title=Herschel -PACS photometry of the five major moons of Uranus|journal=Astronomy & Astrophysics|year=2020|volume=641|pages=A76|doi=10.1051/0004-6361/202037625|arxiv=2006.09795|bibcode=2020A&A...641A..76D|issn=0004-6361|doi-access=free}}</ref> It differs strongly from the thermal behaviour of the Uranian irregular moons that is comparable to classical [[trans-Neptunian object]]s.<ref name="FarkasTakacs2017" /> This suggests a separate origin.
+[[File:PIA25500-Uranus-MajorMoons-20230504.jpg|thumb|left|300px|Moons (Ariel, Umbriel, Titania, Oberon, Miranda)<br />Modeling (4 May 2023)]]
+All major moons comprise approximately equal amounts rock and ice, except Miranda, which is made primarily of ice.<ref name="Hussmann Sohl et al. 2006" /> The ice component may include [[ammonia]] and [[carbon dioxide]].<ref name="Grundy Young et al. 2006" /> Their surfaces are heavily cratered, though all of them (except Umbriel) show signs of [[endogenic]] [[resurfacing]] in the form of lineaments (canyons) and, in the case of Miranda, ovoid race-track like structures called [[Corona (planetary geology)|coronae]].<ref name="Smith Soderblom et al. 1986" /> Extensional processes associated with upwelling [[diapir]]s are likely responsible for the origin of the coronae.<ref name="Pappalardo1997" /> Ariel appears to have the youngest surface with the fewest impact craters, while Umbriel's appears oldest.<ref name="Smith Soderblom et al. 1986" /> A past 3:1 [[orbital resonance]] between Miranda and Umbriel and a past 4:1 resonance between Ariel and Titania are thought to be responsible for the heating that caused substantial endogenic activity on Miranda and Ariel.<ref name="Tittemore Wisdom 1990" /><ref name="Tittemore 1990" />
+One piece of evidence for such a past resonance is Miranda's unusually high orbital [[inclination]] (4.34°) for a body so close to the planet.<ref>{{cite journal |title=Tidal Evolution of the Uranian Satellites II. An Explanation of the Anomalously High Orbital Inclination of Miranda |first=W. C. |last=Tittemore |author2=Wisdom, J. |journal=Icarus |volume=78 |issue=1 |pages=63–89 |date=1989 |doi=10.1016/0019-1035(89)90070-5 |bibcode=1989Icar...78...63T |url=http://groups.csail.mit.edu/mac/users/wisdom/TittemoreWisdomII.pdf |hdl=1721.1/57632 |hdl-access=free |access-date=2011-01-25 |archive-date=2013-05-11 |archive-url=https://web.archive.org/web/20130511084828/http://groups.csail.mit.edu/mac/users/wisdom/TittemoreWisdomII.pdf |url-status=live }}</ref><ref>{{cite journal|title=The Role of Secondary Resonances in the Orbital History of Miranda |author=Malhotra, R. |author2=Dermott, S. F.|journal=Icarus |volume=85|issue=2 |pages=444–480|date=1990 |doi=10.1016/0019-1035(90)90126-T |bibcode=1990Icar...85..444M|doi-access=free }}</ref> The largest Uranian moons may be internally differentiated, with rocky [[core (geology)|cores]] at their centers surrounded by ice [[mantle (geology)|mantles]].<ref name="Hussmann Sohl et al. 2006" /> Titania and Oberon may harbor liquid water oceans at the core/mantle boundary.<ref name="Hussmann Sohl et al. 2006" /> The major moons of Uranus are airless bodies. For instance, Titania was shown to possess no atmosphere at a pressure larger than 10–20&nbsp;nanobar.<ref name="Widemann Sicardy et al. 2009" />
+
+The path of the Sun in the local sky over the course of a local day during Uranus's and its major moons' summer solstice is quite different from that seen on most other [[Solar System]] worlds. The major moons have almost exactly the same rotational axial tilt as Uranus (their axes are parallel to that of Uranus).<ref name="Smith Soderblom et al. 1986" /> The Sun would appear to follow a circular path around Uranus's [[celestial pole]] in the sky, at the closest about 7 degrees from it,{{efn|The [[axial tilt]] of Uranus is 97°.<ref name="Smith Soderblom et al. 1986" />}} during the hemispheric summer.  Near the equator, it would be seen nearly due north or due south (depending on the season). At latitudes higher than 7°, the Sun would trace a circular path about 15 degrees in diameter in the sky, and never set during the hemispheric summer, moving to a position over the celestial equator during the Uranian equinox, and then invisible below the horizon during the hemispheric winter.
+
+=== Irregular moons ===
+{{see also|Irregular moon}}
+
+Uranus's irregular moons range in size from 120 to 200&nbsp;km ([[Sycorax (moon)|Sycorax]]) to under 10&nbsp;km ([[S/2023 U 1]]).<ref name="SheppardMoons"/> Five of these moons have had their rotation periods measured, and on average, those in the Uranian system rotate faster than irregular moons around other giant planets.<ref name="FarkasTakacs2017" /> This may reflect a history of more frequent or more energetic collisions within the Uranian system.<ref name="FarkasTakacs2017" />
+
+Due to the small number of known Uranian irregular moons, it is not yet clear which of them belong to groups with similar orbital characteristics. The only known group among Uranus's irregular moons is the Caliban group, which is clustered at orbital distances between {{convert|6-7|e6km|e6mi|abbr=unit}} and inclinations between 141–144°.<ref name="Sheppardmoons2024" /> The Caliban group includes three retrograde moons, which are [[Caliban (moon)|Caliban]], S/2023 U 1, and [[Stephano (moon)|Stephano]].<ref name="Sheppardmoons2024" /> Beyond that, there is also a statistically significant division of its retrograde moons into two broad categories: those with smaller, more circular orbits and those with larger, more eccentric orbits.<ref name="Sheppard2005" /><ref name="Nicholson2008"/> However, the inclinations are distributed more or less randomly.<ref name="Nicholson2008"/>
+
+Uranus is somewhat unique in that its retrograde moons do not orbit as far from the planet as those of the other giant planets, and only has one prograde irregular.<ref name="Sheppard2024" /> [[Margaret (moon)|Margaret]] is the only known irregular prograde moon of Uranus, and it has one of the most eccentric orbits of any moon in the Solar System.
+
+The intermediate inclinations 60° < i < 140° are devoid of known moons due to the [[Kozai mechanism|Kozai instability]].<ref name="Sheppard2005" /> In this instability region, solar [[Perturbation (astronomy)|perturbations]] at apoapse cause the moons to acquire large eccentricities that lead to collisions with inner satellites or ejection. The lifetime of moons in the instability region is from 10&nbsp;million to a billion years.<ref name="Sheppard2005" />
+
+[[File:Irregular Moons of Uranus 3-panel_view_dark.svg|thumb|center|upright=4|The orbits of Uranian irregular moons as seen from three different views. Prograde irregular moons are colored blue, retrograde irregular moons are colored red, and [[regular moon]]s are colored magenta. Data as of 2026.]]
+
+== List of moons==
+[[File:Uranusmoonsdiagram.png|thumb|upright=4|center|Orbital diagram of the [[orbital inclination]] and orbital distances for Uranus's rings and moon system at various scales. Open the image for full resolution.]]
+
+The Uranian moons are listed here by orbital period, from shortest to longest. Moons massive enough for their surfaces to have [[gravitational collapse|collapsed]] into a [[spheroid]] are highlighted in light blue and bolded. The inner and major moons all have [[Retrograde and prograde motion|prograde]] orbits. Irregular moons with retrograde orbits are shown in dark grey. Margaret, the only known irregular moon of Uranus with a prograde orbit, is shown in light grey. The orbits and mean distances of the irregular moons are variable over short timescales due to frequent planetary and solar [[perturbation (astronomy)|perturbations]], therefore the listed [[orbital elements]] of all irregular moons are averaged over a 10,000-year [[numerical integration]] by Sheppard et al. (2024). These may differ from [[osculating orbit|osculating]] orbital elements provided by other sources.<ref name="Sheppard2024"/> <!--Otherwise, recently-discovered irregular moons without published proper elements are temporarily listed here with inaccurate [[Osculating orbit|osculating orbital elements]] that are ''italicized'' to distinguish them from other irregular moons with proper orbital elements.-->The orbital elements of the inner moons listed here are based on the [[Epoch (astronomy)|epoch]] of 1 January 2025; those for the major moons are based on the epoch of 1 January 2000; while orbital elements of irregular satellites are based on the epoch of 1 January 2020.<ref name="Jacobson&Park2025" /><ref name="jplsats"/>
+
+<div style="float:left">
+{| class="wikitable" style="margin:0; font-size:90%; text-align:left"
+|-
+|+ Key
+|-
+| style="background:#fff;"  |&nbsp; ''Inner moons (14)''
+| style="background:#ccf;"  | ♠ '''''Major moons''' (5)''
+| style="background:#f0f0b0"| ♦ ''Caliban group (3)''
+|-
+| style="background:#efefef"| † Margaret (1)
+| colspan="2" style="background:#d3d3d3"| ‡ ''Ungrouped retrograde irregular moons (6)''
+|}</div>
+{{clear}}
+{{static row numbers}}
+{{sort under}}
+{{sticky table start}}
+{| class="wikitable sortable sort-under sticky-table-row1 sticky-table-col1" style=" font-size:90%;"
+|+ Uranian moons
+|- style="background: #efefef;"
+! Label<br />{{efn|Label refers to the [[Roman numeral]] attributed to each moon in order of their discovery.<ref name="Gazetteer" />}}
+! Name
+! class="unsortable" | Pronunciation<br />([[Help:IPA for English|key]])
+! class="unsortable" | Image
+! [[Absolute magnitude#Solar System bodies (H)|Abs.<br />magn.]]<br /><ref name="Karkoschka2001, Hubble"/><ref name="NSES"/>
+! [[List of Solar System objects by radius|Diameter]]<br />(km)<br />{{efn|Diameters with multiple entries such as "{{nowrap|60 × 40 × 34}}" reflect that the body is not a perfect [[spheroid]] and that each of its dimensions have been measured well enough. The diameters and dimensions of Miranda, Ariel, Umbriel, and Oberon were taken from Thomas, 1988.<ref name="Thomas 1988" /> The diameter of Titania is from Widemann, 2009.<ref name="Widemann Sicardy et al. 2009" /> The diameters and dimensions of the inner moons are derived from Karkoschka, 2001,<ref name="Karkoschka2001, Voyager" /> except for Cupid, Perdita, Mab, and Uranus XXVIII. The radii of Cupid, Perdita, and Mab were taken from Showalter, 2006.<ref name="Showalter Lissauer 2006" /> The dimensions of Uranus XXVIII are a calculated estimate. The radii of outer moons except Sycorax, Caliban, and S/2023 U 1 were taken from Sheppard's website.<ref name="SheppardMoons"/> The radii of Sycorax and Caliban are from Farkas-Takács et al., 2017.<ref name="FarkasTakacs2017"/> The dimensions of S/2023 U 1 are a calculated estimate.}}
+! data-sort-type=number | [[List of Solar System objects by mass|Mass]]<br />(×&nbsp;10<sup>16</sup>&nbsp;[[kg]])<br />{{efn|Masses of the five major moons were taken from Jacobson & Park, 2025.<ref name="Jacobson&Park2025"/> Masses of Cordelia, Ophelia, and Cressida were taken from French, 2024.<ref name="French2024"/> Masses of all other moons were calculated assuming a density of 1 g/cm<sup>3</sup> and using given radii.}}
+! [[Semi-major axis]]<br />(km)<br />{{efn|name=orbits|Mean orbits of the inner and irregular satellites, other than Puck, are taken from JPL Small System Dynamics,<ref name="jplsats" /> while mean orbits of the five major moons and Puck are taken from Jacobson & Park (2025).<ref name="Jacobson&Park2025"/>}}
+! [[Orbital period]]<br />([[Day|d]])<br />{{efn|name=orbits}}{{efn|Negative orbital periods indicate a [[retrograde orbit]] around Uranus (opposite to the planet's orbit). Orbital periods of irregular satellites may not be consistent with their semi-major axes due to perturbations.}}
+! [[Inclination]]<br />([[Degree (angle)|°]])<br />{{efn|name=orbits}}{{efn|Inclinations greater than 90° are retrograde. Orbital inclinations of inner satellites, other than Puck, are with respect to their [[Laplace plane]]s. For the major satellites and Puck, inclination measures the angle between the moon's orbital plane and the plane defined by Uranus's equator. For irregular satellites, inclination measures the angle between the moon's orbital plane and the ecliptic.}}
+! [[Orbital eccentricity|Eccentricity]]<br />{{efn|name=orbits}}
+! [[Timeline of discovery of Solar System planets and their moons|Discovery<br />year]]<br /><ref name="jplsats-disc" />
+! Year announced
+! Discoverer<br /><ref name="jplsats-disc" />
+! Group
+|-style="background:#fff;"
+| {{sort|06|VI}} || [[Cordelia (moon)|Cordelia]] || {{IPAc-en|k|ɔːr|ˈ|d|iː|l|i|ə}} || bgcolor="black" | [[File: Cordelia Ophelia Voyager 2 labeled.png|50px]] || 10.9 || {{sort|0039.6|39.6 <br /> {{nowrap|(50 × 36)}}}} || {{sort|000006.08|{{val|6.08|0.57}}}} || {{val|49755}} || {{sort|0.3347|+{{val|0.3347}}}} || 0.2 || 0.000 || 1986 || 1986 || [[Richard J. Terrile|Terrile]] <br /> ([[Voyager 2]]) || ε ring shepherd
+|-style="background:#fff;"
+| {{sort|07|VII}} || [[Ophelia (moon)|Ophelia]] || {{IPAc-en|oʊ-|ˈ|f|iː|l|i|ə}} || bgcolor="black" | [[File:opheliamoon.png|50px]] || 10.5 || {{sort|0043.3|43.3 <br /> {{nowrap|(54 × 38)}}}} || {{sort|000003.57|{{val|3.57|0.32}}}} || {{val|53765}} || {{sort|0.3764|+{{val|0.3764}}}} || 0.2 || 0.011 || 1986 || 1986 || [[Richard J. Terrile|Terrile]] <br /> ([[Voyager 2]]) || ε ring shepherd
+|-style="background:#fff;"
+| {{sort|28|[[Uranus XXVIII|XXVIII]]}} || <small>[[S/2025 U 1]]</small> || || bgcolor="black" | [[File:Uranus new moon 2025 JWST.png|50px]] || {{sort|13.6|≈ 13.6}} || {{sort|0009|≈&thinsp;8–10}} || {{sort|000000.04|≈&thinsp;0.04}} || {{val|57844}} || {{sort|0.4201|+{{val|0.4201}}}} || 4.0 || 0.039 || 2025 || 2025 || [[M. El Moutamid|El Moutamid]] et al.<br/>([[James Webb Space Telescope|JWST]]) || 
+|-style="background:#fff;"
+| {{sort|08|VIII}} || [[Bianca (moon)|Bianca]] || {{IPAc-en|b|i|ˈ|ɑː|ŋ|k|ə}} || bgcolor="black" | [[File:biancamoon.png|50px]] || 9.8 || {{sort|0050.9|50.9 <br /> {{nowrap|(64 × 46)}}}} || {{sort|000006.9|≈&thinsp;6.9}} || {{val|59170}} || {{sort|0.4347|+{{val|0.4347}}}} || 2.3 || 0.006 || 1986 || 1986 || [[Bradford A. Smith|Smith]] <br /> ([[Voyager 2]]) || Portia
+|-style="background:#fff;"
+| {{sort|09|IX}} || [[Cressida (moon)|Cressida]] || {{IPAc-en|ˈ|k|r|ɛ|s|ə|d|ə}} || bgcolor="black" | [[File:Uranus-Portia-Cressida-Ophelia-NASA.gif|50px]] || 8.9 || {{sort|0079|79.0 <br /> {{nowrap|(92 × 74)}}}} || {{sort|000018.39|{{val|18.39|2.12}}}} || {{val|61770}} || {{sort|0.4639|+{{val|0.4639}}}} || 1.8 || 0.004 || 1986 || 1986 || [[Stephen P. Synnott|Synnott]] <br /> ([[Voyager 2]]) || Portia
+|-style="background:#fff;"
+| {{sort|10|X}} || [[Desdemona (moon)|Desdemona]] || {{IPAc-en|ˌ|d|ɛ|z|d|ə|ˈ|m|oʊ|n|ə}} || bgcolor="black" | [[File:desdemonamoon.png|50px]] || 9.3 || {{sort|0064.3|64.3 <br /> {{nowrap|(90 × 54)}}}} || {{sort|000014|≈&thinsp;14}} || {{val|62663}} || {{sort|0.4736|+{{val|0.4736}}}} || 3.1 || 0.007 || 1986 || 1986 || [[Stephen P. Synnott|Synnott]] <br /> ([[Voyager 2]]) || Portia
+|-style="background:#fff;"
+| {{sort|11|XI}} || [[Juliet (moon)|Juliet]] || {{IPAc-en|ˈ|dʒ|uː|l|i|ə|t}} || bgcolor="black" | [[File:julietmoon.png|50px]] || 8.4 || {{sort|0094.4|94.4 <br /> {{nowrap|(150 × 74)}}}} || {{sort|000044|≈&thinsp;44}} || {{val|64362}} || {{sort|0.4931|+{{val|0.4931}}}} || 3.0 || 0.006 || 1986 || 1986 || [[Stephen P. Synnott|Synnott]] <br /> ([[Voyager 2]]) || Portia
+|-style="background:#fff;"
+| {{sort|12|XII}} || [[Portia (moon)|Portia]] || {{IPAc-en|ˈ|p|ɔər|ʃ|ə}} || bgcolor="black" | [[File: Uranus-Portia-Cressida-Ophelia-NASA.gif|50px]] || 7.7 || {{sort|0134.9|134.9 <br /> {{nowrap|(156 × 126)}}}} || {{sort|000130|≈&thinsp;130}} || {{val|66101}} || {{sort|0.5132|+{{val|0.5132}}}} || 2.7 || 0.004 || 1986 || 1986 || [[Stephen P. Synnott|Synnott]] <br /> ([[Voyager 2]]) || Portia
+|-style="background:#fff;"
+| {{sort|13|XIII}} || [[Rosalind (moon)|Rosalind]] || {{IPAc-en|ˈ|r|ɒ|z|ə|l|ə|n|d}} || bgcolor="black" | [[File:rosalindmoon.png|50px]] || 9.1 || {{sort|0072|72&nbsp;±&nbsp;12}} || {{sort|000020|≈&thinsp;20}} || {{val|69930}} || {{sort|0.5583|+{{val|0.5583}}}} || 1.7 || 0.003 || 1986 || 1986 || [[Stephen P. Synnott|Synnott]] <br /> ([[Voyager 2]]) || Portia
+|-style="background:#fff;"
+| {{sort|27|XXVII}} || [[Cupid (moon)|Cupid]] || {{IPAc-en|ˈ|k|juː|p|ə|d}} || bgcolor="black" | [[File:cupidmoon.png|50px]] || 12.6 || {{sort|0017.8|17.8&nbsp;±&nbsp;1.4}} || {{sort|000000.30|≈&thinsp;0.30}} || {{val|74396}} || {{sort|0.6125|+{{val|0.6125}}}} || 2.0 || 0.007 || 2003 || 2003 || [[Mark R. Showalter|Showalter]] and <br /> [[Jack J. Lissauer|Lissauer]] ([[Hubble Space Telescope|HST]]) || Belinda
+|-style="background:#fff;"
+| {{sort|14|XIV}} || [[Belinda (moon)|Belinda]] || {{IPAc-en|b|ə|ˈ|l|ɪ|n|d|ə}} || bgcolor="black" | [[File:Belinda.gif|50px|center]] || 8.8 || {{sort|0080.2|80.2 <br /> {{nowrap|(128 × 64)}}}} || {{sort|000027|≈&thinsp;27}} || {{val|75258}} || {{sort|0.6236|+{{val|0.6236}}}} || 1.4 || 0.002 || 1986 || 1986 || [[Stephen P. Synnott|Synnott]] <br /> ([[Voyager 2]]) || Belinda
+|-style="background:#fff;"
+| {{sort|25|XXV}} || [[Perdita (moon)|Perdita]] || {{IPAc-en|ˈ|p|ɜːr|d|ə|t|ə}} || bgcolor="black" | [[File:Perdita, moon of Uranus, 2003.png|50px]] || 11.0 || {{sort|0026.6|26.6&nbsp;±&nbsp;1.4}} || {{sort|000000.99|≈&thinsp;0.99}} || {{val|76418}} || {{sort|0.6382|+{{val|0.6382}}}} || 1.6 || 0.005 || 1999 || 1999 || [[Karkoschka]] <br /> ([[Voyager 2]]) || Belinda
+|-style="background:#fff;"
+| {{sort|15|XV}} || [[Puck (moon)|Puck]] || {{IPAc-en|ˈ|p|ʌ|k}} || bgcolor="black" | [[File:Puck, moon of Uranus (1986).png|50px|center]] || 7.0 || {{sort|0162|162&nbsp;±&nbsp;4}} || {{sort|000220|≈&thinsp;220}} || {{val|86004}} || {{sort|0.76183|+{{val|0.76183}}}} || 0.327 || 0.0001 || 1985 || 1986 || [[Stephen P. Synnott|Synnott]] <br /> ([[Voyager 2]]) || 
+|-style="background:#fff;"
+| {{sort|26|XXVI}} || [[Mab (moon)|Mab]] || {{IPAc-en|ˈ|m|æ|b}} || bgcolor="black" | [[File:mabmoon.png|50px|center]] || 12.1 || {{sort|0012|≈&thinsp;12}}|| {{sort|000000.09|≈&thinsp;0.09}}|| {{val|97737}} || {{sort|0.9229|+{{val|0.9229}}}} || 1.8 || 0.006 || 2003 || 2003 || Showalter and <br /> Lissauer ([[Hubble Space Telescope|HST]]) || μ ring source
+|- style="background: #ccf;"
+| {{sort|05|V}} || '''[[Miranda (moon)|Miranda]]'''<sup>♠</sup> || {{IPAc-en|m|ə|ˈ|r|æ|n|d|ə}} || bgcolor="black" | [[File:Miranda mosaic in color - Voyager 2.png|50px|center]] || 3.1 || {{sort|0470|471.6&nbsp;±&nbsp;1.4 <br /> {{nowrap|(481 × 468 × 466)}}}} || {{sort|006293|{{val|6293|300}}}} || {{val|129846}} || {{sort|1.4135|+{{val|1.4135}}}} || 4.421 || 0.0014 || 1948 || 1948 || [[Gerard Kuiper|Kuiper]] ||
+|- style="background: #ccf;"
+| {{sort|01|I}} || '''[[Ariel (moon)|Ariel]]'''<sup>♠</sup> || {{IPAc-en|ˈ|ɛər|i|ɛ|l}} || bgcolor="black" |[[File:Ariel in monochrome.jpg|50px|center]] || 1.0 || {{sort|1157|{{val|1157.8|1.2}} <br /> {{nowrap|(1162 × 1156 × 1155)}}}} || {{sort|123310|{{val|123310|1800}}}} || {{val|190929}} || {{sort|2.5204|+{{val|2.5204}}}} || 0.026 || 0.0014 || 1851 || 1851 || [[William Lassell|Lassell]] ||
+|- style="background: #ccf;"
+| {{sort|02|II}} || '''[[Umbriel]]'''<sup>♠</sup> || {{IPAc-en|ˈ|ʌ|m|b|r|i|ə|l}} || bgcolor="black" |[[File:PIA00040 Umbrielx2.47.jpg|50px|center]] || 1.8 || {{sort|1164.8|{{val|1164.8|1.6}}}}<ref name="Assafin2023">{{Cite journal |last=Assafin |first=M |last2=Santos-Filho |first2=S |last3=Morgado |first3=B E |last4=Gomes-Júnior |first4=A R |last5=Sicardy |first5=B |last6=Margoti |first6=G |last7=Benedetti-Rossi |first7=G |last8=Braga-Ribas |first8=F |last9=Laidler |first9=T |last10=Camargo |first10=J I B |last11=Vieira-Martins |first11=R |last12=Swift |first12=T |last13=Dunham |first13=D |last14=George |first14=T |last15=Bardecker |first15=J |date=2023-10-20 |title=Kilometer-precise (UII) Umbriel physical properties from the multichord stellar occultation on 2020 September 21 |journal=Monthly Notices of the Royal Astronomical Society |language=en |volume=526 |issue=4 |pages=6193–6204 |doi=10.1093/mnras/stad3093 |issn=0035-8711 |doi-access=free|arxiv=2310.11196 }}</ref> || {{sort|128850|{{val|128850|2250}}}} || {{val|265986}} || {{sort|4.1442|+{{val|4.1442}}}} || 0.083 || 0.0039 || 1851 || 1851 || [[William Lassell|Lassell]] ||
+|- style="background: #ccf;"
+| {{sort|03|III}} || '''[[Titania (moon)|Titania]]'''<sup>♠</sup> || {{IPAc-en|t|ə|ˈ|t|ɑː<!--never /eɪ/-->|n|i|ə}} || bgcolor="black" | [[File:Titania (moon) color, cropped.jpg|50px|center]] || 0.8 || {{sort|1577|{{val|1576.8|1.2}}}} || {{sort|345500|{{val|345500|5090}}}} || {{val|436298}} || {{sort|8.7059|+{{val|8.7059}}}} || 0.114 || 0.0016 || 1787 || 1787 || [[William Herschel|Herschel]] ||
+|- style="background: #ccf;"
+| {{sort|04|IV}} || '''[[Oberon (moon)|Oberon]]'''<sup>♠</sup> || {{IPAc-en|ˈ|oʊ|b|ə|r|ɒ|n}} || bgcolor="black" | [[File:Voyager 2 picture of Oberon.jpg|50px|center]] || 1.0 || {{sort|1522|{{val|1522.8|5.2}}}} || {{sort|311040|{{val|311040|7490}}}} || {{val|583511}} || {{sort|13.463|+{{val|13.463}}}} || 0.125 || 0.0016 || 1787 || 1787 || [[William Herschel|Herschel]] ||
+|- style="background: #d3d3d3;"
+| {{sort|22|XXII}} || [[Francisco (moon)|Francisco]]<sup>‡</sup> || {{IPAc-en|f|r|æ|n|ˈ|s|ɪ|s|k|oʊ}} || bgcolor="black" | [[File:Francisco VLT 2002-09-05 average stack annotated.png|50px]] || 12.9 || {{sort|0022|≈&thinsp;22}} || {{sort|000000.56|≈&thinsp;0.56}} || {{val|4275700}} || {{sort|267|{{val|−267}}}} || 146.8 || 0.144 || 2001 || 2003 || [[Matthew J. Holman|Holman]] et al. || 
+|- style="background: #f0f0b0;"
+| {{sort|16|XVI}} || [[Caliban (moon)|Caliban]]<sup>♦</sup> || {{IPAc-en|ˈ|k|æ|l|ə|b|æ|n}} || bgcolor="black" | [[File:Caliban discovery.jpg|50px]] || 8.9 || {{sort|0042|{{val|42|20|12}}}} || {{sort|000003.9|≈&thinsp;3.9}}|| {{val|7167000}} || {{sort|580|{{val|−580}}}} || 141.4 || 0.200 || 1997 || 1997 || [[Brett J. Gladman|Gladman]] et al. || Caliban
+|- style="background: #f0f0b0;"
+| {{sort|20|XX}} || [[Stephano (moon)|Stephano]]<sup>♦</sup> || {{IPAc-en|ˈ|s|t|ɛ|f|ə|n|oʊ}} || bgcolor="black" | [[File:Stephano - Uranus moon.jpg|50px]] || 11.6 || {{sort|0032|≈&thinsp;32}} || {{sort|000001.7|≈&thinsp;1.7}} || {{val|7951400}} || {{sort|677|{{val|−677}}}} || 143.6 || 0.235 || 1999 || 1999 || [[Brett J. Gladman|Gladman]] et al. || Caliban
+|- style="background: #f0f0b0;"
+| {{sort|99|}} || <small>[[S/2023 U 1]]</small><sup>♦</sup> || || bgcolor="black" | || 13.7 || {{sort|0008|≈&thinsp;8}} || {{sort|000000.027|≈&thinsp;0.027}} || {{val|7976600}} || {{sort|681|{{val|−681}}}} || 143.9 || 0.250 || 2023 || 2024 || [[Scott S. Sheppard|Sheppard]] et al. || Caliban
+|- style="background: #d3d3d3;"
+| {{sort|21|XXI}} || [[Trinculo (moon)|Trinculo]]<sup>‡</sup> || {{IPAc-en|ˈ|t|r|ɪ|ŋ|k|j|ʊ|l|oʊ}} || bgcolor="black" | [[File:Trinculo VLT 2002-09-03 annotated.png|50px]] || 12.7 || {{sort|0018|≈&thinsp;18}} || {{sort|000000.31|≈&thinsp;0.31}} || {{val|8502600}} || {{sort|749|{{val|−749}}}} || 167.1 || 0.220 || 2001 || 2002 || [[Matthew J. Holman|Holman]] et al. || 
+|- style="background: #d3d3d3;"
+| {{sort|17|XVII}} || [[Sycorax (moon)|Sycorax]]<sup>‡</sup> || {{IPAc-en|ˈ|s|ɪ|k|ə|r|æ|k|s}} || bgcolor="black" | [[File:Sycorax CFHT 2001-08-24.gif|50px]] || 7.5 || {{sort|0157| {{val|157|23|15}}}} || {{sort|000200|≈&thinsp;200}} || {{val|12193200}} || {{sort|1286|{{val|−1286}}}} || 157.0 || 0.520 || 1997 || 1997 || [[Philip D. Nicholson|Nicholson]] et al. || 
+|- style="background: #efefef;"
+| {{sort|23|XXIII}} || [[Margaret (moon)|Margaret]]<sup>†</sup> || {{IPAc-en|ˈ|m|ɑːr|ɡ|ər|ə|t}} || bgcolor="black" | [[File:Margaret Gemini North 2003-09-28 annotated.gif|50px]] || 12.7 || {{sort|0020|≈&thinsp;20}} || {{sort|000000.42|≈&thinsp;0.42}} || {{val|14425000}} || {{sort|1655|+{{val|1655}}}} || 60.5 || 0.642 || 2003 || 2003 || [[Scott S. Sheppard|Sheppard]] and <br /> [[David C. Jewitt|Jewitt]] || 
+|- style="background: #d3d3d3;"
+| {{sort|18|XVIII}} || [[Prospero (moon)|Prospero]]<sup>‡</sup> || {{IPAc-en|ˈ|p|r|ɒ|s|p|ə|r|oʊ}} || bgcolor="black" | [[File:Prospero - Uranus moon.jpg|50px]] || 10.6 || {{sort|0050|≈&thinsp;50}} || {{sort|000006.5|≈&thinsp;6.5}} || {{val|16221000}} || {{sort|1974|{{val|−1974}}}} || 149.4 || 0.441 || 1999 || 1999 || [[Matthew J. Holman|Holman]] et al. || 
+|- style="background: #d3d3d3;"
+| {{sort|19|XIX}} || [[Setebos (moon)|Setebos]]<sup>‡</sup> || {{IPAc-en|ˈ|s|ɛ|t|ɛ<!--not schwi, per the RSC-->|b|ʌ|s}} || bgcolor="black" | [[File:Uranus - Setebos image.jpg|50px]] || 10.6 || {{sort|0047|≈&thinsp;47}} || {{sort|000005.4|≈&thinsp;5.4}} || {{val|17519800}} || {{sort|2215|{{val|−2215}}}} || 153.9 || 0.579 || 1999 || 1999 || [[John J. Kavelaars|Kavelaars]] et al. || 
+|- style="background: #d3d3d3;"
+| {{sort|24|XXIV}} || [[Ferdinand (moon)|Ferdinand]]<sup>‡</sup> || {{IPAc-en|ˈ|f|ɜːr|d|ə|n|æ|n|d}} || bgcolor="black" | [[File:Ferdinand GeminiNorth 2003-09-20 annotated.gif|50px]] || 12.4 || {{sort|0021|≈&thinsp;21}}|| {{sort|000000.48|≈&thinsp;0.48}} || {{val|20421400}} || {{sort|2788|{{val|−2788}}}} || 169.2 || 0.395 || 2001 || 2003 || [[Matthew J. Holman|Holman]] et al. || 
+|}
+{{sticky table end}}
+
+== See also ==
+*[[List of natural satellites]]
+
+== Notes ==
+{{notelist}}
+
+== References ==
+{{reflist
+| colwidth = 30em
+| refs =
+<ref name="Lassell1851">
+{{cite journal | last = Lassell | first = W. | title = On the interior satellites of Uranus | journal = Monthly Notices of the Royal Astronomical Society | volume = 12 | date = 1851 | pages = 15–17 | bibcode = 1851MNRAS..12...15L | doi=10.1093/mnras/12.1.15
+| doi-access = free
+}}
+</ref>
+
+<ref name="Kuiper 1949">
+{{cite journal|page=129|issue=360|doi=10.1086/126146|bibcode=1949PASP...61..129K|volume=61|journal=Publications of the Astronomical Society of the Pacific|year=1949|title=The Fifth Satellite of Uranus|last=Kuiper | first=G. P.|s2cid=119916925 |doi-access=free}}
+</ref>
+
+<ref name="Karkoschka2001, Hubble">
+{{cite journal| doi = 10.1006/icar.2001.6596| last = Karkoschka| first = Erich| author-link = Erich Karkoschka| year = 2001| title = Comprehensive Photometry of the Rings and 16 Satellites of Uranus with the Hubble Space Telescope| journal = Icarus| volume = 151| issue = 1| pages = 51–68| bibcode = 2001Icar..151...51K| ref = {{sfnRef|Karkoschka, Hubble|2001}}}}
+</ref>
+
+<ref name="IAUC 7171">{{cite journal
+| last = Karkoschka
+| first = Erich
+| author-link = Erich Karkoschka
+| title = S/1986 U 10
+| journal = IAU Circular
+| issue = 7171
+| pages = 1
+| date = May 18, 1999
+| issn = 0081-0304
+| url = http://www.cbat.eps.harvard.edu/iauc/07100/07171.html
+| access-date = 2011-11-02
+| bibcode = 1999IAUC.7171....1K
+| archive-date = 2014-05-20
+| archive-url = https://web.archive.org/web/20140520001132/http://www.cbat.eps.harvard.edu/iauc/07100/07171.html
+| url-status = live
+}}</ref>
+
+<ref name="Karkoschka2001, Voyager">
+{{cite journal| doi = 10.1006/icar.2001.6597| last = Karkoschka| first = Erich| author-link = Erich Karkoschka| year = 2001| title = Voyager's Eleventh Discovery of a Satellite of Uranus and Photometry and the First Size Measurements of Nine Satellites| journal = Icarus| volume = 151| issue = 1| pages = 69–77| bibcode = 2001Icar..151...69K| ref = {{sfnRef|Karkoschka, Voyager|2001}}}}
+</ref>
+
+<ref name="Showalter Lissauer 2006">
+{{cite journal| doi = 10.1126/science.1122882| last1 = Showalter| first1 = Mark R.| last2 = Lissauer| first2 = Jack J.| date = 2006-02-17| title = The Second Ring-Moon System of Uranus: Discovery and Dynamics| url=https://www.science.org/doi/10.1126/science.1122882| url-access=subscription| journal = Science| volume = 311| issue = 5763| pages = 973–977| pmid = 16373533| bibcode = 2006Sci...311..973S| s2cid = 13240973}}
+</ref>
+
+<ref name="Sheppard2005">
+{{Cite journal | last1 = Sheppard | first1 = S. S. | last2 = Jewitt | first2 = D. | last3 = Kleyna | first3 = J. | title = An Ultradeep Survey for Irregular Satellites of Uranus: Limits to Completeness | doi = 10.1086/426329 | journal = The Astronomical Journal | volume = 129 | issue = 1 | pages = 518–525 | year = 2005 | bibcode=2005AJ....129..518S|arxiv = astro-ph/0410059 | s2cid = 18688556 }}
+</ref>
+
+<ref name="Gazetteer">{{cite web | title = Planet and Satellite Names and Discoverers | work = Gazetteer of Planetary Nomenclature | publisher = USGS Astrogeology | date = 21 July 2006 | url = https://planetarynames.wr.usgs.gov/Page/Planets | access-date = 2006-08-06 | archive-date = 2010-07-03 | archive-url = https://web.archive.org/web/20100703115324/https://planetarynames.wr.usgs.gov/Page/Planets | url-status = live }}</ref>
+
+<ref name="Jacobson Campbell et al. 1992">
+{{cite journal| doi = 10.1086/116211| last1 = Jacobson| first1 = R. A.| last2 = Campbell| first2 = J. K.| last3 = Taylor| first3 = A. H.| last4 = Synnott| first4 = S. P.| date=June 1992 | title = The masses of Uranus and its major satellites from Voyager tracking data and earth-based Uranian satellite data| journal = The Astronomical Journal| volume = 103| issue = 6| pages = 2068–2078| bibcode = 1992AJ....103.2068J| bibcode-access=free| ref = {{sfnRef|Jacobson Campbell et al.|1992}}}}
+</ref>
+
+<ref name="Hussmann Sohl et al. 2006">
+{{cite journal| doi = 10.1016/j.icarus.2006.06.005| last1 = Hussmann| first1 = Hauke| last2 = Sohl| first2 = Frank| last3 = Spohn| first3 = Tilman| date = November 2006| title = Subsurface oceans and deep interiors of medium-sized outer planet satellites and large trans-neptunian objects| journal = [[Icarus (journal)|Icarus]]| volume = 185| issue = 1| pages = 258–273 | bibcode = 2006Icar..185..258H| ref = {{sfnRef|Hussmann Sohl et al.|2006}}}}
+</ref>
+
+<ref name="Smith Soderblom et al. 1986">{{cite journal| doi = 10.1126/science.233.4759.43| last1 = Smith| first1 = B. A.| last2 = Soderblom| first2 = L. A.| last3 = Beebe| first3 = A.| last4 = Bliss| first4 = D.| last5 = Boyce| first5 = J. M.| last6 = Brahic| first6 = A.| last7 = Briggs| first7 = G. A.| last8 = Brown| first8 = R. H.| last9 = Collins| first9 = S. A.| date = 4 July 1986| title = Voyager 2 in the Uranian System: Imaging Science Results| journal = Science| volume = 233| issue = 4759| pages = 43–64| pmid = 17812889| bibcode = 1986Sci...233...43S| s2cid = 5895824| ref = {{sfnRef|Smith Soderblom et al.|1986}}| url = https://zenodo.org/record/1230972| access-date = 28 June 2019| archive-date = 23 October 2018| archive-url = https://web.archive.org/web/20181023120045/https://zenodo.org/record/1230972| url-status = live}}</ref>
+
+<ref name="Denning1881">
+{{cite journal|url=http://www.infomotions.com/etexts/gutenberg/dirs/etext05/7030310.htm|journal=Scientific American Supplement|issue=303|date=22 October 1881|last=Denning|first=W.F.|title=The centenary of the discovery of Uranus|url-status=dead|archive-url=https://web.archive.org/web/20090112065252/http://infomotions.com/etexts/gutenberg/dirs/etext05/7030310.htm|archive-date=January 12, 2009}}
+</ref>
+
+<ref name="Hughes1994">
+{{cite journal|bibcode=1994QJRAS..35..331H|date=1994|pages=334–344|title=The Historical Unravelling of the Diameters of the First Four Asteroids|last=Hughes|first=D. W.|volume=35|issue=3|journal=R.A.S. Quarterly Journal
+}}
+</ref>
+
+<ref name="DumasSmithTerrile2003">
+{{cite journal| last1 = Dumas| first1 = Christophe| last2 = Smith| first2 = Bradford A.| last3 = Terrile| first3 = Richard J.| year = 2003| title = Hubble Space Telescope NICMOS Multiband Photometry of Proteus and Puck| journal = [[The Astronomical Journal]]| volume = 126| issue = 2| pages = 1080–1085| doi = 10.1086/375909| bibcode = 2003AJ....126.1080D| ref = {{sfnRef|Dumas Smith et al.|2003}}| doi-access = free}}
+</ref>
+
+<ref name="Esposito2002">
+{{cite journal| doi = 10.1088/0034-4885/65/12/201| last = Esposito| first = L. W.| author-link = Larry W. Esposito| year = 2002| title = Planetary rings| journal = Reports on Progress in Physics| volume = 65| issue = 12| pages = 1741–1783| bibcode = 2002RPPh...65.1741E| s2cid = 250909885}}
+</ref>
+
+<ref name="NSES">{{cite web
+|title=Natural Satellites Ephemeris Service
+|publisher=IAU: Minor Planet Center
+|url=https://minorplanetcenter.net/iau/NatSats/NaturalSatellites.html
+|access-date=2025-11-14
+|url-status=live
+}}</ref>
+
+<ref name="Pappalardo1997">
+{{cite journal|author=Pappalardo, R. T.|author2=Reynolds, S. J. |author3=Greeley, R. |title=Extensional tilt blocks on Miranda: Evidence for an upwelling origin of Arden Corona|journal=Journal of Geophysical Research|volume=102|issue=E6|pages=13,369–13,380| date=1996|url=https://www.agu.org/pubs/crossref/1997/97JE00802.shtml|doi=10.1029/97JE00802|bibcode=1997JGR...10213369P
+|archive-url = https://web.archive.org/web/20080302041649/https://www.agu.org/pubs/crossref/1997/97JE00802.shtml |archive-date=2008-03-02 |doi-access=free
+}}
+</ref>
+
+<ref name="Tittemore Wisdom 1990">
+{{cite journal| doi = 10.1016/0019-1035(90)90125-S| last1 = Tittemore| first1 = William C.| last2 = Wisdom| first2 = Jack| date=June 1990 | title = Tidal evolution of the Uranian satellites: III. Evolution through the Miranda-Umbriel 3:1, Miranda-Ariel 5:3, and Ariel-Umbriel 2:1 mean-motion commensurabilities| journal = Icarus| volume = 85| issue = 2| pages = 394–443| bibcode = 1990Icar...85..394T| hdl = 1721.1/57632| hdl-access = free}}
+</ref>
+
+<ref name="Tittemore 1990">
+{{cite journal| doi = 10.1016/0019-1035(90)90024-4| last = Tittemore | first = W. C.| date=September 1990 | title = Tidal heating of Ariel| journal = Icarus| volume = 87| issue = 1| pages = 110–139| bibcode = 1990Icar...87..110T}}
+</ref>
+
+<ref name="Grundy Young et al. 2006">
+{{cite journal| doi = 10.1016/j.icarus.2006.04.016| last1 = Grundy| first1 = W. M.| last2 = Young| first2 = L. A.| last3 = Spencer| first3 = J. R.| last4 = Johnson| first4 = R. E.| last5 = Young| first5 = E. F.| last6 = Buie| first6 = M. W.| date=October 2006 | title = Distributions of H<sub>2</sub>O and CO<sub>2</sub> ices on Ariel, Umbriel, Titania, and Oberon from IRTF/SpeX observations| journal = Icarus| volume = 184| issue = 2| pages = 543–555| arxiv = 0704.1525| bibcode = 2006Icar..184..543G| s2cid = 12105236| ref = {{sfnRef|Grundy Young et al.|2006}}}}
+</ref>
+
+<ref name="Duncan Lissauer 1997">
+{{cite journal| doi = 10.1006/icar.1996.5568| last1 = Duncan| first1 = Martin J.| last2 = Lissauer| first2 = Jack J.| year = 1997| title = Orbital Stability of the Uranian Satellite System| journal = Icarus| volume = 125| issue = 1| pages = 1–12| bibcode = 1997Icar..125....1D}}
+</ref>
+
+<ref name="Tyler1989">
+{{cite journal|last=Tyler|first=G.L.|title=Voyager radio science observations of Neptune and Triton|date=1989|journal=Science|volume=246|pages=1466–73| bibcode=1989Sci...246.1466T|doi=10.1126/science.246.4936.1466|pmid=17756001|issue=4936|author2=Sweetnam, D.L.|last3=Anderson|first3=J.D.|display-authors=2|last4=Borutzki|first4=S. E.|last5=Campbell|first5=J. K.|last6=Eshleman|first6=V. R.|last7=Gresh|first7=D. L.|last8=Gurrola|first8=E. M.|last9=Hinson|first9=D. P.
+|s2cid = 39920233
+}}
+</ref>
+
+<ref name="Widemann Sicardy et al. 2009">{{cite journal| doi = 10.1016/j.icarus.2008.09.011| last1 = Widemann| first1 = T.| last2 = Sicardy| first2 = B.| last3 = Dusser| first3 = R.| last4 = Martinez| first4 = C.| last5 = Beisker| first5 = W.| last6 = Bredner| first6 = E.| last7 = Dunham| first7 = D.| last8 = Maley| first8 = P.| last9 = Lellouch| first9 = E.| date = February 2009| last10 = Arlot| first10 = J. -E.| last11 = Berthier| first11 = J.| last12 = Colas| first12 = F.| last13 = Hubbard| first13 = W. B.| last14 = Hill| first14 = R.| last15 = Lecacheux| first15 = J.| last16 = Lecampion| first16 = J. -F.| last17 = Pau| first17 = S.| last18 = Rapaport| first18 = M.| last19 = Roques| first19 = F.| last20 = Thuillot| first20 = W.| last21 = Hills| first21 = C. R.| last22 = Elliott| first22 = A. J.| last23 = Miles| first23 = R.| last24 = Platt| first24 = T.| last25 = Cremaschini| first25 = C.| last26 = Dubreuil| first26 = P.| last27 = Cavadore| first27 = C.| last28 = Demeautis| first28 = C.| last29 = Henriquet| first29 = P.| last30 = Labrevoir| first30 = O.| title = Titania's radius and an upper limit on its atmosphere from the September 8, 2001 stellar occultation| journal = Icarus| volume = 199| issue = 2| pages = 458–476| url = http://www.lesia.obspm.fr/perso/thomas-widemann/eprint/Widemann_etal2009.pdf| bibcode = 2009Icar..199..458W| display-authors = 29| access-date = September 4, 2015| archive-url = https://web.archive.org/web/20140725162821/http://www.lesia.obspm.fr/perso/thomas-widemann/eprint/Widemann_etal2009.pdf| archive-date = July 25, 2014| url-status = dead}}</ref>
+
+<ref name="Mousis 2004">
+{{cite journal|year=2004|doi=10.1051/0004-6361:20031515|bibcode=2004A&A...413..373M|pages=373&ndash;380 |volume=413 | first=O.|title=Modeling the thermodynamical conditions in the Uranian subnebula – Implications for regular satellite composition|journal=Astronomy & Astrophysics|last=Mousis|doi-access=free}}
+</ref>
+
+<ref name="Lassell1851b">
+{{cite journal| doi = 10.1086/100198| last = Lassell| first = William| author-link = William Lassell| date=December 1851 | title = Letter from William Lassell, Esq., to the Editor| journal = Astronomical Journal| volume = 2| issue = 33| page = 70| bibcode = 1851AJ......2...70L| ref = {{sfnRef|Lassell, .27.27letter.27.27|1851}}}}
+</ref>
+
+<ref name="Thomas 1988">
+{{cite journal|year=1988|doi=10.1016/0019-1035(88)90054-1|bibcode=1988Icar...73..427T|pages=427–441 |volume=73 | first=P. C.|last=Thomas|title=Radii, shapes, and topography of the satellites of Uranus from limb coordinates|journal=Icarus|issue=3 |doi-access=free}}
+</ref>
+
+<!--<ref name="TNOsCool9">
+{{cite journal |last=Lellouch |first=E. |last2=Santos-Sanz |first2=P. |last3=Lacerda |first3=P. |last4=Mommert |first4=M. |last5=Duffard |first5=R. |last6=Ortiz |first6=J. L. |last7=Müller |first7=T. G. |last8=Fornasier |first8=S. |last9=Stansberry |first9=J. |last10=Kiss |first10=Cs. |last11=Vilenius |first11=E. |last12=Mueller |first12=M. |last13=Peixinho |first13=N. |last14=Moreno |first14=R. |last15=Groussin |first15=O. |last16=Delsanti |first16=A. |last17=Harris |first17=A. W. |date=September 2013 |title="TNOs are Cool": A survey of the trans-Neptunian region. IX. Thermal properties of Kuiper belt objects and Centaurs from combined Herschel and Spitzer observations |url=http://www.aanda.org/articles/aa/pdf/2013/09/aa22047-13.pdf |journal=Astronomy & Astrophysics |volume=557 |pages=A60 |doi=10.1051/0004-6361/201322047  |doi-access=free|access-date=7 November 2014 |bibcode=2013A&A...557A..60L}}</ref>-->
+
+<ref name="FarkasTakacs2017">
+{{cite journal |title=Properties of the Irregular Satellite System around Uranus Inferred from K2, Herschel, and Spitzer Observations |display-authors=etal |last1=Farkas-Takács |first1=A. |last2=Kiss |first2=Cs. |last3=Pál |first3=A. |last4=Molnár |first4=L. |last5=Szabó |first5=Gy. M. |last6=Hanyecz |first6=O. |last7=Sárneczky |first7=K. |last8=Szabó |first8=R. |last9=Marton |first9=G. |last10=Mommert |first10=M. |last11=Szakáts |first11=R. |last12=Müller |first12=T. |last13=Kiss |first13=L. L. |date=September 2017 |journal=The Astronomical Journal |volume=154 |issue=3 |pages=119–131 |doi=10.3847/1538-3881/aa8365 |arxiv=1706.06837 |bibcode=2017AJ....154..119F |s2cid=118869078 |issn=1538-3881 |doi-access=free}}</ref>
+
+<ref name="MPEC-2024-D113">{{cite web
+ |title        = MPEC 2024-D113 : S/2023 U 1
+ |url          = https://minorplanetcenter.net/mpec/K24/K24DB3.html
+ |work         = Minor Planet Electronic Circular
+ |publisher    = Minor Planet Center
+ |date         = 23 February 2024
+ |accessdate   = 23 February 2024
+ |archive-date = 29 February 2024
+ |archive-url  = https://web.archive.org/web/20240229051827/https://minorplanetcenter.net/mpec/K24/K24DB3.html
+ |url-status   = live
+}}</ref>
+
+<ref name="Sheppardmoons2024">{{cite web
+ |title        = New Uranus and Neptune Moons
+ |url          = https://sites.google.com/carnegiescience.edu/sheppard/home/newuranusneptunemoons
+ |work         = Earth & Planetary Laboratory
+ |publisher    = Carnegie Institution for Science
+ |date         = 23 February 2024
+ |accessdate   = 23 February 2024
+ |archive-date = 23 February 2024
+ |archive-url  = https://web.archive.org/web/20240223160326/https://sites.google.com/carnegiescience.edu/sheppard/home/newuranusneptunemoons
+ |url-status   = live
+}}</ref>
+
+<ref name="Cuk2022">{{cite journal
+ |first1     = Matija |last1 = Ćuk
+ |first2     = Robert S. |last2 = French
+ |first3     = Mark R. |last3 = Showalter
+ |first4     = Matthew S. |last4 = Tiscareno
+ |first5     = Maryame |last5 = El Moutamid
+ |title      = Cupid is not Doomed Yet: On the Stability of the Inner Moons of Uranus
+ |journal    = The Astronomical Journal
+ |date       = August 2022
+ |volume     = 164
+ |issue      = 2
+ |id         = 38
+ |pages      = 8
+ |doi        = 10.3847/1538-3881/ac745d
+ |doi-access = free
+ |arxiv      = 2205.14272
+ |bibcode    = 2022AJ....164...38C
+ |s2cid      = 249192192
+}}</ref>
+
+<ref name="jplsats-disc">{{cite web
+ |title        = Planetary Satellite Discovery Circumstances
+ |url          = https://ssd.jpl.nasa.gov/sats/discovery.html
+ |work         = JPL Solar System Dynamics
+ |publisher    = NASA
+ |accessdate   = 28 February 2024
+ |archive-date = 27 September 2021
+ |archive-url  = https://web.archive.org/web/20210927162554/https://ssd.jpl.nasa.gov/sats/discovery.html
+ |url-status   = live
+}}</ref>
+
+<ref name="SheppardMoons">{{cite web
+ |title        = Moons of Uranus
+ |url          = https://sites.google.com/carnegiescience.edu/sheppard/moons/uranusmoons
+ |first        = Scott S.
+ |last         = Sheppard
+ |work         = Earth & Planets Laboratory
+ |publisher    = Carnegie Institution for Science
+ |accessdate   = 23 February 2024
+ |archive-date = 18 February 2024
+ |archive-url  = https://web.archive.org/web/20240218211355/https://sites.google.com/carnegiescience.edu/sheppard/moons/uranusmoons
+ |url-status   = live
+}}</ref>
+
+<ref name="jplsats">{{cite web|title=Planetary Satellite Mean Elements|url=https://ssd.jpl.nasa.gov/sats/elem/|publisher=Jet Propulsion Laboratory|accessdate=9 November 2025|archive-date=9 November 2025|archive-url=https://web.archive.org/web/20251109005256/https://ssd.jpl.nasa.gov/sats/elem/|url-status=live}}</ref>
+
+<ref name="French2024">{{cite journal |last1=French |first1=Richard G. |last2=Hedman |first2=Matthew M. |last3=Nicholson |first3=Philip D. |last4=Longaretti |first4=Pierre-Yves |last5=McGhee-French |first5=Colleen A. |title=The Uranus system from occultation observations (1977–2006): Rings, pole direction, gravity field, and masses of Cressida, Cordelia, and Ophelia |journal=Icarus |date=March 2024 |volume=411 |article-number=115957 |doi=10.1016/j.icarus.2024.115957|arxiv=2401.04634 |bibcode=2024Icar..41115957F }}</ref>
+
+<ref name="Sheppard2024">{{Cite journal |last1=Sheppard |first1=Scott S. |last2=Tholen |first2=David J. |last3=Brozovic |first3=Marina |last4=Jacobson |first4=Robert |last5=Trujillo |first5=Chadwick A. |last6=Lykawka |first6=Patryk Sofia |last7=Alexandersen |first7=Mike |date=2024-12-01 |title=New Moons of Uranus and Neptune from Ultradeep Pencil-beam Surveys |journal=The Astronomical Journal |volume=168 |issue=6 |pages=258 |arxiv=2410.00108 |doi=10.3847/1538-3881/ad7fed |bibcode=2024AJ....168..258S |doi-access=free |issn=0004-6256}}</ref>
+
+<ref name="CBET5593">{{cite web
+  |title      = CBET 5593: S/2025 U 1
+  |url        = http://www.cbat.eps.harvard.edu/iau/cbet/005500/CBET005593.txt
+  |first = Daniel W. E. |last = Green
+  |work       = Central Bureau Electronic Telegram
+  |publisher  = Central Bureau for Astronomical Telegrams
+  |date       = 19 August 2025
+  |accessdate = 19 August 2025}}</ref>
+
+<ref name="NASA-29">{{cite news
+  |title      = New Moon Discovered Orbiting Uranus Using NASA's Webb Telescope
+  |url        = https://science.nasa.gov/blogs/webb/2025/08/19/new-moon-discovered-orbiting-uranus-using-nasas-webb-telescope/
+  |first = Maryame |last = El Moutamid
+  |publisher  = NASA
+  |date       = 2025-08-19
+  |accessdate = 2025-08-19}}</ref>
+
+<ref name="Jacobson&Park2025">{{Cite journal |last1=Jacobson |first1=Robert A. |last2=Park |first2=Ryan S. |date=2025-02-03 |title=The Orbits of Uranus, Its Satellites and Rings, the Gravity Field of the Uranian System, and the Orientation of the Poles of Uranus and Its Satellites |journal=The Astronomical Journal |volume=169 |issue=2 |pages=65 |doi=10.3847/1538-3881/ad99d1 |bibcode=2025AJ....169...65J |doi-access = free |issn=0004-6256}}</ref>
+
+<ref name="Nicholson2008">{{Cite book |last1=Nicholson |first1=Philip D. |author-link1=Phil Nicholson |title=The Solar System Beyond Neptune |last2=Ćuk |first2=Matija |last3=Sheppard |first3=Scott S. |author-link3=Scott S. Sheppard |last4=Nesvorný |first4=David |last5=Johnson |first5=Torrence V. |date=May 8, 2008 |publisher=[[University of Arizona Press]] |isbn=978-0816527557 |editor-last=Barucci |editor-first=M. Antonietta |series=The University of Arizona Space Science |chapter=Irregular Satellites of the Giant Planets |bibcode=2008ssbn.book..411N |editor-last2=Boehnhardt |editor-first2=Hermann |editor-last3=Cruikshank |editor-first3=Dale P. |editor-last4=Morbidelli |editor-first4=Alessandro |chapter-url=https://web.gps.caltech.edu/~mbrown/out/kbbook/Chapters/Nicholson_IrregSat.pdf |archive-date=2025-11-14|archive-url=https://web.archive.org/web/20251114151618/https://web.gps.caltech.edu/~mbrown/out/kbbook/Chapters/Nicholson_IrregSat.pdf|url-status=live}}</ref>
+
+}}
+
+== External links ==
+{{commons category}}
+* [[Scott S. Sheppard]]: [https://sites.google.com/carnegiescience.edu/sheppard/moons/uranusmoons Uranus Moons]
+* [https://web.archive.org/web/20110823202755/http://orinetz.com/planet/tourprog/uranusmoons.html Simulation Showing the location of Uranus's Moons]
+* {{cite web|url=http://solarsystem.nasa.gov/planets/uranus/moons|archive-url=https://web.archive.org/web/20151021010354/http://solarsystem.nasa.gov/planets/uranus/moons|url-status=dead|archive-date=21 October 2015|title=Uranus: Moons|publisher=NASA's Solar System Exploration|access-date=20 December 2008}}
+* {{cite web|url=http://hubblesite.org/news_release/news/2005-33|title=NASA's Hubble Discovers New Rings and Moons Around Uranus|publisher=[[Space Telescope Science Institute]]|date= 22 December 2005|access-date=20 December 2008}}
+* [https://web.archive.org/web/20170307045140/https://planetarynames.wr.usgs.gov/?System=Uranus Gazetteer of Planetary Nomenclature—Uranus (USGS)]
+*{{Citation | title=Uranus Rings photos |date=December 18, 2023 |website=James Webb Space Telescope | publisher=NASA |url=https://webbtelescope.org/contents/news-releases/2023/news-2023-150 | access-date=19 December 2023}}
+
+{{Moons of Uranus}}
+{{Uranus}}
+{{Solar System moons (compact)}}
+{{Solar System}}
+{{Portal bar|Science|Stars|Spaceflight|Outer space}}
+{{Authority control}}
+
+[[Category:Moons of Uranus| ]]
+[[Category:Lists of moons]]
+[[Category:Solar System]]
