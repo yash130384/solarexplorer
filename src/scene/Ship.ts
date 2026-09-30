@@ -1,16 +1,19 @@
 /**
- * Das Raumschiff des SolarExplorers: Modell, Flugphysik und Zustand.
+ * Das Raumschiff des SolarExplorers: GLTF-Modell, Flugphysik und Audio.
  *
- * Das Schiff ist ein kleiner, freundlicher "Shuttle" aus reinen
- * Three.js-Primitiveen. Der mathematische Teil (Klemmen, Beschleunigung,
+ * Das Schiff ist ein Star-Wars-artiges 3D-Modell (GLB), geladen via
+ * GLTFLoader. Der mathematische Teil (Klemmen, Beschleunigung,
  * Geschwindigkeit) lebt bewusst in dieser Datei und nicht in `src/core/*`,
  * weil er die Three.js-Objektorientierung braucht — die eigentliche
  * Flugphysik bleibt aber frei von Renderer-Zugriffen und damit testbar.
  *
  * **Vorwaerts-Achse:** Das Modell zeigt mit seiner lokalen **+Z-Achse** in
  * Flugrichtung (Three.js-Standard-Konvention: Objekte blicken nach `+Z`).
- * Das Cockpit sitzt deshalb vorne bei `+z`, die Triebwerks-Glows hinten bei
- * `-z`.
+ *
+ * **Audio:** Ein `AudioListener` sitzt auf der Schiffsgruppe. Der
+ * Triebwerks-Sound ist eine schleifende `PositionalAudio`; Klick-Sounds
+ * sind nicht-positional `Audio`. Lautstaerke des Triebwerks wird durch
+ * den Schub gesteuert.
  *
  * **Einheiten:** Position und Geschwindigkeit werden in *Szeneneinheiten*
  * gefuehrt (das ist die Einheit, in der auch `src/core/scale.ts` rechnet).
@@ -21,6 +24,8 @@
  */
 
 import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { AudioLoader } from "three";
 import {
   AU_KM,
   LOG_DISTANCE_SCALE,
@@ -93,6 +98,21 @@ const ENGINE_R = "triebwerk-r";
 
 /** Maximaler Nickwinkel in Grad — verhindert, dass das Schiff kopfsteht. */
 export const PITCH_LIMIT_DEG = 85;
+
+/** URL des Star-Wars-artigen Schiffmodells (relativ zum public-Ordner). */
+export const SHIP_MODEL_URL = "/media/models/schiff_racer.glb";
+
+/** URL des Triebwerks-Sounds (Schleife, relativ zum public-Ordner). */
+export const ENGINE_SOUND_URL = "/media/audio/triebwerk.ogg";
+
+/** URL des Klick-Sounds fuer UI-Aktionen (relativ zum public-Ordner). */
+export const CLICK_SOUND_URL = "/media/audio/klick.ogg";
+
+/** URL des Bestaetigungs-Sounds (relativ zum public-Ordner). */
+export const CONFIRM_SOUND_URL = "/media/audio/bestaetigung.ogg";
+
+/** Skalierungsfaktor fuer das geladene GLB-Modell. */
+const SHIP_MODEL_SCALE = 0.8;
 
 /**
  * Berechnet, wie viele Kilometer eine Szeneneinheit im jeweiligen
@@ -167,6 +187,24 @@ export class Ship {
   /** Rumpfradius in Szeneneinheiten, abgeleitet aus dem Radiusmodus. */
   private readonly hullRadius: number;
 
+  /** AudioListener fuer raumklangbasierte Sounds. */
+  private readonly audioListener: THREE.AudioListener | null = null;
+
+  /** Triebwerks-Sound (loopende PositionalAudio). */
+  private readonly engineSound: THREE.PositionalAudio | null = null;
+
+  /** Klick-Sound fuer UI-Aktionen (nicht-positional). */
+  private readonly clickSound: THREE.Audio | null = null;
+
+  /** Bestaetigungs-Sound. */
+  private readonly confirmSound: THREE.Audio | null = null;
+
+  /** Promise fuer den laufenden Modell-Ladevorgang. */
+  private modelLoadPromise: Promise<void> | null = null;
+
+  /** `true`, sobald das Modell geladen und eingesetzt wurde. */
+  private modelLoaded = false;
+
   /**
    * Baut das Schiffmodell und richtet es auf den Ursprung aus.
    *
@@ -186,17 +224,35 @@ export class Ship {
     );
     this.kmPerUnit = kmPerSceneUnit(distanceMode);
     this.group = this.buildModel();
+
+    // Audio-Setup: Listener auf der Schiffsgruppe, Sounds erst nach
+    // asyncem Laden der Puffer aktiv.
+    try {
+      this.audioListener = new THREE.AudioListener();
+      this.group.add(this.audioListener);
+
+      this.engineSound = new THREE.PositionalAudio(this.audioListener);
+      this.engineSound.setRefDistance(2);
+      this.engineSound.setMaxDistance(50);
+      this.engineSound.setLoop(true);
+      this.group.add(this.engineSound);
+
+      this.clickSound = new THREE.Audio(this.audioListener);
+      this.clickSound.setVolume(0.5);
+
+      this.confirmSound = new THREE.Audio(this.audioListener);
+      this.confirmSound.setVolume(0.5);
+    } catch {
+      // Audio wird in Umgebungen ohne Web-Audio-API (z. B. manche
+      // Test-Runner) nicht unterstuetzt — Schiff funktioniert ohne.
+    }
   }
 
   /**
    * Erzeugt die Mesh-Gruppe des Schiffs.
    *
-   * Aufbau (Ursprung in der Gruppenmitte, Nase zeigt nach `+Z`):
-   * - Rumpf: liegende Capsule,
-   * - Cockpit: halbe Kugel, transparent, leicht nach vorne versetzt,
-   * - zwei Fluegel als flache Boxen (orange Akzent),
-   * - zwei Triebwerke: kleine Emissions-Kegel plus additive Glow-Kugeln
-   *   und ein schwaches `PointLight` als Warmequelle.
+   * Der Platzhalter wird sofort erzeugt; das echte GLTF-Modell wird
+   * per {@link loadModel} nachgeladen und ersetzt ihn.
    *
    * @returns Die fertige Gruppe (noch nicht in eine Szene gehaengt).
    */
@@ -251,7 +307,7 @@ export class Ship {
     nose.position.z = r * 1.25;
     group.add(nose);
 
-    // Cockpit: obere Haelfte einer Kugel, leicht nach vorne versetzt.
+    // Cockpit: obere Haelfte einer Kugel, transparent, leicht nach vorne versetzt.
     const canopy = new THREE.Mesh(
       new THREE.SphereGeometry(
         r * COCKPIT_SCALE,
@@ -306,6 +362,196 @@ export class Ship {
     group.add(engineLight);
 
     return group;
+  }
+
+  /**
+   * Entfernt alle Kinder der Gruppe (Platzhalter-Geometrien).
+   *
+   * Wird von {@link loadModel} aufgerufen, bevor das GLTF-Modell
+   * eingesetzt wird.
+   *
+   * @returns {void}
+   */
+  private clearModel(): void {
+    const toRemove: THREE.Object3D[] = [];
+    this.group.traverse((child) => {
+      if (child !== this.group) {
+        toRemove.push(child);
+      }
+    });
+    for (const child of toRemove) {
+      this.group.remove(child);
+      if (child instanceof THREE.Mesh) {
+        child.geometry.dispose();
+        const mat = child.material;
+        if (Array.isArray(mat)) {
+          for (const entry of mat) {
+            entry.dispose();
+          }
+        } else if (mat) {
+          mat.dispose();
+        }
+      }
+    }
+  }
+
+  /**
+   * Laedt das GLTF-Schiffmodell und ersetzt das Platzhalter-Geomoerie.
+   *
+   * Mehrfacher Aufruf ist unschaedlich — liefert das Promise des
+   * ersten Aufrufs zurueck, solange das Modell noch laedt.
+   *
+   * @param url - Pfad zur GLB-Datei (default: {@link SHIP_MODEL_URL}).
+   * @returns Promise, der bei Erfolg void liefert.
+   */
+  loadModel(url: string = SHIP_MODEL_URL): Promise<void> {
+    if (this.modelLoaded) {
+      return Promise.resolve();
+    }
+    if (this.modelLoadPromise !== null) {
+      return this.modelLoadPromise;
+    }
+
+    this.modelLoadPromise = new Promise<void>((resolve, reject) => {
+      const loader = new GLTFLoader();
+      loader.load(
+        url,
+        (gltf) => {
+          this.clearModel();
+
+          const model = gltf.scene;
+          model.scale.setScalar(SHIP_MODEL_SCALE);
+          model.name = "schiff-model";
+          // GLTF-Modelle blicken oft nach -Z; drehe nach +Z-Flugrichtung.
+          model.rotation.y = Math.PI;
+
+          this.group.add(model);
+          this.modelLoaded = true;
+
+          // Triebwerks-Sound ist bereits im Konstruktor angehoengt
+          // (this.group.add(this.engineSound)); hier nur konfigurieren.
+          if (this.engineSound) {
+            this.engineSound.setRefDistance(2);
+            this.engineSound.setMaxDistance(50);
+          }
+
+          resolve();
+        },
+        undefined,
+        (error) => {
+          console.warn(
+            `SolarExplorer: Schiffmodell konnte nicht geladen werden (${url}), Platzhalter bleibt aktiv.`,
+            error,
+          );
+          reject(error);
+        },
+      );
+    });
+
+    return this.modelLoadPromise;
+  }
+
+  /**
+   * Laedt Audio-Puffer und konfiguriert die Sounds.
+   *
+   * Muss einmal nach dem Konstruktor aufgerufen werden; die Sounds
+   * sind danach einsatzbereit. Fehler beim Laden werden loggt, aber
+   * nicht geworfen — das Schiff funktioniert auch ohne Audio weiter.
+   *
+   * @returns Promise, der bei Abschluss void liefert.
+   */
+  async loadSounds(): Promise<void> {
+    if (this.audioListener === null) {
+      return;
+    }
+
+    const audioLoader = new AudioLoader();
+
+    // Triebwerks-Sound laden und sofort als Schleife starten.
+    try {
+      const engineBuffer = await this._loadAudioBuffer(audioLoader, ENGINE_SOUND_URL);
+      if (this.engineSound) {
+        this.engineSound.setBuffer(engineBuffer);
+        this.engineSound.setLoop(true);
+        this.engineSound.setVolume(0);
+        this.engineSound.play();
+      }
+    } catch (e) {
+      console.warn("SolarExplorer: Triebwerks-Sound konnte nicht geladen werden.", e);
+    }
+
+    // Klick-Sound laden.
+    try {
+      const clickBuffer = await this._loadAudioBuffer(audioLoader, CLICK_SOUND_URL);
+      if (this.clickSound) {
+        this.clickSound.setBuffer(clickBuffer);
+        this.clickSound.setVolume(0.5);
+      }
+    } catch (e) {
+      console.warn("SolarExplorer: Klick-Sound konnte nicht geladen werden.", e);
+    }
+
+    // Bestaetigungs-Sound laden.
+    try {
+      const confirmBuffer = await this._loadAudioBuffer(audioLoader, CONFIRM_SOUND_URL);
+      if (this.confirmSound) {
+        this.confirmSound.setBuffer(confirmBuffer);
+        this.confirmSound.setVolume(0.5);
+      }
+    } catch (e) {
+      console.warn("SolarExplorer: Bestaetigungs-Sound konnte nicht geladen werden.", e);
+    }
+  }
+
+  /**
+   * Hilfsmethode: laedt einen Audio-Puffer per Promise.
+   *
+   * @param loader - Der AudioLoader.
+   * @param url - Pfad zur Audio-Datei.
+   * @returns Promise mit dem dekodierten AudioBuffer.
+   */
+  private _loadAudioBuffer(
+    loader: AudioLoader,
+    url: string,
+  ): Promise<AudioBuffer> {
+    return new Promise((resolve, reject) => {
+      loader.load(url, resolve, undefined, reject);
+    });
+  }
+
+  /**
+   * Spielt den Klick-Sound ab (z. B. bei UI-Aktionen).
+   *
+   * @returns {void}
+   */
+  playClickSound(): void {
+    if (this.clickSound === null) return;
+    try {
+      if (this.clickSound.isPlaying) {
+        this.clickSound.stop();
+      }
+      this.clickSound.play();
+    } catch {
+      // Audio-Kontext kann in Test-Umgebungen fehlschlagen —
+      // hier wird der Fehler stillschweigend ignoriert.
+    }
+  }
+
+  /**
+   * Spielt den Bestaetigungs-Sound ab.
+   *
+   * @returns {void}
+   */
+  playConfirmSound(): void {
+    if (this.confirmSound === null) return;
+    try {
+      if (this.confirmSound.isPlaying) {
+        this.confirmSound.stop();
+      }
+      this.confirmSound.play();
+    } catch {
+      // Audio-Kontext kann in Test-Umgebungen fehlschlagen.
+    }
   }
 
   /**
@@ -472,6 +718,9 @@ export class Ship {
    * Luftwiderstand ergibt das die Bewegung. Der Aufruf muss pro Bild
    * einmal erfolgen — typischerweise aus `ShipControls.update()`.
    *
+   * Die Lautstaerke des Triebwerks-Sounds wird proportional zum Schub
+   * mitgesteuert (nur wenn der Sound bereits laeuft).
+   *
    * @param forward - Schub nach vorne (positiv) bzw. rueckwaerts (negativ).
    * @param strafe - Schub nach rechts (positiv) bzw. links (negativ).
    * @param up - Schub nach oben (positiv) bzw. unten (negativ).
@@ -491,9 +740,6 @@ export class Ship {
     };
     const world = this.toWorldDirection(accel);
 
-    // Der Luftwiderstand wird bewusst NICHT hier angewandt, sondern
-    // framerate-unabhaengig in updateMovement() — sonst haengt die
-    // Daempfung von der Aufruffrequenz ab.
     this.velocity = this.limitSpeed({
       x: this.velocity.x + world.x,
       y: this.velocity.y + world.y,
@@ -501,6 +747,11 @@ export class Ship {
     });
 
     this.thrustLevel = clamp(Math.hypot(forward, strafe, up), 0, 1);
+
+    // Triebwerks-Sound Lautstaerke an Schubniveau anpassen.
+    if (this.engineSound && this.engineSound.isPlaying) {
+      this.engineSound.setVolume(this.thrustLevel * 0.8);
+    }
   }
 
   /**
@@ -545,6 +796,10 @@ export class Ship {
   stop(): void {
     this.velocity = { x: 0, y: 0, z: 0 };
     this.thrustLevel = 0;
+    // Triebwerks-Sound ausschalten.
+    if (this.engineSound && this.engineSound.isPlaying) {
+      this.engineSound.setVolume(0);
+    }
   }
 
   /**
@@ -555,6 +810,20 @@ export class Ship {
    * @returns {void}
    */
   dispose(): void {
+    // Audio-Ressourcen freigeben.
+    if (this.engineSound) {
+      this.engineSound.stop();
+      this.engineSound.disconnect();
+    }
+    if (this.clickSound) {
+      this.clickSound.stop();
+      this.clickSound.disconnect();
+    }
+    if (this.confirmSound) {
+      this.confirmSound.stop();
+      this.confirmSound.disconnect();
+    }
+
     this.group.traverse((child) => {
       if (child instanceof THREE.Mesh) {
         child.geometry.dispose();
@@ -563,7 +832,7 @@ export class Ship {
           for (const entry of material) {
             entry.dispose();
           }
-        } else {
+        } else if (material) {
           material.dispose();
         }
       }

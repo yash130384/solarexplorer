@@ -3,9 +3,9 @@
  *
  * Die Fabrik ist bewusst zustandslos und statisch: sie uebersetzt ein
  * {@link SceneBody} plus die aktiven Skalierungsmodi in ein fertiges
- * `THREE.Mesh`. Texturen kommen in einem spaeteren Ticket — die Struktur
- * ({@link BodyFactory.createMaterial}) ist dafuer bereits vorbereitet, damit
- * spaeter nur die Material-Erzeugung erweitert werden muss.
+ * `THREE.Mesh`. Die Oberflaechen-Textur kommt aus {@link getTexture}, also
+ * synchron aus dem Cache von `scene/textures` — geladen wird sie dort
+ * einmalig vor dem Szenenaufbau (`SceneManager.loadTextures`).
  *
  * @module scene/BodyFactory
  */
@@ -14,6 +14,8 @@ import * as THREE from "three";
 import type { DistanceMode, ScaleMode } from "../core/scale";
 import { applyLodToMesh, SHARED_GEOMETRY_PREFIX } from "./LodCache";
 import type { LodLevel } from "./LodCache";
+import { boostSunSurface } from "./SunGlow";
+import { getTexture, getRoughnessTexture, getNormalTexture } from "./textures";
 import { safeRenderRadius } from "./types";
 import type { SceneBody } from "./types";
 
@@ -76,15 +78,41 @@ function lodFor(body: SceneBody): LodLevel {
 export class BodyFactory {
   /**
    * Erzeugt das Material eines Koerpers.
-   *
-   * Bewusst getrennt von {@link BodyFactory.create}, damit hier spaeter (ohne
-   * die Geometrie-Logik zu beruehren) Texturen ergaenzt werden koennen.
-   *
-   * @param body - Koerper, fuer den das Material erzeugt wird.
-   * @returns Material-Instanz: emissiv/basic fuer die Sonne, sonst
-   *   `MeshStandardMaterial` in der Farbe aus `bodies.json`.
-   */
-  static createMaterial(body: SceneBody): THREE.Material {
+  *
+  * Bewusst getrennt von {@link BodyFactory.create}, damit hier (ohne die
+  * Geometrie-Logik zu beruehren) die Textur gesetzt wird.
+  *
+  * Die Textur ist eine Equirectangular-Karte (2:1) und wird ueber
+  * `map`, `roughnessMap` und `normalMap` gesetzt:
+  *
+  * - Die LOD-Kugeln aus `scene/LodCache` sind `THREE.SphereGeometry` und
+  *   bringen ihre Standard-UV-Koordinaten mit: `u` = Laengengrad,
+  *   `v` = Breitengrad, nahtlos bei `u` = 0/1. Ein eigenes UV-Mapping ist
+  *   deshalb weder noetig noch moeglich — die Geometrie liegt im Cache und
+  *   wird von mehreren Koerpern geteilt.
+  * - `textures.ts` setzt `wrapS = RepeatWrapping`, damit die Naht bei
+  *   0°/360° verschwindet, und `SRGBColorSpace` fuer die Farbtextur
+  *   (sowie `NoColorSpace` fuer Rauheits-/Normalmaps).
+  * - `normalMap`/`roughnessMap` werden aus den prozedural erzeugten
+  *   `<bodyId>_normal.png` / `<bodyId>_roughness.png` geladen. Fehlt eine
+  *   Datei, bleibt der Kanal `null` und Three.js verwendet die
+  *   Material-Standardwerte (`roughness: 0.9`, keine Normalabweichung).
+  * - Fehlt die Farbtextur, bleibt die Farbe aus `bodies.json` als
+  *   Multiplikator stehen — der Koerper faellt auf einfarbig zurueck.
+  * - Die Sonne bleibt bewusst einfarbig (MeshBasicMaterial mit HDR-Gain),
+  *   da eine Textur dort den Bloom-Effekt stoeren wuerde.
+  *
+  * @param body - Koerper, fuer den das Material erzeugt wird.
+  * @param textures - `false` laesst den Koerper einfarbig. Nur als
+  *   Messschalter gedacht (siehe `SceneOptions.textures`); im Normalbetrieb
+  *   bleibt der Wert `true`.
+  * @returns Material-Instanz: `MeshBasicMaterial` (HDR) fuer die Sonne,
+  *   sonst `MeshStandardMaterial` in der Farbe aus `bodies.json` mit Textur.
+  */
+  static createMaterial(
+    body: SceneBody,
+    textures: boolean = true,
+  ): THREE.Material {
     if (body.type === "star") {
       // Die Sonne leuchtet selbst — sie reagiert nicht auf Licht.
       return new THREE.MeshBasicMaterial({ color: SUN_COLOR });
@@ -94,6 +122,9 @@ export class BodyFactory {
       roughness: 0.9,
       metalness: 0.0,
       flatShading: false,
+      map: textures ? getTexture(body.id) : null,
+      roughnessMap: textures ? getRoughnessTexture(body.id) : null,
+      normalMap: textures ? getNormalTexture(body.id) : null,
     });
   }
 
@@ -113,6 +144,7 @@ export class BodyFactory {
     body: SceneBody,
     scaleMode: ScaleMode,
     distanceMode: DistanceMode,
+    textures: boolean = true,
   ): THREE.Mesh {
     // Der Radius haengt nur vom Radius-Modus ab. `distanceMode` wird fuer die
     // Detailstufe weiter unten ausgewertet (ueber `segmentsFor`), damit die
@@ -122,7 +154,7 @@ export class BodyFactory {
     const radius = safeRenderRadius(body, scaleMode);
     const level = lodFor(body);
 
-    const material = BodyFactory.createMaterial(body);
+    const material = BodyFactory.createMaterial(body, textures);
 
     const mesh = new THREE.Mesh();
     // Die Kugelgeometrie ist geteilt (eine pro Detailstufe, siehe LodCache);
@@ -139,8 +171,14 @@ export class BodyFactory {
     mesh.rotation.z = THREE.MathUtils.degToRad(body.axialTiltDeg);
 
     if (body.type === "star") {
+      // Die Farbe des Korpus wird ueber die Schwelle des Bloom-Passes gehoben
+      // (L 0.523 -> 1.308), damit die Sonne als einziger Koerper bluetet.
+      boostSunSurface(mesh);
+
       // Die Gluehhaelle ist die einzige Geometrie, die pro Koerper eigens
       // erzeugt wird: sie ist zweiteilig (BackSide) und gibt es nur einmal.
+      // Sie bleibt unter der Bloom-Schwelle (L ~ 0.2) und wirkt deshalb auch
+      // dann, wenn kein Postprocessing laeuft (Qualitaetsstufe `low`).
       const glowGeometry = new THREE.SphereGeometry(
         radius * GLOW_SCALE,
         64,

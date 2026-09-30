@@ -12,6 +12,8 @@ import {
   COMPACT_RADIUS_FACTOR,
   DISTANCE_KNEE_AU,
   DISTANCE_TAIL_RATE,
+  DYNAMIC_SCALE_OVERVIEW_FACTOR,
+  DYNAMIC_SCALE_TRAVEL_FACTOR,
   LOG_DISTANCE_SCALE,
   MOND_RADIUS_KM,
   SCALE_MAX_RADIUS_KM,
@@ -338,4 +340,51 @@ function trimDecimal(value: number): number {
  */
 function plural(count: number, singular: string, pluralForm: string): string {
   return count === 1 ? singular : pluralForm;
+}
+
+/**
+ * Skaliert den Radius dynamisch basierend auf der Kameradistanz.
+ *
+ * - Im Ueberblick (weit weg): visual-Skalierung — Planeten sind
+ *   noetigenfalls vergroessert, damit sie klickbar sind.
+ * - Beim Anflug (nah): real-Skalierung — der Wow-Effekt.
+ * - Im Uebergangsbereich: lineare Interpolation zwischen beiden.
+ *
+ * @param radiusKm - Realer Radius in Kilometern (muss > 0 sein).
+ * @param distanceFromCamera - Abstand Kamera zu Planeten in Szeneneinheiten.
+ * @param mode - Basis-Radius-Modus (\"visual\", \"compact\", oder \"real\").
+ * @returns Radius in Szeneneinheiten.
+ * @throws {RangeError} Wenn `radiusKm` nicht endlich oder nicht positiv ist.
+ */
+export function scaleRadiusDynamic(
+  radiusKm: number,
+  distanceFromCamera: number,
+  mode: ScaleMode,
+): number {
+  assertFinite(radiusKm, "radiusKm");
+  if (radiusKm <= 0) {
+    throw new RangeError(`radiusKm muss groesser als 0 sein, ist aber ${radiusKm}.`);
+  }
+  if (!Number.isFinite(distanceFromCamera) || distanceFromCamera < 0) {
+    throw new RangeError(
+      `distanceFromCamera muss endlich und >= 0 sein, ist aber ${String(distanceFromCamera)}.`,
+    );
+  }
+
+  const visualRadius = scaleRadius(radiusKm, mode);
+  const realRadius = scaleRadius(radiusKm, "real");
+
+  const overviewDist = visualRadius * DYNAMIC_SCALE_OVERVIEW_FACTOR;
+  const travelDist = visualRadius * DYNAMIC_SCALE_TRAVEL_FACTOR;
+
+  if (distanceFromCamera >= overviewDist) {
+    return visualRadius;
+  }
+  if (distanceFromCamera <= travelDist) {
+    return realRadius;
+  }
+
+  // Lineare Interpolation im Uebergangsband.
+  const t = (distanceFromCamera - travelDist) / (overviewDist - travelDist);
+  return visualRadius + (realRadius - visualRadius) * t;
 }

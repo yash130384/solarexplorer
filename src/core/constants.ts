@@ -91,6 +91,32 @@ export const COMPACT_RADIUS_FACTOR = 0.6;
 export const DISTANCE_NEAR = 30;
 
 /**
+ * Faktor fuer den dynamischen Maßstab: ab dieser Distanz (in Szeneneinheiten,
+ * relativ zum visualen Radius) wird der Planet in Echtgroesse dargestellt.
+ *
+ * Ein Wert von 25 bedeutet: bei einem Erdradius von 0.5 Einheiten schaltet
+ * die Kamera bei 12.5 Einheiten Entfernung auf Echtmaßstab um.
+ */
+export const DYNAMIC_SCALE_OVERVIEW_FACTOR = 25;
+
+/**
+ * Faktor fuer den dynamischen Maßstab: innerhalb dieser Distanz (relativ zum
+ * visualen Radius) wird immer Echtmaßstab verwendet.
+ *
+ * Ein Wert von 4 bedeutet: sehr nah am Planeten, realistische Groesse.
+ */
+export const DYNAMIC_SCALE_TRAVEL_FACTOR = 4;
+
+/**
+ * Maximale Distanz (in Vielfachen des Parent-Radius), ab der Monde
+ * ausgeblendet werden. Wenn die Kamera weiter als dieser Faktor * Parent-Radius
+ * entfernt ist, sind die Monde des Planeten unsichtbar.
+ *
+ * Ringe bleiben davon unberuehrt — sie bleiben immer sichtbar.
+ */
+export const MOON_VISIBILITY_PARENT_FACTOR = 8;
+
+/**
  * Far Plane der Kamera in Szeneneinheiten.
  * Bewusst sehr gross, damit auch die aeusseren Umlaufbahnen noch gerendert werden.
  */

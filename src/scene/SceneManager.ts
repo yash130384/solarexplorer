@@ -17,7 +17,7 @@ import {
   J2000_UNIX,
 } from "../core/constants";
 import { J2000_JULIAN_DATE, orbitalPosition } from "../core/orbital";
-import { scaleDistance, scaleRadius } from "../core/scale";
+import { scaleDistance, scaleRadius, scaleRadiusDynamic } from "../core/scale";
 import type { DistanceMode, ScaleMode } from "../core/scale";
 import { BodyFactory } from "./BodyFactory";
 import { Belt } from "./Belt";
@@ -26,10 +26,28 @@ import { applyLodByDistance, disposeLodGeometries } from "./LodCache";
 import { OrbitLines } from "./OrbitLines";
 import { Rings } from "./Rings";
 import { DEFAULT_STARFIELD_RADIUS, Starfield } from "./Starfield";
+import {
+  resolveSunGlowSettings,
+  SunGlow,
+} from "./SunGlow";
+import type { SunGlowSettings } from "./SunGlow";
+import {
+  disposeTextures,
+  getTexture,
+  preloadTextures,
+  texturedBodyIds,
+} from "./textures";
 import { detectQualityLevel, detectRendererName, getQualityProfile } from "./quality";
 import type { QualityLevel } from "./quality";
-import { loadSceneBodies, safeRenderRadius } from "./types";
-import type { SceneBody, SceneOptions, SceneStats } from "./types";
+import { BRIGHT_LUMINANCE, CORE_LUMINANCE, emptyFrameSample, loadSceneBodies, safeRenderRadius } from "./types";
+import type {
+  BloomMode,
+  FrameRegion,
+  FrameSample,
+  SceneBody,
+  SceneOptions,
+  SceneStats,
+} from "./types";
 
 /** Oeffnungswinkel der Perspektivkamera in Grad. */
 const CAMERA_FOV = 50;
@@ -53,6 +71,19 @@ const INITIAL_CAMERA_POSITION: readonly [number, number, number] = [0, 150, 850]
 /** Standarddistanz der Kamera, multipliziert mit dem Radius des Koerpers. */
 const DEFAULT_FOCUS_FACTOR = 6;
 
+/** Wiederverwendeter Weltpositions-Vektor (kein GC-Druck pro Bild). */
+const worldPositionScratch = new THREE.Vector3();
+
+/**
+ * Anhebung der Kameraposition relativ zur Sonne-Koerper-Achse.
+ *
+ * `0.35` hebt die Kamera knapp ueber die Ebene durch Sonne und Koerper.
+ * Der Koerper steht dadurch leicht schraeg von oben im Bild, mit Licht von
+ * der Seite — statt einer exakt frontalen Scheibe, bei der sich Aha und Oh
+ * auf der Kugel decken muessten.
+ */
+const SUNWARD_LIFT = 0.35;
+
 /** Interne Zielposition der Kamera, je Achse interpoliert. */
 interface CameraTarget {
   /** Zielkoordinate auf der X-Achse (Position der Kamera). */
@@ -61,6 +92,16 @@ interface CameraTarget {
   y: number;
   /** Zielkoordinate auf der Z-Achse (Position der Kamera). */
   z: number;
+}
+
+/**
+   * Wartende Helligkeitsmessung des naechsten Bildes.
+ */
+interface PendingSample {
+  /** Rechteck in CSS-Pixeln, das ausgelesen wird. */
+  readonly region: FrameRegion;
+  /** Aufruf, der das Ergebnis uebergibt. */
+  readonly resolve: (sample: FrameSample) => void;
 }
 
 /**
@@ -81,6 +122,22 @@ export class SceneManager {
 
   /** Aktive Optionen (Skalierungsmodi). */
   private options: SceneOptions;
+
+  /** Postprocessing-Pfad fuer den Sonnen-Glanz; `null`, wenn aus. */
+  private sunGlow: SunGlow | null = null;
+
+  /**
+   * Wartende Helligkeitsmessungen des naechsten Bildes.
+   *
+   * Eine **Liste**, kein einzelner Platz: ein zweiter Aufruf, der den ersten
+   * verdraengt, wuerde dessen Promise endlos haengen lassen (der Aufrufer
+   * wartet ewig statt einen Fehler zu sehen). Alle Eintraege werden im
+   * naechsten Bild bedient.
+   *
+   * Nur fuer den Test-Nachweis des Glanzes — der Messpunkt liegt im Bild
+   * selbst, weil der Backbuffer danach nicht mehr auslesbar ist.
+   */
+  private readonly pendingSamples: PendingSample[] = [];
 
   /** Alle Koerper der Szene, wie aus `bodies.json` geladen. */
   private bodies: SceneBody[];
@@ -226,9 +283,119 @@ export class SceneManager {
     this.addBodies();
     this.addOrbitLines();
     this.addBelt();
+    this.buildSunGlow();
+    this.loadTextures();
 
     this.resize();
     window.addEventListener("resize", this.onResize);
+  }
+
+  /**
+   * Laedt die Oberflaechen-Texturen im Hintergrund nach.
+   *
+   * Bewusst **nicht** awaited: `init()` ist synchron und wird von der App
+   * ohne Verzoegerung aufgerufen. Ein `await` wuerde den ersten Frame
+   * blockieren, bis rund 3,7 MB PNG dekodiert sind — auf einem Kindersystem
+   * mit langsamer Verbindung also ein schwarzer Bildschirm. Stattdessen
+   * bekommen die Koerper erst ihre einfarbige Farbe und werden beim Eintreffen
+   * der Datei nachgezogen ({@link SceneManager.applyTextures}).
+   *
+   * Ein Skalierungswechsel vor dem Eintreffen ist unkritisch: `rebuildBodies`
+   * liest den Textur-Cache beim Erzeugen der Materialien und bekommt die
+   * Textur dann automatisch.
+   *
+   * @returns {void}
+   */
+  private loadTextures(): void {
+    if ((this.options.textures ?? true) === false) {
+      return;
+    }
+    preloadTextures(texturedBodyIds(this.bodies))
+      .then(() => {
+        this.applyTextures();
+      })
+      .catch(() => {
+        // Ohne Texturen bleibt die Szene einfarbig — kein harter Fehler,
+        // der Start laeuft weiter.
+      });
+  }
+
+  /**
+   * Haengt die inzwischen geladenen Texturen an die bestehenden Materialien.
+   *
+   * Nur `MeshStandardMaterial` bekommt eine Textur: das ist die
+   * Instanz-Pruefung zugleich die Ausnahme fuer die Sonne, deren
+   * `MeshBasicMaterial` auf HDR gehoben bleibt (siehe
+   * `BodyFactory.createMaterial`). `needsUpdate` zwingt three zum Neubauen
+   * des Programms, weil eine neue Textur den Shader-Define-Set aendert.
+   *
+   * @returns {void}
+   */
+  private applyTextures(): void {
+    for (const [id, mesh] of this.meshes) {
+      const texture = getTexture(id);
+      const material = mesh.material;
+      if (texture === null || !(material instanceof THREE.MeshStandardMaterial)) {
+        continue;
+      }
+      material.map = texture;
+      material.needsUpdate = true;
+    }
+  }
+
+  /**
+   * Baut den Postprocessing-Pfad fuer den Sonnen-Glanz auf.
+   *
+   * Wird bewusst **nach** den Koerpern aufgerufen: die HDR-Hebung der
+   * Sonnenfarbe sitzt an deren Material, und der Bloom darf sie nur finden,
+   * wenn sie schon gesetzt ist.
+   *
+   * @returns {void}
+   */
+  private buildSunGlow(): void {
+    const renderer = this.renderer;
+    if (renderer === null) {
+      return;
+    }
+    const settings = resolveSunGlowSettings(
+      this.quality,
+      this.options.bloomMode ?? "auto",
+    );
+    this.sunGlow = settings.enabled
+      ? new SunGlow(renderer, this.scene, this.camera, settings)
+      : null;
+  }
+
+  /**
+   * Schaltet den Sonnen-Glanz um, ohne die Szene neu aufzubauen.
+   *
+   * @param mode - `auto` folgt der Hardware, `on`/`off` erzwingen.
+   * @returns {void}
+   */
+  setBloomMode(mode: BloomMode): void {
+    this.options = { ...this.options, bloomMode: mode };
+    this.sunGlow?.dispose();
+    this.sunGlow = null;
+    this.buildSunGlow();
+    this.resize();
+  }
+
+  /**
+   * Liefert die wirksamen Bloom-Parameter (fuer Tests und Debug-Haken).
+   *
+   * Ohne Postprocessing wird trotzdem die Parameter-Loesung zurueckgegeben —
+   * `enabled` sagt dann, ob sie in Benutzung sind.
+   *
+   * @returns Unveraenderliche Kopie der Parameter.
+   */
+  getSunGlowSettings(): SunGlowSettings {
+    if (this.sunGlow !== null) {
+      return this.sunGlow.getSettings();
+    }
+    return resolveSunGlowSettings(
+      this.quality,
+      this.options.bloomMode ?? "auto",
+    );
   }
 
   /**
@@ -293,6 +460,7 @@ export class SceneManager {
    * @returns {void}
    */
   private addBodies(): void {
+    const textures = this.options.textures ?? true;
     // Zwei Durchlaeufe: erst Eltern, dann Monde, damit jeder Elternknoten
     // schon existiert, wenn ein Mond angehaengt wird.
     for (const body of this.bodies) {
@@ -303,6 +471,7 @@ export class SceneManager {
         body,
         this.options.scaleMode,
         this.options.distanceMode,
+        textures,
       );
       this.meshes.set(body.id, mesh);
       this.bodyGroup.add(mesh);
@@ -318,6 +487,7 @@ export class SceneManager {
         body,
         this.options.scaleMode,
         this.options.distanceMode,
+        textures,
       );
       this.meshes.set(body.id, mesh);
       const parentMesh = body.parent === null ? undefined : this.meshes.get(body.parent);
@@ -441,6 +611,9 @@ export class SceneManager {
         Math.min(window.devicePixelRatio, getQualityProfile(this.quality).maxPixelRatio),
       );
       this.renderer.setSize(width, height, false);
+      // Der Composer muss dieselbe Aufloesung benutzen, sonst mischt er
+      // ein Bloom in der Groesse des letzten Frames ein.
+      this.sunGlow?.setSize(width, height);
     }
   }
 
@@ -511,6 +684,43 @@ export class SceneManager {
     // pro Koerper — sie brauchen nur die Kepler-Position pro Bild.
     this.instancedMoons?.update(this.julianDate, this.options.distanceMode);
     this.belt?.update(this.julianDate);
+  }
+
+  /**
+   * Aktualisiert die Groesse aller Koerper-Meshes basierend auf der
+   * Kameradistanz — dynamischer Mastab: im Ueberblick noetigenfalls
+   * vergroessert (klickbar), beim Anflug in Echtgroesse (Wow-Effekt).
+   *
+   * @param cameraPosition - Weltposition der Kamera.
+   * @returns {void}
+   */
+  private updateBodyScales(cameraPosition: THREE.Vector3): void {
+    for (const body of this.bodies) {
+      const mesh = this.meshes.get(body.id);
+      if (mesh === undefined) {
+        continue;
+      }
+      mesh.getWorldPosition(worldPositionScratch);
+      const dist = cameraPosition.distanceTo(worldPositionScratch);
+      const radius = scaleRadiusDynamic(
+        body.radiusKm,
+        dist,
+        this.options.scaleMode,
+      );
+      mesh.scale.setScalar(radius);
+      mesh.userData["bodyRadius"] = radius;
+    }
+  }
+
+  /**
+   * Blendet instanzierte Monde ein oder aus, je nach Kameradistanz
+   * zum Parent-Planeten. Ringe bleiben davon unberuehrt.
+   *
+   * @param cameraPosition - Weltposition der Kamera.
+   * @returns {void}
+   */
+  private updateMoonVisibility(cameraPosition: THREE.Vector3): void {
+    this.instancedMoons?.setVisibleByCamera(cameraPosition, this.meshes);
   }
 
   /**
@@ -612,7 +822,120 @@ export class SceneManager {
   }
 
   /**
+   * Liest Helligkeitswerte aus dem Backbuffer **waehrend** des naechsten Bildes.
+   *
+   * Der Test-Haken liest den Framebuffer nicht selbst: ohne
+   * `preserveDrawingBuffer` ist er nach dem Compositing nicht mehr
+   * auslesbar, `readPixels` liefert dann Nullen. Stattdessen laeuft die
+   * Messung am Ende von `render()` — dort ist der Backbuffer noch vollstaendig.
+   *
+   * Mehrere Messungen duerfen gleichzeitig wartstehen: jede bekommt ihr
+   * eigenes Ergebnisobjekt, alle werden im naechsten Bild bedient. Ein
+   * spaeterer Aufruf verdraengt keinen — sonst haenge dessen Promise ewig.
+   *
+   * @param region - Rechteck in CSS-Pixeln ab der linken oberen Ecke.
+   * @returns Promise mit den Messwerten des naechsten Bildes; sofort auf
+   *   Nullwerten, wenn kein Renderer existiert oder der Manager disposed ist.
+   */
+  sampleFrame(region: FrameRegion): Promise<FrameSample> {
+    if (this.renderer === null || this.disposed) {
+      return Promise.resolve(emptyFrameSample());
+    }
+    return new Promise<FrameSample>((resolve) => {
+      this.pendingSamples.push({ region, resolve });
+    });
+  }
+
+  /**
+   * Fuehrt alle wartenden Frame-Messungen aus (einmal pro Bild).
+   *
+   * @returns {void}
+   */
+  private runPendingSamples(): void {
+    if (this.pendingSamples.length === 0) {
+      return;
+    }
+    // Vorher abnehmen: ein `resolve` im Promise-Handler koennte selbst eine
+    // neue Messung anmelden, die sonst noch in diesem Bild mitliefe.
+    for (const pending of this.pendingSamples.splice(0)) {
+      const out = emptyFrameSample();
+      this.readLuminance(pending.region, out);
+      pending.resolve(out);
+    }
+  }
+
+  /**
+   * Beantwortet wartende Messungen mit Nullwerten, ohne den Backbuffer zu lesen.
+   *
+   * Wird aus `dispose` aufgerufen: danach zeichnet die Szene keine Bilder mehr,
+   * eine wartende Messung laeuft also sonst endlos.
+   *
+   * @returns {void}
+   */
+  private clearPendingSamples(): void {
+    for (const pending of this.pendingSamples.splice(0)) {
+      pending.resolve(emptyFrameSample());
+    }
+  }
+
+  /**
+   * Liest einen Bildausschnitt aus dem aktuellen Backbuffer.
+   *
+   * @param region - Rechteck in CSS-Pixeln ab der linken oberen Ecke.
+   * @param out - Zielobjekt, das in-place gefuellt wird.
+   * @returns {void}
+   */
+  private readLuminance(region: FrameRegion, out: FrameSample): void {
+    const renderer = this.renderer;
+    if (renderer === null) {
+      return;
+    }
+    const gl = renderer.getContext();
+    const ratio = renderer.getPixelRatio();
+    const x = Math.max(0, Math.round(region.x * ratio));
+    const y = Math.max(
+      0,
+      Math.round((this.canvas.clientHeight - region.y - region.height) * ratio),
+    );
+    const width = Math.max(1, Math.round(region.width * ratio));
+    const height = Math.max(1, Math.round(region.height * ratio));
+    const buffer = new Uint8Array(width * height * 4);
+    gl.readPixels(x, y, width, height, gl.RGBA, gl.UNSIGNED_BYTE, buffer);
+
+    let total = 0;
+    let max = 0;
+    let bright = 0;
+    let core = 0;
+    const count = width * height;
+    for (let i = 0; i < buffer.length; i += 4) {
+      const r = buffer[i] ?? 0;
+      const g = buffer[i + 1] ?? 0;
+      const b = buffer[i + 2] ?? 0;
+      const luma = Math.round(0.2126 * r + 0.7152 * g + 0.0722 * b);
+      total += luma;
+      if (luma > max) {
+        max = luma;
+      }
+      if (luma >= BRIGHT_LUMINANCE) {
+        bright += 1;
+      }
+      if (luma >= CORE_LUMINANCE) {
+        core += 1;
+      }
+    }
+    out.maxLuminance = max;
+    out.meanLuminance = count > 0 ? total / count : 0;
+    out.brightPixels = bright;
+    out.corePixels = core;
+    out.totalPixels = count;
+  }
+
+  /**
    * Zeichnet ein Bild und bewegt die Kamera weich auf ihr Ziel zu.
+   *
+   * Ohne Postprocessing geht der Bild direkt in den Renderer; mit Bloom
+   * laeuft er durch die Pass-Kette (`RenderPass` -> `UnrealBloomPass` ->
+   * `OutputPass`).
    *
    * @returns {void}
    */
@@ -622,9 +945,17 @@ export class SceneManager {
     }
     this.updateCamera();
     this.updateLod();
+    this.updateBodyScales(this.camera.position);
+    this.updateMoonVisibility(this.camera.position);
     this.rings?.update(this.camera.position);
     this.instancedMoons?.updateLod(this.camera.position);
-    this.renderer.render(this.scene, this.camera);
+    if (this.sunGlow !== null) {
+      this.sunGlow.render();
+    } else {
+      this.renderer.render(this.scene, this.camera);
+    }
+    // Nach dem Zeichnen: hier ist der Backbuffer noch vollstaendig.
+    this.runPendingSamples();
   }
 
   /**
@@ -728,24 +1059,39 @@ export class SceneManager {
     }
     parts.push(`rings=${this.rings?.count ?? 0}`);
     parts.push(`stars=${this.starfield?.getCount() ?? 0}`);
+    const glow = this.getSunGlowSettings();
+    parts.push(`bloom=${glow.enabled ? "on" : "off"},${glow.threshold}`);
     return parts.join("\n");
   }
 
   /**
    * Richtet die Kamera auf einen Koerper aus.
    *
-   * Die Kamera faehrt weich an (per Lerp in {@link SceneManager.render}); wenn
-   * der aktuell eingefrorene Bildausschnitt zu weit weg waere, wird sie
-   * zusaetzlich hart an die Zielposition gesetzt, damit `focusOn` auch ohne
-   * Animationsschleife sofort wirkt.
+   * Standardmaessig faehrt die Kamera weich an (per Lerp in
+   * {@link SceneManager.render}). Mit `snap` steht sie **sofort** auf der
+   * Zielposition — noetig fuer Bildmessungen, die zwei Aufnahmen pixelgleich
+   * vergleichen: ueber die weiche Fahrt waeren Scheibengroesse und Lage
+   * zwischen den Aufnahmen verschieden, und der Vergleich masste dann die
+   * Kamerafahrt statt der Textur.
+   *
+   * Achtung: wer `focusOn` mit `snap` benutzt, muss vorher
+   * {@link SceneManager.camera} aus der {@link CameraFollow}-Steuerung
+   * loesen — sonst zieht sie im naechsten Bild wieder auf das Schiff
+   * (siehe `App.focusBodyInstant`).
    *
    * @param bodyId - ID des Koerpers (z. B. `"mars"`).
    * @param distanceFactor - Vielfaches des Koerperradius als Kameraabstand;
    *   Standard ist {@link DEFAULT_FOCUS_FACTOR}.
+   * @param snap - `true` setzt die Kamera hart, statt sie weich fahren zu
+   *   lassen.
    * @returns {void}
    * @throws {RangeError} Wenn `bodyId` unbekannt ist oder `distanceFactor` <= 0.
    */
-  focusOn(bodyId: string, distanceFactor: number = DEFAULT_FOCUS_FACTOR): void {
+  focusOn(
+    bodyId: string,
+    distanceFactor: number = DEFAULT_FOCUS_FACTOR,
+    snap: boolean = false,
+  ): void {
     const body = this.bodies.find((entry) => entry.id === bodyId);
     if (body === undefined) {
       throw new RangeError(`Unbekannter Koerper: ${bodyId}`);
@@ -776,29 +1122,65 @@ export class SceneManager {
     // … die Kamera fahrt davor. Wichtig: Das Ziel fuer die weiche Fahrt ist
     // die Kameraposition selbst, nicht der Koerpermittelpunkt — sonst faehrt
     // die Kamera im Laufe der Interpolation *in* den Planeten hinein.
-    this.cameraTarget = {
-      x: world.x,
-      y: world.y + distance * 0.5,
-      z: world.z + distance,
-    };
+    //
+    // Mit `snap` wird die Kamera zusaetzlich auf die **beleuchtete Seite**
+    // gestellt. Die Sonne steht im Ursprung, der Koerper bei `world`; die
+    // beleuchtete Halbkugel zeigt also von `world` aus in Richtung `-world`.
+    // Die Kamera muss auf dieser Seite stehen — mit `+world` landete sie auf
+    // der Nachtseite (gemessene mittlere Luminanz auf dem Jupiter: 2.6).
+    if (snap) {
+      const sunward = world.clone().negate().normalize();
+      if (sunward.lengthSq() < 1e-8) {
+        sunward.set(0, 0, 1);
+      }
+      // Leicht seitlich versetzen, damit es nicht genau die Symmetrieachse
+      // ist: sonst spiegelt die A/B-Aufnahme eine exakt mittige Scheibe.
+      sunward.y += SUNWARD_LIFT;
+      sunward.normalize();
+      this.cameraTarget = {
+        x: world.x + sunward.x * distance,
+        y: world.y + sunward.y * distance,
+        z: world.z + sunward.z * distance,
+      };
+    } else {
+      this.cameraTarget = {
+        x: world.x,
+        y: world.y + distance * 0.5,
+        z: world.z + distance,
+      };
+    }
+
+    if (snap) {
+      this.camera.position.set(
+        this.cameraTarget.x,
+        this.cameraTarget.y,
+        this.cameraTarget.z,
+      );
+      this.camera.lookAt(this.lookTarget.x, this.lookTarget.y, this.lookTarget.z);
+      this.camera.updateMatrixWorld();
+    }
   }
 
   /**
    * Liefert Laufzeitstatistik der Szene.
    *
-   * Die Zahlen stammen aus `renderer.info` und beziehen sich auf den letzten
-   * gezeichneten Frame (vor dem ersten `render` also auf Null).
+   * Die Zahlen beziehen sich auf den letzten gezeichneten Frame (vor dem
+   * ersten `render` also auf Null). **Szenen**-Draw-Calls, nicht die der
+   * Postprocessing-Quadse: mit Bloom liefert `renderer.info` die Zeichenaufrufe
+   * des letzten Passes (1-2), also greift hier der Schnappschuss aus
+   * `SunGlow.getSceneStats()`.
    *
    * @returns Anzahl der Koerper, Zeichenaufrufe und Dreiecke.
    */
   getStats(): SceneStats {
+    const glowStats = this.sunGlow?.getSceneStats();
     const info = this.renderer?.info;
     const stats: SceneStats = {
       // `bodies` zaehlt alle Koerper, auch die instanzierten — die sind ja
       // sichtbar, nur ohne eigenes Mesh.
       bodies: this.bodies.length,
-      drawCalls: info?.render.calls ?? 0,
-      triangles: info?.render.triangles ?? 0,
+      drawCalls: glowStats?.drawCalls ?? info?.render.calls ?? 0,
+      triangles: glowStats?.triangles ?? info?.render.triangles ?? 0,
     };
     if (this.instancedMoons !== null) {
       stats.instancedMoons = this.instancedMoons.count;
@@ -809,7 +1191,31 @@ export class SceneManager {
     if (this.rings !== null) {
       stats.rings = this.rings.count;
     }
+    stats.textured = this.countTextured();
     return stats;
+  }
+
+  /**
+   * Zaehlt die Koerper-Meshes, deren Material eine Textur traegt.
+   *
+   * Nachweis fuer den E2E-Test (Ticket 19): eine Textur, die im Code
+   * gesetzt, aber nie geladen wird, sieht in `getStats()` genauso aus wie
+   * eine, die am Material haftet. Der Zaehler liest das Material selbst.
+   *
+   * @returns Anzahl der Meshes mit `map` ungleich `null`.
+   */
+  private countTextured(): number {
+    let textured = 0;
+    for (const mesh of this.meshes.values()) {
+      const material = mesh.material;
+      if (
+        material instanceof THREE.MeshStandardMaterial &&
+        material.map !== null
+      ) {
+        textured += 1;
+      }
+    }
+    return textured;
   }
 
   /**
@@ -893,6 +1299,10 @@ export class SceneManager {
 
     window.removeEventListener("resize", this.onResize);
 
+    if (this.sunGlow !== null) {
+      this.sunGlow.dispose();
+      this.sunGlow = null;
+    }
     if (this.orbitLines !== null) {
       this.orbitLines.dispose();
       this.orbitLines = null;
@@ -938,6 +1348,15 @@ export class SceneManager {
     // zulaessig, aber undokumentiert waere. `disposeLodGeometries` leert
     // zusaetzlich den Cache, damit ein neuer Aufbau wieder frisch beginnt.
     disposeLodGeometries();
+    // Dasselbe gilt fuer die Oberflaechen-Texturen: sie liegen im
+    // Material, nicht in der Geometrie, und wuerden sonst bis zum Neuladen
+    // der Seite im WebGL-Speicher liegen.
+    disposeTextures();
+
+    // Wartende Messungen zuerst beantworten — danach gibt es keinen
+    // Backbuffer mehr, aus dem sie lesen koennten (der Aufrufer wuerde ewig
+    // auf sein Promise warten).
+    this.clearPendingSamples();
 
     if (this.renderer !== null) {
       this.renderer.dispose();

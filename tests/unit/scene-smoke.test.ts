@@ -18,7 +18,11 @@ import {
 } from "../../src/scene/quality";
 import { SceneManager } from "../../src/scene/SceneManager";
 import { Starfield, mulberry32 } from "../../src/scene/Starfield";
-import { loadSceneBodies, safeRenderRadius } from "../../src/scene/types";
+import {
+  emptyFrameSample,
+  loadSceneBodies,
+  safeRenderRadius,
+} from "../../src/scene/types";
 import type { SceneOptions } from "../../src/scene/types";
 
 const bodies = loadSceneBodies();
@@ -294,6 +298,61 @@ describe("OrbitLines", () => {
     expect(materialSpy).toHaveBeenCalled();
     expect(moonGeometrySpy).toHaveBeenCalled();
     expect(moonMaterialSpy).toHaveBeenCalled();
+  });
+});
+
+describe("Frame-Messung ohne Renderer (scene/types)", () => {
+  it("liefert Nullwerte statt zu haengen", async () => {
+    // Ohne WebGL (jsdom) gibt es keinen Backbuffer. `sampleFrame` muss dann
+    // trotzdem ein Ergebnis liefern — ein `await` darf nicht endlos warten.
+    const manager = new SceneManager(makeCanvas(), options);
+    const sample = await manager.sampleFrame({ x: 0, y: 0, width: 8, height: 8 });
+    expect(sample).toEqual({
+      maxLuminance: 0,
+      meanLuminance: 0,
+      brightPixels: 0,
+      corePixels: 0,
+      totalPixels: 0,
+    });
+    manager.dispose();
+  });
+
+  it("beantwortet auch nach dispose, statt zu haengen", async () => {
+    // Nach `dispose` zeichnet die Szene keine Bilder mehr. Ohne Antwort
+    // bliebe der Promise des Aufrufers offen.
+    const manager = new SceneManager(makeCanvas(), options);
+    manager.dispose();
+    await expect(
+      manager.sampleFrame({ x: 0, y: 0, width: 8, height: 8 }),
+    ).resolves.toEqual(emptyFrameSample());
+  });
+
+  it("bedient parallele Messungen alle", async () => {
+    // Zwei Aufrufe ohne `await` dazwischen: beide muessen beantwortet werden.
+    // Vorher verdraengte der zweite den ersten, dessen `await` haengte ewig.
+    const manager = new SceneManager(makeCanvas(), options);
+    const both = Promise.all([
+      manager.sampleFrame({ x: 0, y: 0, width: 8, height: 8 }),
+      manager.sampleFrame({ x: 1, y: 1, width: 4, height: 4 }),
+    ]);
+    // Ohne Renderer loest `sampleFrame` sofort auf; der Test haelt den Fall
+    // fest, dass zweimal hintereinander nichts haengt.
+    const [first, second] = await both;
+    expect(first).toEqual(emptyFrameSample());
+    expect(second).toEqual(emptyFrameSample());
+    expect(first).not.toBe(second);
+    manager.dispose();
+  });
+});
+
+describe("emptyFrameSample", () => {
+  it("gibt pro Aufruf ein eigenes Objekt zurueck", () => {
+    // Kein geteiltes Objekt: sonst wuerde eine spaetere Messung die Werte
+    // einer frueheren ueberschreiben.
+    const a = emptyFrameSample();
+    const b = emptyFrameSample();
+    expect(a).toEqual(b);
+    expect(a).not.toBe(b);
   });
 });
 

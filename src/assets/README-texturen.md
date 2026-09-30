@@ -52,8 +52,12 @@ Python-Version erzeugen identische Dateien.
 
 ## Technik
 
-- **Format:** Equirectangular 2:1 (1024×512 für Planeten/Sonne, 512×256 für
-  größere Monde, 256×128 für Phobos/Deimos), 8-Bit RGB PNG.
+|- **Format:** Equirectangular 2:1 (1024×512 für Planeten/Sonne, 512×256 für
+|  größere Monde, 256×128 für Phobos/Deimos).
+|  Jeder Koerper hat drei Dateien:
+|  `<id>.png` (Farbe, sRGB), `<id>_roughness.png` (Rauheit, linear),
+|  `<id>_normal.png` (Normalen, linear).
+|  8-Bit pro Kanal, RGB bzw. Graustufe.
 - **Noise:** Value-Noise mit 4–6 Oktaven, in X-Richtung kachelbar, damit die
   Equirectangular-Naht bei 0°/360° nicht sichtbar kachelt. Die V-Koordinate wird
   über `0.5 - 0.5·cos(lat)` gestreckt, damit Features an den Polen nicht
@@ -106,13 +110,21 @@ Fehler, der Körper bleibt sichtbar.
 | `mimas.png` | Mimas | Schlichtes graues Krater-Monster |
 | `triton.png` | Triton | Rosa-weiß, sehr glatt, geringe Kontraste |
 
-20 Texturen, IDs entsprechen exakt der `id` in `src/data/bodies.json`.
+20 Koerper × 3 Dateien = 60 Body-PNGs + 4 Ring-PNGs = 64 Dateien.
+IDs entsprechen exakt der `id` in `src/data/bodies.json`.
 
 ## Git
 
-Die 20 PNGs sind zusammen ca. 4 MB Binärdaten. Es wurde **nicht** committet —
-ob sie mit ins Repo kommen, über `.gitignore` ausgeschlossen und beim Build
-erzeugt werden oder per `tools/generate_textures.py` in den Docker-Build
-eingehängt werden, entscheidet das Review.
+Die 60 Body-PNGs (Farbe + Rauheit + Normal) und 4 Ring-PNGs sind zusammen
+ca. 8 MB Binärdaten und **sind im Repo committet**
+(`git ls-files public/media/textures` listet 64 Pfade). Grund: der
+Docker-Build kopiert nur das Repository — ohne die PNGs wäre
+`docker compose up --build` eine leere Szene.
+Neu erzeugbar jederzeit mit `python3 tools/generate_textures.py`, byte-identisch
+(fester Seed pro Körper).
 
-Gesamtgröße aktuell: ca. 4 MB (genaue Zahlen: `python3 tools/verify_textures.py`).
+Die Texturen liegen unter `public/media/textures/`, nicht unter `src/assets/`:
+sie werden zur Laufzeit über den stabilen Pfad `./media/textures/<id>.png`
+geladen (`src/scene/textures.ts:26`) und von Vite ohne Hash nach `dist/` kopiert.
+
+Gesamtgröße aktuell: ca. 4,1 MB (genaue Zahlen: `python3 tools/verify_textures.py`).

@@ -2,7 +2,7 @@
 """Prozedurale Textur-Generator fuer SolarExplorer.
 
 Erzeugt pro Himmelskoerper eine Equirectangular-Map (2:1) als PNG unter
-``src/assets/textures/<bodyId>.png``. Die Texturen sind bewusst *prozedural*
+``public/media/textures/<bodyId>.png``. Die Texturen sind bewusst *prozedural*
 statt heruntergeladen: keine Lizenzfragen, keine Laufzeit-CDN-Abhaengigkeit,
 vollstaendig offline reproduzierbar.
 
@@ -34,7 +34,9 @@ except Exception:  # pragma: no cover - Pillow ist optional
     Image = None  # type: ignore
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT_DIR = os.path.join(ROOT, "src", "assets", "textures")
+# public/ ist Vites publicDir: die PNGs werden 1:1 nach dist/ kopiert und sind
+# zur Laufzeit ueber ./media/textures/<id>.png erreichbar (stabiler Pfad, kein Hash).
+OUT_DIR = os.path.join(ROOT, "public", "media", "textures")
 
 RGB = tuple[int, int, int]
 
@@ -870,9 +872,137 @@ def render_enceladus(spec: BodySpec, canvas: Canvas, rng: Rng) -> None:
         draw_line(canvas, pts[0][0], pts[0][1], pts[1:], (150, 178, 196), 0.4, 1.4)
 
 
-def render_generic(spec: BodySpec, canvas: Canvas, rng: Rng) -> None:
-    """Fallback: Noise + Kraeter."""
-    render_cratered(spec, canvas, rng)
+def _height_canvas(
+    spec: BodySpec, width: int, height: int, seed_offset: int = 0,
+) -> Canvas:
+    """Hoehenfeld aus FBM-Noise (deterministisch).
+
+    :param spec: Koerper-Beschreibung.
+    :param width: Ausgabebreite in Pixeln.
+    :param height: Ausgabehoehe in Pixeln.
+    :param seed_offset: Offset fuer den Seed (verschiedene Maps nutzen
+       unterschiedliche Offsets, damit sie nicht identisch sind).
+    :returns: Graustufen-Canvas (Hoehe als Intensitaet).
+    """
+    rng = Rng(seed_for(spec.body_id) + seed_offset)
+    fbm = base_fbm(rng, 8, 4, 6)
+    canvas = Canvas(width, height)
+    for y in range(height):
+        v = lat_stretch(y, height)
+        for x in range(width):
+            u = x / width
+            h = fbm.sample(u, v)
+            gray = int(max(0, min(255, h * 255)))
+            canvas.set(x, y, (gray, gray, gray))
+    return canvas
+
+
+def height_canvas(spec: BodySpec) -> Canvas:
+    """Hoehenfeld aus FBM-Noise (deterministisch, unabhaengig vom Farb-Renderer).
+
+    Wird als Zwischenschritt fuer Normal- und Rauheitskarten genutzt.
+
+    :param spec: Koerper-Beschreibung.
+    :returns: Graustufen-Canvas (Hoehe als Intensitaet).
+    """
+    return _height_canvas(spec, spec.width, spec.height, 0)
+
+
+def render_normal_map(spec: BodySpec) -> Canvas:
+    """Normal map aus dem Hoehenfeld (Sobel-Filter).
+
+    Encodiert die Oberflaechennormalen als RGB: R=x, G=y, B=z der
+    Tangenten-Raum-Normalen. Helleraue Bereiche (Beruege/Kraterend)
+    erzeugen erkennbare Relief-Strukturen im Normalen-Map.
+
+    Wird in halber Aufloesung erzeugt (Noeheitskarte braucht nicht
+    die volle Farb-Resolution) und per nearest-neighbor skaliert.
+
+    :param spec: Koerper-Beschreibung.
+    :returns: Canvas mit Normal-Map-Pixeln.
+    """
+    half_w = max(1, spec.width // 2)
+    half_h = max(1, spec.height // 2)
+    height = _height_canvas(spec, half_w, half_h, 100)
+    # Height data as flat list for fast direct access
+    h_data = [height.get(x, y)[0] for y in range(half_h) for x in range(half_w)]
+
+    def h_at(x: int, y: int) -> float:
+        x = x % half_w
+        y = max(0, min(half_h - 1, y))
+        return h_data[y * half_w + x] / 255.0
+
+    # Build normal map at half resolution first
+    half_canvas = Canvas(half_w, half_h)
+    strength = 2.0
+    for y in range(half_h):
+        for x in range(half_w):
+            left = h_at(x - 1, y)
+            right = h_at(x + 1, y)
+            up = h_at(x, y - 1)
+            down = h_at(x, y + 1)
+            dx = (right - left) * strength
+            dy = (down - up) * strength
+            nx = -dx
+            ny = -dy
+            nz = 1.0
+            length = math.sqrt(nx * nx + ny * ny + nz * nz)
+            nx /= length
+            ny /= length
+            nz /= length
+            r = int(max(0, min(255, (nx * 0.5 + 0.5) * 255)))
+            g = int(max(0, min(255, (ny * 0.5 + 0.5) * 255)))
+            b = int(max(0, min(255, (nz * 0.5 + 0.5) * 255)))
+            half_canvas.set(x, y, (r, g, b))
+
+    # Scale up to full resolution (nearest-neighbor)
+    canvas = Canvas(spec.width, spec.height)
+    for y in range(spec.height):
+        src_y = min(half_h - 1, max(0, int(y * half_h / spec.height)))
+        for x in range(spec.width):
+            src_x = min(half_w - 1, max(0, int(x * half_w / spec.width)))
+            canvas.set(x, y, half_canvas.get(src_x, src_y))
+    return canvas
+
+
+def render_roughness_map(spec: BodySpec) -> Canvas:
+    """Rauheitskarte: hell = rau, dunkel = glatt.
+
+    Grundwert je nach Koerpertyp + Fein-Noise-Variation.
+    Wird in halber Aufloesung erzeugt (Rauheit veraendert sich
+    langsam genug, dass Halbierung sichtbar reicht).
+
+    :param spec: Koerper-Beschreibung.
+    :returns: Canvas mit Rauheitswerten (Graustufe).
+    """
+    base_roughness = {
+        "cratered": 0.7, "maria": 0.5, "venus": 0.6, "earth": 0.5,
+        "mars": 0.7, "jupiter": 0.4, "saturn": 0.35, "uranus": 0.3,
+        "neptune": 0.35, "titan": 0.4, "triton": 0.3, "io": 0.6,
+        "europa": 0.25, "enceladus": 0.2, "star": 0.8,
+    }.get(spec.kind, 0.5)
+    half_w = max(1, spec.width // 2)
+    half_h = max(1, spec.height // 2)
+    rng = Rng(seed_for(spec.body_id) + 1)
+    fbm = base_fbm(rng, 8, 4, 5)
+    half_canvas = Canvas(half_w, half_h)
+    for y in range(half_h):
+        v = lat_stretch(y, half_h)
+        for x in range(half_w):
+            u = x / half_w
+            n = fbm.sample(u, v)
+            roughness = base_roughness + (n - 0.5) * 0.3
+            roughness = max(0.0, min(1.0, roughness))
+            gray = int(roughness * 255)
+            half_canvas.set(x, y, (gray, gray, gray))
+    # Scale up to full resolution (nearest-neighbor)
+    canvas = Canvas(spec.width, spec.height)
+    for y in range(spec.height):
+        src_y = min(half_h - 1, max(0, int(y * half_h / spec.height)))
+        for x in range(spec.width):
+            src_x = min(half_w - 1, max(0, int(x * half_w / spec.width)))
+            canvas.set(x, y, half_canvas.get(src_x, src_y))
+    return canvas
 
 
 RENDERERS: dict[str, Callable[[BodySpec, Canvas, Rng], None]] = {
@@ -902,7 +1032,7 @@ def render(spec: BodySpec) -> Canvas:
     """
     rng = Rng(seed_for(spec.body_id))
     canvas = Canvas(spec.width, spec.height)
-    renderer = RENDERERS.get(spec.kind, render_generic)
+    renderer = RENDERERS.get(spec.kind, render_cratered)
     renderer(spec, canvas, rng)
     return canvas
 
@@ -1088,12 +1218,20 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         written += 1
 
+        # Rougheits- und Normal-Map erzeugen
+        for suffix, renderer_fn in (("_roughness", render_roughness_map), ("_normal", render_normal_map)):
+            map_path = os.path.join(OUT_DIR, f"{spec.body_id}{suffix}.png")
+            if os.path.exists(map_path) and not args.force:
+                continue
+            map_canvas = renderer_fn(spec)
+            write_png_file(map_path, spec.width, spec.height, map_canvas.data)
+
     print("-" * 78)
     print(f"{written} geschrieben, {skipped} uebersprungen, "
-          f"{len(os.listdir(OUT_DIR))} Dateien in src/assets/textures/")
+          f"{len(os.listdir(OUT_DIR))} Dateien in public/media/textures/")
 
     rings = generate_ring_textures(force=args.force)
-    print(f"{rings} Ringtextur(en) in src/assets/textures/rings/ "
+    print(f"{rings} Ringtextur(en) in public/media/textures/rings/ "
           f"({'--force' if args.force else 'nur fehlende'})")
     return 0
 

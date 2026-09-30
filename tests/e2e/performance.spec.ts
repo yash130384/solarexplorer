@@ -228,6 +228,49 @@ test.describe("Performance", () => {
     expect(stats.drawCalls).toBeLessThan(withoutInstancing / 2);
   });
 
+  test("haelt die Draw-Call-Grenzen auch mit eingeschaltetem Bloom ein", async ({ page }) => {
+    // Auf dem Software-Rasterisierer des Tests ist `auto` = aus (Bloom aus).
+    // Auf normaler Entwickler-Hardware (`medium`/`high`) laeuft er aber, und
+    // dann darf `getStats()` nicht die Vollbild-Quadse der Bloom-Passes
+    // zaehlen — sonst waeren die beiden Pruefungen oben (Grenze 300, und
+    // `after < before`) entweder eine Vakuumpruefung oder gar fehlschlagend.
+    // Deshalb derselbe Weg noch einmal mit erzwungenem Bloom.
+    await page.evaluate(() => {
+      const hook = (window as unknown as Record<string, unknown>)["__solarExplorer"] as {
+        setBloomMode: (mode: string) => void;
+      };
+      hook.setBloomMode("on");
+    });
+    // Der neue Composer und seine Shader brauchen ein paar Bilder.
+    await page.waitForTimeout(1500);
+
+    const before = await readStats(page);
+    report("Bloom aktiv", String(before.drawCalls > 10));
+    report("Draw-Calls mit Bloom", String(before.drawCalls));
+    report("Dreiecke mit Bloom", String(before.triangles));
+
+    // Echter Szenendurchgang, nicht der Vollbild-Quad des letzten Passes.
+    expect(before.drawCalls, "Bloom-Passe zaehlt nicht als Szenen-Draw-Call").toBeGreaterThan(10);
+    expect(
+      before.drawCalls,
+      `Draw-Calls ${before.drawCalls} mit Bloom (Grenze ${MAX_DRAW_CALLS})`,
+    ).toBeLessThan(MAX_DRAW_CALLS);
+
+    await page.evaluate(() => {
+      const hook = (window as unknown as Record<string, unknown>)["__solarExplorer"] as {
+        setKnownOnly: (value: boolean) => void;
+      };
+      hook.setKnownOnly(true);
+    });
+    await page.waitForTimeout(600);
+    const after = await readStats(page);
+    report("Draw-Calls 'Nur bekannte' mit Bloom", String(after.drawCalls));
+    // Die instanzierten Monde fallen als komplette Gruppe weg (Hunderte
+    // Draw-Calls), die LOD-Wanderung der Kamera bewegt die Zahl nur um
+    // einzelne. Der Vergleich bleibt deshalb robust gegen beides.
+    expect(after.drawCalls).toBeLessThan(before.drawCalls);
+  });
+
   test("der Filter 'Nur bekannte' senkt die Draw-Calls", async ({ page }) => {
     const before = await readStats(page);
     await page.evaluate(() => {

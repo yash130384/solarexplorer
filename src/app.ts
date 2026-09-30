@@ -23,6 +23,7 @@ import { CameraFollow } from "./controls/CameraFollow";
 import { ShipControls } from "./controls/ShipControls";
 import { SceneManager } from "./scene/SceneManager";
 import { Ship } from "./scene/Ship";
+import type { BloomMode, FrameRegion, FrameSample } from "./scene/types";
 import { HudUI } from "./ui/Hud";
 import type { DistanceScaleMode, ShipStatus, SizeScaleMode } from "./ui/Hud";
 import { InfoPanelUI, fetchJson } from "./ui/InfoPanel";
@@ -73,6 +74,37 @@ const QUIZ_STOP_LABEL = "Quiz beenden";
 /** Gueltige Distanzmodi — Spiegel von `DistanceMode` aus `core/scale`. */
 const DISTANCE_MODES: readonly DistanceMode[] = ["visual", "real", "log"];
 
+/** Gueltige Bloom-Modi — Spiegel von `BloomMode` aus `scene/types`. */
+const BLOOM_MODES: readonly BloomMode[] = ["auto", "on", "off"];
+
+/**
+ * Liest den Wert eines einzelnen Query-String-Schluessels aus.
+ *
+ * @param search - Query-String, mit oder ohne fuehrendes `?`.
+ * @param key - Gesuchter Schluessel, z. B. `"distance"`.
+ * @returns Der kleingeschriebene Wert, oder `null` wenn nicht vorhanden.
+ */
+function readUrlParam(search: string, key: string): string | null {
+  if (typeof search !== "string") {
+    return null;
+  }
+  const query = search.startsWith("?") ? search.slice(1) : search;
+  for (const part of query.split("&")) {
+    if (part.length === 0) {
+      continue;
+    }
+    const eq = part.indexOf("=");
+    if (eq < 0) {
+      continue;
+    }
+    if (part.slice(0, eq) !== key) {
+      continue;
+    }
+    return decodeURIComponent(part.slice(eq + 1)).trim().toLowerCase();
+  }
+  return null;
+}
+
 /**
  * Liest den Distanzmodus aus einer Query-Strings.
  *
@@ -84,26 +116,37 @@ const DISTANCE_MODES: readonly DistanceMode[] = ["visual", "real", "log"];
  * @returns Der angeforderte Modus, sonst `'visual'`.
  */
 function getDistanceModeFromUrl(search: string): DistanceMode {
-  if (typeof search !== "string") {
-    return "visual";
-  }
-  const query = search.startsWith("?") ? search.slice(1) : search;
-  for (const part of query.split("&")) {
-    if (part.length === 0) {
-      continue;
-    }
-    const eq = part.indexOf("=");
-    if (eq < 0) {
-      continue;
-    }
-    if (part.slice(0, eq) !== "distance") {
-      continue;
-    }
-    const value = decodeURIComponent(part.slice(eq + 1)).trim().toLowerCase();
-    const match = DISTANCE_MODES.find((mode) => mode === value);
-    return match ?? "visual";
-  }
-  return "visual";
+  const match = DISTANCE_MODES.find((mode) => mode === readUrlParam(search, "distance"));
+  return match ?? "visual";
+}
+
+/**
+ * Liest den Bloom-Modus (`?bloom=auto|on|off`) aus der Query-Strings.
+ *
+ * Praktisch wichtig fuer den Nachweis: der Test laeuft auf einem headless-
+ * Chromium, also auf einem Software-Rasterisierer, wo `auto` den Glanz
+ * abschaltet. Mit `?bloom=on` laesst sich der Effekt dort erzwingen.
+ *
+ * @param search - Query-String, mit oder ohne fuehrendes `?`.
+ * @returns Der angeforderte Modus, sonst `'auto'`.
+ */
+function getBloomModeFromUrl(search: string): BloomMode {
+  const match = BLOOM_MODES.find((mode) => mode === readUrlParam(search, "bloom"));
+  return match ?? "auto";
+}
+
+/**
+ * Liest den Modus der Oberflaechen-Texturen aus der Query-Strings.
+ *
+ * Nur fuer den Nachweis gedacht: `?textures=off` laesst die Koerper
+ * einfarbig, damit ein Test **an derselben Stelle** beweisen kann, dass die
+ * Textur das Bild ueberhaupt veraendert (siehe `tests/e2e/texture-pixels`).
+ *
+ * @param search - Query-String, mit oder ohne fuehrendes `?`.
+ * @returns `false` nur bei `textures=off`, sonst `true`.
+ */
+function getTexturesFromUrl(search: string): boolean {
+  return readUrlParam(search, "textures") !== "off";
 }
 
 /**
@@ -241,6 +284,12 @@ export class SolarExplorerApp {
   /** Aktiver Distanz-Skalierungsmodus. */
   private distanceMode: DistanceMode = "visual";
 
+  /** Aktiver Bloom-Modus des Sonnen-Glanzes. */
+  private bloomMode: BloomMode = "auto";
+
+  /** `false` laesst die Koerper einfarbig (`?textures=off`, Nachweis only). */
+  private texturesEnabled = true;
+
   /** Simulationssekunden je Echtzeitsekunde. */
   private timeScale: number = timeScaleFor(DEFAULT_TIME_PRESET);
 
@@ -348,9 +397,11 @@ export class SolarExplorerApp {
     // Skalierungsmodi aus der URL lesen (core/orbital.ts bzw. lokaler Parser).
     this.scaleMode = getScaleModeFromUrl(window.location.search);
     this.distanceMode = getDistanceModeFromUrl(window.location.search);
+    this.bloomMode = getBloomModeFromUrl(window.location.search);
+    this.texturesEnabled = getTexturesFromUrl(window.location.search);
 
     this.buildScene();
-    this.buildShip();
+    await this.buildShip();
     this.buildUi(bodies, dataBaseUrl);
 
     this.exposeDebugHook();
@@ -389,10 +440,51 @@ export class SolarExplorerApp {
           instancedMoons: stats?.instancedMoons ?? 0,
           asteroids: stats?.asteroids ?? 0,
           rings: stats?.rings ?? 0,
+          textured: stats?.textured ?? 0,
           fps: app.fps,
           quality: app.scene?.getQuality() ?? null,
+          bloom: app.scene?.getSunGlowSettings() ?? null,
         };
       },
+      /**
+       * Schaltet den Sonnen-Glanz (Bloom) um, ohne die Szene neu aufzubauen.
+       *
+       * @param mode - `"on"`, `"off"` oder `"auto"` (folgt der Hardware).
+       * @returns {void}
+       */
+      setBloomMode: (mode: BloomMode) => {
+        app.bloomMode = mode;
+        app.scene?.setBloomMode(mode);
+      },
+      /**
+       * Haelt die Simulation an oder laesst sie weiterlaufen.
+       *
+       * Wird von den Bildmessungen genutzt: die Asteroiden wandern weiter,
+       * und zwei Messungen zu verschiedenen Zeitpunkten sind nicht
+       * vergleichbar.
+       *
+       * @param value - `true` haelt an.
+       * @returns {void}
+       */
+      setPaused: (value: boolean) => {
+        app.paused = value;
+        app.updateHud();
+      },
+      /**
+       * Misst die Helligkeit eines Bildausschnitts im naechsten gerenderten
+       * Bild (Nachweis des Sonnen-Glanzes, siehe `scene/types`).
+       *
+       * @param region - Rechteck in CSS-Pixeln ab der linken oberen Ecke.
+       * @returns Promise mit den Messwerten des naechsten Bildes.
+       */
+      sampleFrame: (region: FrameRegion): Promise<FrameSample> =>
+        app.scene?.sampleFrame(region) ?? Promise.resolve({
+          maxLuminance: 0,
+          meanLuminance: 0,
+          brightPixels: 0,
+          corePixels: 0,
+          totalPixels: 0,
+        }),
       /**
        * Schaltet den Detailfilter um (fuer Tests der Kindersicht).
        *
@@ -402,6 +494,100 @@ export class SolarExplorerApp {
       setKnownOnly: (knownOnly: boolean) => {
         app.scene?.setKnownOnly(knownOnly);
         app.hud?.setDetailMode(knownOnly ? 'known' : 'all');
+      },
+      /**
+       * Setzt die Kamera **sofort** an einen Koerper — ohne weiche Fahrt.
+       *
+       * Nur fuer Bildmessungen (Nachweis der Texturen). Zwei Aufnahmen, die
+       * pixelgleich verglichen werden, muessen exakt dieselbe Kamera haben:
+       * die weiche Fahrt aus `CameraFollow.update` und der weiche Lerp in
+       * `SceneManager.updateCamera` lassen den Planeten zwischen den
+       * Aufnahmen wandern, und der Vergleich masste dann die Kamerafahrt.
+       *
+       * Deshalb wird die Kamera zuerst aus der Schiffsverfolgung geloest —
+       * sonst zieht `CameraFollow` sie im naechsten Bild wieder aufs Schiff
+       * zurueck, und genau daran ist die erste Fassung des Nachweises
+       * gescheitert (gemessen wurde ein Planetenrand statt der Scheibe).
+       *
+       * @param bodyId - ID des Koerpers, z. B. `"venus"`.
+       * @param distanceFactor - Kameraabstand als Vielfaches des Radius.
+       * @returns {void}
+       */
+      focusBodyInstant: (bodyId: string, distanceFactor?: number): void => {
+        // `free` ist der Modus ohne Ziel: `update` kehrt dann sofort zurueck
+        // und laesst die Kamera stehen.
+        app.camera?.setMode("free");
+        app.camera?.setTarget(null);
+        app.scene?.focusOn(bodyId, distanceFactor, true);
+      },
+      /**
+       * Setzt die Simulationszeit **dauerhaft**.
+       *
+       * `snapshot(epoch)` allein reicht nicht: `App.tick` ruft in jedem Bild
+       * `scene.setTime(app.julianDate)` auf und setzt die Zeit damit sofort
+       * wieder auf den Wert der App. Der Koerper wanderte also weiter, und
+       * zwei Aufnahmen "derselben" Szene zeigten verschiedene Standorte —
+       * gemessen wurde die Bewegung statt der Textur (Kontrollmessung auf
+       * dem Jupiter: 12 bis 20 % veraenderte Pixel ohne jede Textur).
+       *
+       * @param julianDate - Simulationszeit als Julian Date, z. B. J2000.
+       * @returns {void}
+       */
+      setEpoch: (julianDate: number): void => {
+        app.julianDate = julianDate;
+        app.scene?.setTime(julianDate);
+      },
+      /**
+       * Liefert das Rechteck, in dem ein Koerper aktuell auf dem Bildschirm
+       * liegt — in CSS-Pixeln des Canvas.
+       *
+       * Nur fuer Bildmessungen. Der Textur-Nachweis muss das Messfeld auf die
+       * *sichtbare* Scheibe legen; vorher wurde die Feldgroesse aus Radius
+       * und Kameraabstand hochgerechnet, und weil `focusOn` den Abstand bei
+       * `DISTANCE_NEAR` klemmt, lag das Feld bei Erde, Mars, Uranus und
+       * Neptun grossenteils neben dem Koerper (gemessene Aenderung dort:
+       * 0.0 bis 0.8 %, auf dem Jupiter dagegen 3.9 %).
+       *
+       * Statt zu rechnen wird der Radius ueber die echte Kamera projiziert:
+       * das uebernimmt Near/Far, FOV und den Zoom der laufenden Szene.
+       *
+       * @param bodyId - ID des Koerpers, z. B. `"jupiter"`.
+       * @param marginFraction - Zuschlag um den Radius, z. B. `0.15` fuer
+       *   15 % mehr Kantenlaenge je Seite.
+       * @returns Das Rechteck, oder `null`, wenn der Koerper nicht
+       *   gefunden werden konnte.
+       */
+      bodyScreenRect: (
+        bodyId: string,
+        marginFraction = 0.15,
+      ): { x: number; y: number; width: number; height: number } | null => {
+        const scene = app.scene;
+        if (scene === null) {
+          return null;
+        }
+        const radius = scene.getBodyRadius(bodyId);
+        if (radius === null) {
+          return null;
+        }
+        const world = new THREE.Vector3();
+        if (!scene.getBodyWorldPosition(bodyId, world)) {
+          return null;
+        }
+        // Projektion ueber die echte Kamera: uebernimmt FOV, Zoom und den
+        // tatsaechlichen Abstand. Das ist der Punkt — die Near-Plane
+        // (`DISTANCE_NEAR`) klemmt den Abstand nach unten, eine aus dem Radius
+        // hochgerechnete Feldgroesse lag deshalb daneben.
+        const camera = scene.getCamera();
+        const distance = camera.position.distanceTo(world);
+        const halfHeight = Math.tan(((camera.fov / 2) * Math.PI) / 180) * distance;
+        const pixels = (radius / halfHeight) * (app.canvas.clientHeight / 2);
+        const half = Math.max(8, Math.round(pixels * (1 + marginFraction)));
+        return {
+          x: Math.round(app.canvas.clientWidth / 2 - half),
+          y: Math.round(app.canvas.clientHeight / 2 - half),
+          width: half * 2,
+          height: half * 2,
+        };
       },
       /**
        * Liefert einen vergleichbaren Schnappschuss der Szenenstruktur.
@@ -458,6 +644,8 @@ export class SolarExplorerApp {
     const scene = new SceneManager(this.canvas, {
       scaleMode: this.scaleMode,
       distanceMode: this.distanceMode,
+      bloomMode: this.bloomMode,
+      textures: this.texturesEnabled,
     });
     scene.init();
     scene.setTime(this.julianDate);
@@ -472,15 +660,23 @@ export class SolarExplorerApp {
   }
 
   /**
-   * Verbindet Schiff, Steuerung und Kamera und fuellt die Schnellreise-Ziele.
+   * Verbindet Schiff, Steuerung und Kamera und laedt Modell + Sounds.
    *
    * @returns {void}
    */
-  private buildShip(): void {
+  private async buildShip(): Promise<void> {
     const scene = this.scene;
     const ship = this.ship;
     if (scene === null || ship === null) {
       return;
+    }
+
+    // Modell laden (Platzhalter bleibt sichtbar, bis das GLB da ist).
+    try {
+      await ship.loadModel();
+      await ship.loadSounds();
+    } catch {
+      // Platzhalter + fallback ohne Audio — App startet trotzdem.
     }
 
     this.camera = new CameraFollow(scene.getCamera());
@@ -488,10 +684,6 @@ export class SolarExplorerApp {
     this.camera.setMode("follow");
 
     this.controls = new ShipControls(ship, this.camera);
-    // Die Steuerung haengt am Canvas, nicht am UI-Container: am Canvas
-    // gehoeren Zeiger- und Tastaturereignisse zur Szene, waehrend `#app` die
-    // Bedienelemente traegt. An `#app` wuerde der Pointer-Capture der
-    // Steuerung jeden Klick auf Nav, HUD, Panel und Quiz verschlucken.
     this.controls.attach(this.canvas);
     this.controls.setQuickTravelPositions(this.readBodyPositions(scene));
     this.focusCanvasOnSceneClick();
@@ -560,10 +752,15 @@ export class SolarExplorerApp {
    * @returns {void}
    */
   private buildUi(bodies: readonly BodyData[], dataBaseUrl: string): void {
+    const playClick = (): void => {
+      this.ship?.playClickSound();
+    };
+
     this.hud = new HudUI(this.root, {
       initialSizeMode: toHudSizeMode(this.scaleMode),
       initialDistanceMode: toHudDistanceMode(this.distanceMode),
       onScaleModeChange: (kind, mode) => {
+        playClick();
         if (kind === "size") {
           this.setScaleMode(mode === "real" ? "real" : "visual");
         } else {
@@ -571,9 +768,11 @@ export class SolarExplorerApp {
         }
       },
       onPauseToggle: (paused) => {
+        playClick();
         this.paused = paused;
       },
       onDetailModeChange: (mode) => {
+        playClick();
         this.scene?.setKnownOnly(mode === 'known');
       },
     });
@@ -584,6 +783,7 @@ export class SolarExplorerApp {
 
     this.nav = new NavUI(this.root, {
       onSelect: (id) => {
+        playClick();
         this.focusBody(id);
       },
     });
@@ -617,7 +817,10 @@ export class SolarExplorerApp {
     button.style.bottom = "16px";
     button.style.transform = "translateX(-50%)";
     button.style.zIndex = "16";
-    button.addEventListener("click", () => this.toggleQuiz());
+    button.addEventListener("click", () => {
+      this.ship?.playClickSound();
+      this.toggleQuiz();
+    });
     this.root.appendChild(button);
     return button;
   }
@@ -703,14 +906,34 @@ export class SolarExplorerApp {
     }
     scene.setTime(this.julianDate);
 
+    // Merken, ob vorher eine Auto-Travel-Reise lief.
+    const wasTraveling = this.controls?.isAutoTravelActive() ?? false;
+
     this.controls?.update(deltaSeconds);
     ship.updateMovement(deltaSeconds);
     this.refreshQuickTravelPositions();
 
-    // Die Kamera wird von `CameraFollow` gefuehrt; `SceneManager.focusOn`
-    // wuerde mit ihr um dieselbe Kameraposition konkurrieren. Der Anflug auf
-    // einen Koerper laeuft daher ueber das Schiff, die Kamera folgt von selbst.
     this.camera?.update(deltaSeconds);
+
+    // Ankunft: Auto-Travel abgeschlossen → Skalierung auf real
+    // umschalten (Wow-Effekt bei der Ankunft).
+    if (wasTraveling && !(this.controls?.isAutoTravelActive() ?? false)) {
+      if (this.scaleMode !== "real" && this.activeBodyId !== null) {
+        this.setScaleMode("real");
+        // Positionsdaten neu lesen (veraendern sich beim Moduswechsel).
+        this.quickTravelPositions = this.readBodyPositions(scene);
+        const newPos = this.quickTravelPositions.get(this.activeBodyId);
+        if (newPos !== undefined) {
+          const radius = scene.getBodyRadius(this.activeBodyId) ?? 1;
+          const offset = Math.max(radius * FOCUS_APPROACH_FACTOR, 1);
+          ship.setPosition({
+            x: newPos.x,
+            y: newPos.y,
+            z: newPos.z + offset,
+          });
+        }
+      }
+    }
 
     scene.render();
     this.updateHud();
@@ -771,11 +994,11 @@ export class SolarExplorerApp {
   }
 
   /**
-   * Waehlt einen Koerper aus: Kamera fliegt an, Navigation und Panel folgen.
+   * Waehlt einen Koerper aus: Schiff fliegt glatt dorthin.
    *
-   * Statt die Kamera direkt zu setzen wird das Schiff an eine Position neben
-   * dem Koerper gesetzt — die Kamera folgt dem Schiff, sodass die beiden
-   * Kamerafuehrer sich nicht gegenseitig ueberschreiben.
+   * Statt die Kamera direkt zu setzen oder das Schiff zu teleportieren,
+   * wird eine gleichmaessige Interpolation gestartet. Die Kamera
+   * folgt dem Schiff automatisch (CameraFollow).
    *
    * @param id - Koerper-ID aus `bodies.json`, z. B. `"mars"`.
    * @returns {void}
@@ -783,7 +1006,8 @@ export class SolarExplorerApp {
   focusBody(id: string): void {
     const scene = this.scene;
     const ship = this.ship;
-    if (scene === null || ship === null) {
+    const controls = this.controls;
+    if (scene === null || ship === null || controls === null) {
       return;
     }
     const position = this.quickTravelPositions.get(id);
@@ -792,9 +1016,15 @@ export class SolarExplorerApp {
     }
     const radius = scene.getBodyRadius(id) ?? 1;
     const offset = Math.max(radius * FOCUS_APPROACH_FACTOR, 1);
-    ship.setPosition({ x: position.x, y: position.y, z: position.z + offset });
-    ship.setVelocity({ x: 0, y: 0, z: 0 });
-    ship.setOrientation(0, 0);
+    const target = {
+      x: position.x,
+      y: position.y,
+      z: position.z + offset,
+    };
+
+    // Ggf. laufende Reise abbrechen und neuen Flug starten.
+    controls.cancelAutoTravel();
+    controls.startAutoTravel(target);
 
     this.activeBodyId = id;
     this.nav?.setActive(id);

@@ -16,6 +16,7 @@
 
 import * as THREE from "three";
 import { J2000_JULIAN_DATE, orbitalPosition } from "../core/orbital";
+import { MOON_VISIBILITY_PARENT_FACTOR } from "../core/constants";
 import { scaleDistance } from "../core/scale";
 import type { DistanceMode, ScaleMode } from "../core/scale";
 import { getSphereGeometry } from "./LodCache";
@@ -295,6 +296,9 @@ export class InstancedMoons {
   /** Koerper-ID -> zugehoerige Gruppe (fuer Statistik und LOD). */
   private readonly groupByBodyId: Map<string, MoonInstanceGroup>;
 
+  /** Elternkoerper-ID -> Radius in Szeneneinheiten (fuer Sichtbarkeit). */
+  private readonly parentRadii: ReadonlyMap<string, number>;
+
   /**
    * Erzeugt alle Gruppen aus der Koerperliste.
    *
@@ -309,6 +313,7 @@ export class InstancedMoons {
   ) {
     this.groups = new Map();
     this.groupByBodyId = new Map();
+    this.parentRadii = distances;
 
     // Nach Eltern gruppieren; nur echte kleine Monde kommen hinein.
     const byParent = new Map<string, SceneBody[]>();
@@ -414,6 +419,35 @@ export class InstancedMoons {
       total += group.count;
     }
     return total;
+  }
+
+  /**
+   * Blendet Monde ein oder aus, basierend auf der Kameradistanz
+   * zum Parent-Planeten.
+   *
+   * Monde sind nur sichtbar, wenn die Kamera innerhalb von
+   * {@link MOON_VISIBILITY_PARENT_FACTOR} * Parent-Radius liegt.
+   * Ringe bleiben davon unberuehrt (siehe `Rings.update`).
+   *
+   * @param cameraPosition - Weltposition der Kamera.
+   * @param parentMeshes - Koerper-ID -> Planeten-Mesh.
+   * @returns {void}
+   */
+  setVisibleByCamera(
+    cameraPosition: THREE.Vector3,
+    parentMeshes: ReadonlyMap<string, THREE.Mesh>,
+  ): void {
+    for (const [parentId, group] of this.groups) {
+      const parent = parentMeshes.get(parentId);
+      if (parent === undefined) {
+        group.mesh.visible = false;
+        continue;
+      }
+      parent.getWorldPosition(worldPositionScratch);
+      const dist = cameraPosition.distanceTo(worldPositionScratch);
+      const parentRadius = this.parentRadii.get(parentId) ?? 1;
+      group.mesh.visible = dist <= parentRadius * MOON_VISIBILITY_PARENT_FACTOR;
+    }
   }
 
   /** Anzahl der Gruppen (und damit der Draw-Calls dieser Mondkategorie). */

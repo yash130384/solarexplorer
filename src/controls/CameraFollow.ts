@@ -279,7 +279,8 @@ export class CameraFollow {
    * Berechnet Wunschposition und Blickziel fuer den Follow-Modus.
    *
    * Die Kamera sitzt hinter dem Schiff (entgegen seiner Blickrichtung),
-   * leicht ueber der Flugebene, und schaut auf die Nase.
+   * leicht ueber der Flugebene, und schaut auf die Nase — fuer
+   * Star-Wars-Fluggefuehl.
    *
    * @param target - Das verfolgte Objekt (darf nicht `null` sein).
    * @param targetPos - Weltposition des Ziels.
@@ -304,11 +305,15 @@ export class CameraFollow {
     }
     forward.normalize();
 
+    // Kamera sitzt hinter dem Schiff.
     this.desiredPosition
       .copy(targetPos)
       .addScaledVector(forward, -distance)
       .addScaledVector(UP, height);
-    this.desiredLookAt.copy(targetPos);
+
+    // Blickpunkt: ein Punkt vor dem Schiff (Nase), nicht nur der Mittelpunkt.
+    const lookTarget = targetPos.clone().addScaledVector(forward, distance * 0.35);
+    this.desiredLookAt.copy(lookTarget);
   }
 
   /**

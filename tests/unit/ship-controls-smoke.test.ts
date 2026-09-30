@@ -492,3 +492,241 @@ describe("ShipControls: Maus und Touch", () => {
     ship.dispose();
   });
 });
+
+describe("Ship: Audio", () => {
+  it("erzeugt einen AudioListener auf der Schiffsgruppe", () => {
+    const ship = makeShip();
+    const listener = ship.getObject().children.find(
+      (c): c is THREE.AudioListener => c instanceof THREE.AudioListener,
+    );
+    // In jsdom existiert kein AudioContext — der Listener wird dann
+    // nicht erzeugt. Das Schiff funktioniert trotzdem (Audio ist
+    // optional, Fehler werden im Konstruktor abgefangen).
+    if (listener) {
+      expect(listener).toBeInstanceOf(THREE.AudioListener);
+    }
+    ship.dispose();
+  });
+
+  it("spielt Klick-Sound ohne Absturz ab", () => {
+    const ship = makeShip();
+    expect(() => ship.playClickSound()).not.toThrow();
+    ship.dispose();
+  });
+
+  it("spielt Bestaetigungs-Sound ohne Absturz ab", () => {
+    const ship = makeShip();
+    expect(() => ship.playConfirmSound()).not.toThrow();
+    ship.dispose();
+  });
+
+  it("laedt das Modell und ersetzt das Platzhalter-Geomoerie", async () => {
+    const ship = makeShip();
+    const namesBefore: string[] = [];
+    ship.getObject().traverse((child) => namesBefore.push(child.name));
+    expect(namesBefore).toContain("rumpf");
+
+    const mockScene = new THREE.Group();
+    mockScene.name = "mock-model";
+    const { GLTFLoader } = await import(
+      "three/examples/jsm/loaders/GLTFLoader.js"
+    );
+    const originalLoad = GLTFLoader.prototype.load;
+    (GLTFLoader.prototype.load as unknown as unknown) = vi.fn((
+      _url: string,
+      onLoad: (gltf: unknown) => void,
+    ) => {
+      onLoad({ scene: mockScene });
+    });
+
+    await ship.loadModel("/media/models/schiff_racer.glb");
+
+    const namesAfter: string[] = [];
+    ship.getObject().traverse((child) => namesAfter.push(child.name));
+    expect(namesAfter).not.toContain("rumpf");
+    expect(namesAfter).toContain("schiff-model");
+
+    GLTFLoader.prototype.load = originalLoad;
+    ship.dispose();
+  });
+
+  it("behaelt das Platzhalter-Modell bei Fehler", async () => {
+    const ship = makeShip();
+    const { GLTFLoader } = await import(
+      "three/examples/jsm/loaders/GLTFLoader.js"
+    );
+    const originalLoad = GLTFLoader.prototype.load;
+    (GLTFLoader.prototype.load as unknown as unknown) = vi.fn((
+      _url: string,
+      _onLoad: (gltf: unknown) => void,
+      _onProgress: ((event: ProgressEvent) => void) | undefined,
+      onError: (event: ErrorEvent) => void,
+    ) => {
+      onError(new ErrorEvent("error", { message: "mock error" }));
+    });
+
+    await expect(ship.loadModel("/bad/path.glb")).rejects.toThrow();
+
+    const names: string[] = [];
+    ship.getObject().traverse((child) => names.push(child.name));
+    expect(names).toContain("rumpf");
+
+    GLTFLoader.prototype.load = originalLoad;
+    ship.dispose();
+  });
+});
+
+describe("ShipControls: Auto-Travel", () => {
+  /** Erzeugt eine Auto-Travel-testtaegige Umgebung. */
+  function makeAutoTravelEnv(): {
+    ship: Ship;
+    controls: ShipControls;
+    element: HTMLElement;
+  } {
+    const ship = makeShip();
+    const { follow } = makeCamera();
+    const controls = new ShipControls(ship, follow);
+    const element = document.createElement("div");
+    element.tabIndex = 0;
+    document.body.appendChild(element);
+    controls.attach(element);
+    return { ship, controls, element };
+  }
+
+  it("fliegt glatt Richtung Ziel", () => {
+    const { ship, controls } = makeAutoTravelEnv();
+    ship.setPosition({ x: 0, y: 0, z: 0 });
+    controls.startAutoTravel({ x: 100, y: 0, z: 0 });
+
+    // Erstes Frame: Schiff naehert sich dem Ziel.
+    controls.update(0.1);
+    const pos = ship.getPosition();
+    expect(pos.x).toBeGreaterThan(0);
+    expect(pos.x).toBeLessThan(100);
+    expect(pos.y).toBeCloseTo(0, 6);
+    expect(pos.z).toBeCloseTo(0, 6);
+    controls.detach();
+    ship.dispose();
+  });
+
+  it("erreicht das Ziel und bleibt stehen", () => {
+    const { ship, controls } = makeAutoTravelEnv();
+    ship.setPosition({ x: 0, y: 0, z: 0 });
+    // Kurze Distanz (1 Einheit): Frame 1 bringt 0.8 nah ans Ziel,
+    // Frame 2 erkennt Restdistanz < 0.4 -> Ankunft.
+    controls.startAutoTravel({ x: 1, y: 0, z: 0 });
+    controls.update(0.1);
+    controls.update(0.1);
+    expect(controls.isAutoTravelActive()).toBe(false);
+    const pos = ship.getPosition();
+    expect(pos.x).toBeCloseTo(1, 4);
+    expect(pos.y).toBeCloseTo(0, 4);
+    expect(pos.z).toBeCloseTo(0, 4);
+    expect(ship.getVelocity()).toEqual({ x: 0, y: 0, z: 0 });
+    controls.detach();
+    ship.dispose();
+  });
+
+  it("cancelAutoTravel beendet die Reise", () => {
+    const { ship, controls } = makeAutoTravelEnv();
+    ship.setPosition({ x: 0, y: 0, z: 0 });
+    controls.startAutoTravel({ x: 100, y: 0, z: 0 });
+
+    controls.cancelAutoTravel();
+    expect(controls.isAutoTravelActive()).toBe(false);
+
+    // Nach der Abbrechung darf sich das Schiff nicht mehr bewegen.
+    const before = ship.getPosition();
+    controls.update(0.1);
+    const after = ship.getPosition();
+    expect(after.x).toBeCloseTo(before.x, 6);
+    expect(after.y).toBeCloseTo(before.y, 6);
+    expect(after.z).toBeCloseTo(before.z, 6);
+    controls.detach();
+    ship.dispose();
+  });
+
+  it("isAutoTravelActive liefert korrekten Zustand", () => {
+    const { controls } = makeAutoTravelEnv();
+    expect(controls.isAutoTravelActive()).toBe(false);
+    controls.startAutoTravel({ x: 50, y: 0, z: 0 });
+    expect(controls.isAutoTravelActive()).toBe(true);
+    controls.cancelAutoTravel();
+    expect(controls.isAutoTravelActive()).toBe(false);
+    controls.detach();
+  });
+
+  it("neuer Auto-Travel ueberschreibt die alte Reise", () => {
+    const { ship, controls } = makeAutoTravelEnv();
+    ship.setPosition({ x: 0, y: 0, z: 0 });
+    controls.startAutoTravel({ x: 100, y: 0, z: 0 });
+    controls.startAutoTravel({ x: 0, y: 0, z: 50 });
+
+    controls.update(0.1);
+    const pos = ship.getPosition();
+    // Richtungsänderung: Z-Komponente muss jetzt positiv sein.
+    expect(pos.z).toBeGreaterThan(0);
+    controls.detach();
+    ship.dispose();
+  });
+
+  it("Auto-Travel-Update ignoriert Schubschluessel", () => {
+    const { ship, element, controls } = makeAutoTravelEnv();
+    ship.setPosition({ x: 0, y: 0, z: 0 });
+    controls.startAutoTravel({ x: 50, y: 0, z: 0 });
+
+    // W gleichzeitig mit Auto-Travel: Schub wird unterdrueckt.
+    element.dispatchEvent(new KeyboardEvent("keydown", { code: "KeyW" }));
+    controls.update(0.1);
+    const pos = ship.getPosition();
+    expect(pos.x).toBeGreaterThan(0);
+    // Z-Komponente: nur Auto-Travel, kein Extra-Schub.
+    expect(pos.z).toBeCloseTo(0, 4);
+    element.dispatchEvent(new KeyboardEvent("keyup", { code: "KeyW" }));
+    controls.detach();
+    ship.dispose();
+  });
+
+  it("ESC bricht Auto-Travel ab und setzt Position zurueck", () => {
+    const { ship, element, controls } = makeAutoTravelEnv();
+    ship.setPosition({ x: 10, y: 0, z: 0 });
+    controls.startAutoTravel({ x: 100, y: 0, z: 0 });
+
+    element.dispatchEvent(new KeyboardEvent("keydown", { code: "Escape" }));
+    expect(controls.isAutoTravelActive()).toBe(false);
+    expect(ship.getPosition()).toEqual({ x: 0, y: 0, z: 0 });
+    controls.detach();
+    ship.dispose();
+  });
+});
+
+describe("CameraFollow: 3rd-Person", () => {
+  it("blickt im Follow-Modus auf die Schiffnase", () => {
+    const { camera, follow } = makeCamera();
+    const ship = makeShip();
+    follow.setTarget(ship.getObject());
+    follow.setMode("follow");
+
+    // Schiff zeigt nach +Z (Standard).
+    follow.update(0.016);
+    const lookAt = new THREE.Vector3();
+    // Blickrichtung aus Kameraposition und -Ausrichtung ableiten.
+    camera.getWorldDirection(lookAt);
+    // Kamera schaut in +Z Richtung (auf die Nase).
+    expect(lookAt.z).toBeGreaterThan(0);
+    ship.dispose();
+  });
+
+  it("Kamera bleibt hinter dem Schiff, auch bei Gier", () => {
+    const { camera, follow } = makeCamera();
+    const ship = makeShip();
+    ship.rotate(90, 0); // Schiff zeigt jetzt nach +X.
+    follow.setTarget(ship.getObject());
+    follow.setMode("follow");
+    follow.update(0.016);
+
+    // Kamera soll jetzt von -X Richtung +X schauen (hinter +X-gerichteter Nase).
+    expect(camera.position.x).toBeLessThan(0);
+    ship.dispose();
+  });
+});

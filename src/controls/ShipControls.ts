@@ -53,6 +53,12 @@ const QUICK_TRAVEL_TARGETS: Readonly<Record<string, string>> = Object.freeze({
   KeyF: "erde",
 });
 
+/** Geschwindigkeit der Auto-Travel-Interpolation (Szeneneinheiten pro Sekunde). */
+const AUTO_TRAVEL_SPEED = 8;
+
+/** Distanz, bei der die Auto-Travel-Reise als angekommen gilt. */
+const AUTO_TRAVEL_ARRIVAL = 0.4;
+
 /** Tasten, deren Standardaktion (Scrollen) unterdrueckt werden muss. */
 const SCROLL_KEYS: ReadonlySet<string> = new Set([
   "ArrowUp",
@@ -111,6 +117,12 @@ export class ShipControls {
 
   /** Weltpositionen der Koerper, fuer die Schnellreise. */
   private readonly quickTravelPositions = new Map<string, Vec3>();
+
+  /** Zielposition der Auto-Travel-Reise, `null` = keine aktive Reise. */
+  private autoTravelTarget: Vec3 | null = null;
+
+  /** `true`, solange das Schiff aktiv zu einem Ziel fliegt. */
+  private autoTravelActive = false;
 
   /**
    * Erzeugt die Steuerung.
@@ -207,6 +219,42 @@ export class ShipControls {
   }
 
   /**
+   * Startet eine Auto-Travel-Reise zum Zielpunkt.
+   *
+   * Das Schiff bewegt sich gleichmaessig auf die Zielposition zu.
+   * Wird eine neue Reise gestartet, fuehrt sie die alte.
+   *
+   * @param target - Weltposition in Szeneneinheiten.
+   * @returns {void}
+   */
+  startAutoTravel(target: Vec3): void {
+    this.autoTravelTarget = { ...target };
+    this.autoTravelActive = true;
+  }
+
+  /**
+   * Bricht die laufende Auto-Travel-Reise ab.
+   *
+   * Das Schiff behaelt seine aktuelle Position und Geschwindigkeit.
+   *
+   * @returns {void}
+   */
+  cancelAutoTravel(): void {
+    this.autoTravelActive = false;
+    this.autoTravelTarget = null;
+  }
+
+  /**
+   * Liefert `true`, solange das Schiff eine Auto-Travel-Reise
+   * aktiv hat.
+   *
+   * @returns Reisezustand.
+   */
+  isAutoTravelActive(): boolean {
+    return this.autoTravelActive;
+  }
+
+  /**
    * Wertet den Eingabezustand aus und bewegt Schiff und Kamera.
    *
    * Muss einmal pro Bild aufgerufen werden.
@@ -224,30 +272,62 @@ export class ShipControls {
       return;
     }
 
-    // Drehen: Tastatur addiert, Maus/Touch (ein Finger) schiebt die Kamera.
-    const yaw = this.axis("KeyD", "ArrowRight") - this.axis("KeyA", "ArrowLeft");
-    const pitch = this.axis("KeyE") - this.axis("KeyQ");
-    if (yaw !== 0) {
-      this.ship.rotate(YAW_SPEED_DEG_PER_S * deltaSeconds * yaw, 0);
-    }
-    if (pitch !== 0) {
-      this.ship.rotate(0, PITCH_SPEED_DEG_PER_S * deltaSeconds * pitch);
-    }
-    this.camera.setMode("follow");
+    if (this.autoTravelActive && this.autoTravelTarget !== null) {
+      const pos = this.ship.getPosition();
+      const dx = this.autoTravelTarget.x - pos.x;
+      const dy = this.autoTravelTarget.y - pos.y;
+      const dz = this.autoTravelTarget.z - pos.z;
+      const dist = Math.hypot(dx, dy, dz);
 
-    // Schub: Tastatur in Schiffsachsen, Touch ueber die Zwei-Finger-Geste.
-    const forward = this.thrustAxis("KeyW", "ArrowUp") - this.thrustAxis("KeyS", "ArrowDown");
-    const up = this.thrustAxis("KeyR") - this.thrustAxis("KeyC");
-    const strafe = this.thrustAxis("KeyX") - this.thrustAxis("KeyZ");
-    const touchForward = this.touchPushForward();
-    const turbo = this.pressed.has("ShiftLeft") || this.pressed.has("ShiftRight");
+      if (dist <= AUTO_TRAVEL_ARRIVAL) {
+        // Ziel erreicht: Schiff exakt positionieren, Stillstand.
+        this.ship.setPosition({
+          x: this.autoTravelTarget.x,
+          y: this.autoTravelTarget.y,
+          z: this.autoTravelTarget.z,
+        });
+        this.ship.setVelocity({ x: 0, y: 0, z: 0 });
+        this.autoTravelActive = false;
+        this.autoTravelTarget = null;
+      } else {
+        // Gleichmaessig auf das Ziel zu bewegen.
+        const step = Math.min(AUTO_TRAVEL_SPEED * deltaSeconds, dist);
+        const invDist = 1 / dist;
+        this.ship.setPosition({
+          x: pos.x + dx * invDist * step,
+          y: pos.y + dy * invDist * step,
+          z: pos.z + dz * invDist * step,
+        });
+        this.ship.setVelocity({ x: 0, y: 0, z: 0 });
+      }
+      // Kamera folgt weiterhin per default.
+      this.camera.setMode("follow");
+    } else {
+      // Drehen: Tastatur addiert, Maus/Touch (ein Finger) schiebt die Kamera.
+      const yaw = this.axis("KeyD", "ArrowRight") - this.axis("KeyA", "ArrowLeft");
+      const pitch = this.axis("KeyE") - this.axis("KeyQ");
+      if (yaw !== 0) {
+        this.ship.rotate(YAW_SPEED_DEG_PER_S * deltaSeconds * yaw, 0);
+      }
+      if (pitch !== 0) {
+        this.ship.rotate(0, PITCH_SPEED_DEG_PER_S * deltaSeconds * pitch);
+      }
+      this.camera.setMode("follow");
 
-    this.ship.thrust(
-      (forward + touchForward) * (turbo ? TURBO_FACTOR : 1),
-      strafe,
-      up,
-    );
-    this.ship.updateMovement(deltaSeconds);
+      // Schub: Tastatur in Schiffsachsen, Touch ueber die Zwei-Finger-Geste.
+      const forward = this.thrustAxis("KeyW", "ArrowUp") - this.thrustAxis("KeyS", "ArrowDown");
+      const up = this.thrustAxis("KeyR") - this.thrustAxis("KeyC");
+      const strafe = this.thrustAxis("KeyX") - this.thrustAxis("KeyZ");
+      const touchForward = this.touchPushForward();
+      const turbo = this.pressed.has("ShiftLeft") || this.pressed.has("ShiftRight");
+
+      this.ship.thrust(
+        (forward + touchForward) * (turbo ? TURBO_FACTOR : 1),
+        strafe,
+        up,
+      );
+      this.ship.updateMovement(deltaSeconds);
+    }
   }
 
   /**
@@ -310,6 +390,7 @@ export class ShipControls {
    * @returns {void}
    */
   reset(): void {
+    this.cancelAutoTravel();
     this.ship.setPosition(SAFE_POSITION);
     this.ship.setVelocity({ x: 0, y: 0, z: 0 });
     this.ship.setOrientation(0, 0);

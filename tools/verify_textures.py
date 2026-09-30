@@ -16,7 +16,7 @@ except Exception:  # pragma: no cover
     Image = None
 
 DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                   "src", "assets", "textures")
+                   "public", "media", "textures")
 
 
 def _decode_raw(raw: bytes, width: int, height: int):
